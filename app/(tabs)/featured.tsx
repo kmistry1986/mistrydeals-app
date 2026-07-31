@@ -1,102 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-  RefreshControl,
-} from 'react-native';
+import React from 'react';
+import { View, ScrollView, Text, StyleSheet, ActivityIndicator, Pressable, Linking } from 'react-native';
+import { Image } from 'expo-image';
 import { useFocusEffect } from '@react-navigation/native';
-import { fetchFeaturedDeals } from '../../lib/supabase';
-import { ProductCard } from '../../components/ProductCard';
+import { supabase } from '../../lib/supabase';
+import { getTruncatedTitle } from '../../lib/titleUtils';
 
 export default function FeaturedScreen() {
-  const [products, setProducts] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      loadFeaturedDeals();
-    }, [])
-  );
-
-  const loadFeaturedDeals = async () => {
-    setIsLoading(true);
+  const [products, setProducts] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  useFocusEffect(React.useCallback(() => { loadProducts(); }, []));
+  const loadProducts = async () => {
     try {
-      const deals = await fetchFeaturedDeals(50);
-      setProducts(deals);
-    } catch (error) {
-      console.error('Error loading featured deals:', error);
-    } finally {
-      setIsLoading(false);
-    }
+      setIsLoading(true);
+      const { data } = await supabase.from('products').select('*').eq('is_featured', true).order('last_price_sync', { ascending: false });
+      setProducts(data || []);
+    } catch (e) { console.error(e); } finally { setIsLoading(false); }
   };
-
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    try {
-      await loadFeaturedDeals();
-    } finally {
-      setRefreshing(false);
-    }
-  };
-
-  if (isLoading && products.length === 0) {
-    return (
-      <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#D4AF37" />
-        <Text style={styles.loadingText}>Loading featured deals...</Text>
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={products}
-        renderItem={({ item }) => <ProductCard product={item} />}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        columnWrapperStyle={styles.columnWrapper}
-        contentContainerStyle={styles.content}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            tintColor="#D4AF37"
-            colors={['#D4AF37']}
-          />
-        }
-      />
-    </View>
-  );
+  const openLink = p => Linking.openURL(`https://www.amazon.com/dp/${p.amazon_asin}?tag=mistrydealshp-20`);
+  const getDisc = (price, orig) => !orig || !price ? 0 : Math.round(((parseFloat(orig) - parseFloat(price)) / parseFloat(orig)) * 100);
+  if (isLoading) return <View style={styles.center}><ActivityIndicator size="large" color="#D4AF37" /></View>;
+  return <View style={styles.wrapper}><ScrollView style={styles.container} showsVerticalScrollIndicator={false}>{products.map(p => { const disc = getDisc(p.price, p.original_price); const rating = parseFloat(p.rating) || 0; return <Pressable key={p.id} style={styles.item} onPress={() => openLink(p)}><View style={styles.thumb}><Image source={p.image_url} style={styles.img} contentFit="cover" /></View><View style={styles.content}><Text style={styles.title}>{getTruncatedTitle(p.title)}</Text><View style={styles.prices}><Text style={styles.price}>{"$" + parseFloat(p.price).toFixed(2)}</Text>{p.original_price && <Text style={styles.orig}>{"$" + parseFloat(p.original_price).toFixed(2)}</Text>}{disc > 0 && <View style={styles.badge}><Text style={styles.badgeTxt}>{disc}% OFF</Text></View>}</View></View><Text style={styles.star}>★ {rating.toFixed(1)}</Text></Pressable>; })}</ScrollView></View>;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0a0e27',
-  },
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0a0e27',
-  },
-  loadingText: {
-    marginTop: 12,
-    fontSize: 14,
-    color: '#888',
-  },
-  columnWrapper: {
-    justifyContent: 'space-between',
-    paddingHorizontal: 12,
-    gap: 8,
-  },
-  content: {
-    paddingTop: 12,
-    paddingBottom: 20,
-  },
-});
+const styles = StyleSheet.create({wrapper:{flex:1,backgroundColor:'#000'},container:{flex:1,backgroundColor:'#000'},center:{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#000'},item:{flexDirection:'row',paddingHorizontal:16,paddingVertical:14,borderBottomWidth:1,borderBottomColor:'#222',gap:12,alignItems:'center'},thumb:{width:70,height:70,borderRadius:8,overflow:'hidden',backgroundColor:'#1a1f3a'},img:{width:'100%',height:'100%'},content:{flex:1},title:{fontSize:14,fontWeight:'700',color:'#e8e8e8',marginBottom:6},prices:{flexDirection:'row',alignItems:'center',gap:8},price:{fontSize:16,fontWeight:'800',color:'#D4AF37'},orig:{fontSize:12,color:'#888',textDecorationLine:'line-through'},badge:{backgroundColor:'#FF6B6B',paddingHorizontal:6,paddingVertical:3,borderRadius:4},badgeTxt:{fontSize:10,fontWeight:'700',color:'#fff'},star:{fontSize:12,fontWeight:'600',color:'#2CDD9F'}});

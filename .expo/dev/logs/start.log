@@ -308,3 +308,206 @@
 {"_e":"metro:bundling:progress","_t":1785442549051,"id":"f","progress":0,"total":1,"current":0}
 {"_e":"metro:bundling:done","_t":1785442549130,"id":"f","total":1,"ms":78.858541}
 {"_e":"metro:client_log","_t":1785442550301,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"root:init","_t":1785475801177,"format":"v0-jsonl","version":"56.1.22"}
+{"_e":"env:mode","_t":1785475801178,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1785475801179,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1785475801352,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1785475801486,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:instantiate","_t":1785475801814,"atlas":false,"workers":7,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1785475807633,"id":"1","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785475807633,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785475807634,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785475807814,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1785475807915,"id":"1","progress":0.027777777777777776,"total":36,"current":6}
+{"_e":"metro:bundling:progress","_t":1785475808015,"id":"1","progress":0.14927685950413222,"total":44,"current":17}
+{"_e":"metro:bundling:progress","_t":1785475808115,"id":"1","progress":0.43560000000000004,"total":50,"current":33}
+{"_e":"metro:bundling:progress","_t":1785475808216,"id":"1","progress":0.43560000000000004,"total":98,"current":61}
+{"_e":"metro:bundling:progress","_t":1785475808316,"id":"1","progress":0.43560000000000004,"total":273,"current":91}
+{"_e":"metro:bundling:progress","_t":1785475808417,"id":"1","progress":0.43560000000000004,"total":378,"current":126}
+{"_e":"metro:bundling:progress","_t":1785475808516,"id":"1","progress":0.43560000000000004,"total":409,"current":153}
+{"_e":"metro:bundling:progress","_t":1785475808616,"id":"1","progress":0.43560000000000004,"total":454,"current":204}
+{"_e":"metro:bundling:progress","_t":1785475808716,"id":"1","progress":0.43560000000000004,"total":534,"current":253}
+{"_e":"metro:bundling:progress","_t":1785475808720,"id":"1","progress":0.43560000000000004,"total":534,"current":253}
+{"_e":"metro:bundling:progress","_t":1785475808721,"id":"1","progress":0.43560000000000004,"total":534,"current":253}
+{"_e":"metro:bundling:progress","_t":1785475808721,"id":"1","progress":0.43560000000000004,"total":534,"current":253}
+{"_e":"metro:bundling:progress","_t":1785475808817,"id":"1","progress":0.43560000000000004,"total":598,"current":324}
+{"_e":"metro:bundling:progress","_t":1785475808917,"id":"1","progress":0.43560000000000004,"total":653,"current":370}
+{"_e":"metro:bundling:progress","_t":1785475809017,"id":"1","progress":0.43560000000000004,"total":714,"current":431}
+{"_e":"metro:bundling:progress","_t":1785475809117,"id":"1","progress":0.43560000000000004,"total":818,"current":498}
+{"_e":"metro:bundling:progress","_t":1785475809218,"id":"1","progress":0.43560000000000004,"total":877,"current":573}
+{"_e":"metro:bundling:progress","_t":1785475809318,"id":"1","progress":0.44681670841649207,"total":938,"current":627}
+{"_e":"metro:bundling:progress","_t":1785475809419,"id":"1","progress":0.47108233332365473,"total":982,"current":674}
+{"_e":"metro:bundling:progress","_t":1785475809521,"id":"1","progress":0.5362160317205271,"total":1001,"current":733}
+{"_e":"metro:bundling:progress","_t":1785475809623,"id":"1","progress":0.598461729797558,"total":1038,"current":803}
+{"_e":"metro:bundling:progress","_t":1785475809723,"id":"1","progress":0.6712334651909831,"total":1068,"current":875}
+{"_e":"metro:bundling:progress","_t":1785475809824,"id":"1","progress":0.7293409345196866,"total":1096,"current":936}
+{"_e":"metro:bundling:progress","_t":1785475809924,"id":"1","progress":0.7642498318895614,"total":1113,"current":973}
+{"_e":"metro:bundling:progress","_t":1785475810024,"id":"1","progress":0.8107931456073278,"total":1135,"current":1022}
+{"_e":"metro:bundling:progress","_t":1785475810124,"id":"1","progress":0.8389544016892492,"total":1154,"current":1057}
+{"_e":"metro:bundling:progress","_t":1785475810225,"id":"1","progress":0.8754367235676938,"total":1181,"current":1105}
+{"_e":"metro:bundling:progress","_t":1785475810325,"id":"1","progress":0.8857226141901374,"total":1223,"current":1151}
+{"_e":"metro:bundling:progress","_t":1785475810426,"id":"1","progress":0.9049297481856504,"total":1252,"current":1191}
+{"_e":"metro:bundling:progress","_t":1785475810526,"id":"1","progress":0.9049297481856504,"total":1312,"current":1211}
+{"_e":"metro:bundling:progress","_t":1785475810627,"id":"1","progress":0.9049297481856504,"total":1333,"current":1262}
+{"_e":"metro:bundling:progress","_t":1785475810727,"id":"1","progress":0.9281502085144855,"total":1339,"current":1290}
+{"_e":"metro:bundling:progress","_t":1785475810852,"id":"1","progress":0.9281502085144855,"total":1373,"current":1318}
+{"_e":"metro:bundling:progress","_t":1785475810955,"id":"1","progress":0.9281502085144855,"total":1433,"current":1346}
+{"_e":"metro:bundling:progress","_t":1785475811055,"id":"1","progress":0.9281502085144855,"total":1444,"current":1388}
+{"_e":"metro:bundling:progress","_t":1785475811155,"id":"1","progress":0.9946236656528676,"total":1486,"current":1482}
+{"_e":"metro:bundling:progress","_t":1785475811256,"id":"1","progress":0.999,"total":1486,"current":1486}
+{"_e":"metro:bundling:done","_t":1785475811305,"id":"1","total":1486,"ms":3672.651708}
+{"_e":"metro:client_log","_t":1785475812113,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"metro:bundling:started","_t":1785475821328,"id":"2","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785475821329,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1785475821391,"id":"2","total":1,"ms":62.878208}
+{"_e":"metro:client_log","_t":1785475821842,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"root:init","_t":1785476159359,"format":"v0-jsonl","version":"56.1.22"}
+{"_e":"env:mode","_t":1785476159359,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1785476159360,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1785476159570,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1785476159735,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:instantiate","_t":1785476160214,"atlas":false,"workers":7,"host":"::","port":8081}
+{"_e":"root:init","_t":1785476360808,"format":"v0-jsonl","version":"56.1.22"}
+{"_e":"env:mode","_t":1785476360809,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1785476360810,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1785476360994,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1785476361142,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:instantiate","_t":1785476361605,"atlas":false,"workers":7,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1785476365698,"id":"1","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785476365698,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785476365700,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785476365887,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1785476365989,"id":"1","progress":0.09,"total":7,"current":3}
+{"_e":"metro:bundling:progress","_t":1785476366051,"id":"1","progress":0.16000000000000003,"total":7,"current":4}
+{"_e":"metro:bundling:progress","_t":1785476366154,"id":"1","progress":0.19041322314049586,"total":55,"current":24}
+{"_e":"metro:bundling:progress","_t":1785476366227,"id":"1","progress":0.19041322314049586,"total":55,"current":24}
+{"_e":"metro:bundling:progress","_t":1785476366229,"id":"1","progress":0.19041322314049586,"total":55,"current":24}
+{"_e":"metro:bundling:progress","_t":1785476366231,"id":"1","progress":0.19041322314049586,"total":55,"current":24}
+{"_e":"metro:bundling:progress","_t":1785476366255,"id":"1","progress":0.19041322314049586,"total":249,"current":55}
+{"_e":"metro:bundling:progress","_t":1785476366357,"id":"1","progress":0.19041322314049586,"total":329,"current":85}
+{"_e":"metro:bundling:progress","_t":1785476366457,"id":"1","progress":0.19041322314049586,"total":384,"current":123}
+{"_e":"metro:bundling:progress","_t":1785476366557,"id":"1","progress":0.1915181017141949,"total":489,"current":214}
+{"_e":"metro:bundling:progress","_t":1785476366657,"id":"1","progress":0.22164358002385423,"total":582,"current":274}
+{"_e":"metro:bundling:progress","_t":1785476366757,"id":"1","progress":0.2696005917159764,"total":676,"current":351}
+{"_e":"metro:bundling:progress","_t":1785476366857,"id":"1","progress":0.30492622918397216,"total":795,"current":439}
+{"_e":"metro:bundling:progress","_t":1785476366958,"id":"1","progress":0.35464272205411185,"total":848,"current":505}
+{"_e":"metro:bundling:progress","_t":1785476367059,"id":"1","progress":0.3902801534045777,"total":906,"current":566}
+{"_e":"metro:bundling:progress","_t":1785476367162,"id":"1","progress":0.4700779623864872,"total":932,"current":639}
+{"_e":"metro:bundling:progress","_t":1785476367262,"id":"1","progress":0.49172636390084706,"total":974,"current":683}
+{"_e":"metro:bundling:progress","_t":1785476367362,"id":"1","progress":0.5659177136571039,"total":989,"current":744}
+{"_e":"metro:bundling:progress","_t":1785476367464,"id":"1","progress":0.6080728752518401,"total":1049,"current":818}
+{"_e":"metro:bundling:progress","_t":1785476367564,"id":"1","progress":0.6967676469852896,"total":1077,"current":899}
+{"_e":"metro:bundling:progress","_t":1785476367664,"id":"1","progress":0.7553190082644629,"total":1100,"current":956}
+{"_e":"metro:bundling:progress","_t":1785476367765,"id":"1","progress":0.7978749002672205,"total":1124,"current":1004}
+{"_e":"metro:bundling:progress","_t":1785476367866,"id":"1","progress":0.8333717782175334,"total":1148,"current":1048}
+{"_e":"metro:bundling:progress","_t":1785476367966,"id":"1","progress":0.8437102035711498,"total":1203,"current":1105}
+{"_e":"metro:bundling:progress","_t":1785476368067,"id":"1","progress":0.8985620755792513,"total":1229,"current":1165}
+{"_e":"metro:bundling:progress","_t":1785476368168,"id":"1","progress":0.8985620755792513,"total":1285,"current":1185}
+{"_e":"metro:bundling:progress","_t":1785476368273,"id":"1","progress":0.8985620755792513,"total":1317,"current":1227}
+{"_e":"metro:bundling:progress","_t":1785476368373,"id":"1","progress":0.8985620755792513,"total":1327,"current":1256}
+{"_e":"metro:bundling:progress","_t":1785476368473,"id":"1","progress":0.8985620755792513,"total":1366,"current":1294}
+{"_e":"metro:bundling:progress","_t":1785476368573,"id":"1","progress":0.929600082218882,"total":1395,"current":1345}
+{"_e":"metro:bundling:progress","_t":1785476368674,"id":"1","progress":0.9305630594611884,"total":1443,"current":1392}
+{"_e":"metro:bundling:progress","_t":1785476368774,"id":"1","progress":0.999,"total":1486,"current":1486}
+{"_e":"metro:bundling:done","_t":1785476368853,"id":"1","total":1486,"ms":3154.985584}
+{"_e":"metro:client_log","_t":1785476369340,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"root:init","_t":1785476416202,"format":"v0-jsonl","version":"56.1.22"}
+{"_e":"env:mode","_t":1785476416202,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1785476416203,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1785476416365,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1785476416493,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:instantiate","_t":1785476416835,"atlas":false,"workers":7,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1785476421112,"id":"1","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785476421113,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785476421114,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785476421296,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1785476421396,"id":"1","progress":0.1111111111111111,"total":24,"current":8}
+{"_e":"metro:bundling:progress","_t":1785476421497,"id":"1","progress":0.14792899408284024,"total":65,"current":25}
+{"_e":"metro:bundling:progress","_t":1785476421597,"id":"1","progress":0.14792899408284024,"total":187,"current":56}
+{"_e":"metro:bundling:progress","_t":1785476421698,"id":"1","progress":0.2062508342708949,"total":229,"current":104}
+{"_e":"metro:bundling:progress","_t":1785476421799,"id":"1","progress":0.22937126583579218,"total":261,"current":125}
+{"_e":"metro:bundling:progress","_t":1785476421899,"id":"1","progress":0.33481848039517825,"total":337,"current":195}
+{"_e":"metro:bundling:progress","_t":1785476422000,"id":"1","progress":0.36217522163755855,"total":442,"current":266}
+{"_e":"metro:bundling:progress","_t":1785476422099,"id":"1","progress":0.4137882612186701,"total":527,"current":339}
+{"_e":"metro:bundling:progress","_t":1785476422199,"id":"1","progress":0.4137882612186701,"total":672,"current":410}
+{"_e":"metro:bundling:progress","_t":1785476422299,"id":"1","progress":0.43684724345631715,"total":699,"current":462}
+{"_e":"metro:bundling:progress","_t":1785476422351,"id":"1","progress":0.43684724345631715,"total":699,"current":462}
+{"_e":"metro:bundling:progress","_t":1785476422353,"id":"1","progress":0.43684724345631715,"total":699,"current":462}
+{"_e":"metro:bundling:progress","_t":1785476422353,"id":"1","progress":0.43684724345631715,"total":699,"current":462}
+{"_e":"metro:bundling:progress","_t":1785476422399,"id":"1","progress":0.5211859784987286,"total":766,"current":553}
+{"_e":"metro:bundling:progress","_t":1785476422499,"id":"1","progress":0.5441231833910035,"total":850,"current":627}
+{"_e":"metro:bundling:progress","_t":1785476422599,"id":"1","progress":0.6211881424442588,"total":878,"current":692}
+{"_e":"metro:bundling:progress","_t":1785476422700,"id":"1","progress":0.6211881424442588,"total":947,"current":735}
+{"_e":"metro:bundling:progress","_t":1785476422801,"id":"1","progress":0.6211881424442588,"total":985,"current":764}
+{"_e":"metro:bundling:progress","_t":1785476422901,"id":"1","progress":0.6613610976581418,"total":1012,"current":823}
+{"_e":"metro:bundling:progress","_t":1785476423002,"id":"1","progress":0.701222778552595,"total":1027,"current":860}
+{"_e":"metro:bundling:progress","_t":1785476423102,"id":"1","progress":0.7351564582904213,"total":1059,"current":908}
+{"_e":"metro:bundling:progress","_t":1785476423203,"id":"1","progress":0.7554662709882968,"total":1116,"current":970}
+{"_e":"metro:bundling:progress","_t":1785476423316,"id":"1","progress":0.7581400853516753,"total":1137,"current":990}
+{"_e":"metro:bundling:progress","_t":1785476423417,"id":"1","progress":0.7947598681037809,"total":1152,"current":1027}
+{"_e":"metro:bundling:progress","_t":1785476423518,"id":"1","progress":0.8963271594131857,"total":1183,"current":1120}
+{"_e":"metro:bundling:progress","_t":1785476423618,"id":"1","progress":0.9270093695532976,"total":1237,"current":1191}
+{"_e":"metro:bundling:progress","_t":1785476423718,"id":"1","progress":0.9270093695532976,"total":1307,"current":1222}
+{"_e":"metro:bundling:progress","_t":1785476423821,"id":"1","progress":0.9270093695532976,"total":1331,"current":1267}
+{"_e":"metro:bundling:progress","_t":1785476423921,"id":"1","progress":0.9270093695532976,"total":1377,"current":1321}
+{"_e":"metro:bundling:progress","_t":1785476424021,"id":"1","progress":0.9270093695532976,"total":1435,"current":1356}
+{"_e":"metro:bundling:progress","_t":1785476424121,"id":"1","progress":0.9755111334111963,"total":1461,"current":1443}
+{"_e":"metro:bundling:progress","_t":1785476424221,"id":"1","progress":0.999,"total":1487,"current":1487}
+{"_e":"metro:bundling:done","_t":1785476424282,"id":"1","total":1487,"ms":3169.14075}
+{"_e":"metro:client_log","_t":1785476424732,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"metro:bundling:started","_t":1785476483840,"id":"2","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785476483840,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1785476483894,"id":"2","total":1,"ms":54.344875}
+{"_e":"metro:client_log","_t":1785476484295,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"metro:bundling:started","_t":1785476656540,"id":"3","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785476656540,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1785476656597,"id":"3","total":1,"ms":56.848792}
+{"_e":"metro:client_log","_t":1785476657004,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"metro:bundling:started","_t":1785479214242,"id":"4","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785479214243,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1785479214316,"id":"4","total":1,"ms":72.705583}
+{"_e":"metro:client_log","_t":1785479214641,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"metro:bundling:started","_t":1785479221547,"id":"5","platform":"ios","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1785479221547,"id":"5","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1785479221587,"id":"5","total":1,"ms":39.773375}
+{"_e":"metro:client_log","_t":1785479221914,"level":"warn","data":["Linking requires a build-time setting `scheme` in the project's Expo config (app.config.js or app.json) for production apps, if it's left blank, your app may crash. The scheme does not apply to development in the Expo client but you should add it as soon as you start working with Linking to avoid creating a broken build. Learn more: https://docs.expo.dev/guides/linking/"]}
+{"_e":"metro:server_log","_t":1785480070902,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785480204774,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785480453425,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785480804425,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785481866916,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785482974418,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785483204342,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785483480925,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785483804541,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785484229690,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785484404294,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785485370043,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785485792365,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785486048260,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785487141932,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785488456122,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785489630460,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785490802884,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785491208413,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785491665099,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785492629402,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785493830566,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785493990927,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785494124462,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785495090001,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785495325014,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785496294144,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785497497711,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785498691651,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785499889037,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785501090696,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785502290417,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785502585142,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785502801521,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785502922968,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785503185302,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785503785765,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785504164082,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785505410511,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}
+{"_e":"metro:server_log","_t":1785506624652,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","host.exp.Exponent","iPhone 16 Plus","60"]}

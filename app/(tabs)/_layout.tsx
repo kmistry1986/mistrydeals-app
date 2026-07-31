@@ -32,12 +32,12 @@ function GuidesStack() {
       <Stack.Screen
         name="guides-list"
         component={GuidesScreen}
-        options={{ title: 'Buying Guides' }}
+        options={{ title: 'Buying Guides', headerStyle: { backgroundColor: '#000' }, headerTitleStyle: { color: '#e8e8e8' } }}
       />
       <Stack.Screen
         name="guide-detail"
         component={GuideDetailScreen}
-        options={{ title: 'Guide', headerStyle: { backgroundColor: '#0a0e27' }, headerTitleStyle: { color: '#e8e8e8' } }}
+        options={{ title: 'Guide', headerStyle: { backgroundColor: '#000' }, headerTitleStyle: { color: '#e8e8e8' } }}
       />
     </Stack.Navigator>
   );
@@ -77,8 +77,8 @@ export default function TabLayout() {
           paddingTop: 8,
         },
         headerStyle: {
-          backgroundColor: '#0a0e27',
-          borderBottomColor: '#2a3050',
+          backgroundColor: '#000',
+          borderBottomColor: '#222',
           borderBottomWidth: 1,
         },
         headerTitleStyle: {
