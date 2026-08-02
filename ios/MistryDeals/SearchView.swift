@@ -42,36 +42,6 @@ struct SearchView: View {
                 .borderBottom(DesignColors.divider)
                 .padding(.top, 48)
 
-                VStack(spacing: DesignSpacing.md) {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(DesignColors.tertiary)
-
-                        TextField("Search products...", text: $searchText)
-                            .textFieldStyle(.plain)
-                            .foregroundColor(DesignColors.primary)
-                            .submitLabel(.search)
-                            .onSubmit {
-                                Task {
-                                    await performSearch()
-                                }
-                            }
-
-                        if !searchText.isEmpty {
-                            Button(action: { searchText = "" }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(DesignColors.tertiary)
-                            }
-                        }
-                    }
-                    .padding(DesignSpacing.sm)
-                    .background(DesignColors.tertiaryBackground)
-                    .cornerRadius(DesignRadius.sm)
-                    .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
-                }
-                .padding(.horizontal, DesignSpacing.lg)
-                .padding(.vertical, DesignSpacing.md)
-
                 // Filter pills
                 HStack(spacing: DesignSpacing.md) {
                     FilterPill(
@@ -149,12 +119,43 @@ struct SearchView: View {
                         .frame(maxWidth: .infinity)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.bottom, 66)
                 }
         }
         .background(Color.black)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
+        .safeAreaInset(edge: .bottom) {
+            VStack(spacing: DesignSpacing.md) {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(DesignColors.tertiary)
+
+                    TextField("Search products...", text: $searchText)
+                        .textFieldStyle(.plain)
+                        .foregroundColor(DesignColors.primary)
+                        .submitLabel(.search)
+                        .onSubmit {
+                            Task {
+                                await performSearch()
+                            }
+                        }
+
+                    if !searchText.isEmpty {
+                        Button(action: { searchText = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(DesignColors.tertiary)
+                        }
+                    }
+                }
+                .padding(DesignSpacing.sm)
+                .background(DesignColors.tertiaryBackground)
+                .cornerRadius(DesignRadius.sm)
+                .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
+            }
+            .padding(.horizontal, DesignSpacing.lg)
+            .padding(.vertical, DesignSpacing.md)
+            .background(Color.black)
+        }
     }
 
     private func performSearch() async {

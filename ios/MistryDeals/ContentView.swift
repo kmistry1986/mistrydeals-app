@@ -73,52 +73,23 @@ struct ContentView: View {
                         }
                         .frame(height: 40)
                         .background(
-                            ZStack {
+                            ZStack(alignment: .leading) {
                                 Color.white.opacity(0.1)
                                 BlurView(style: .systemThinMaterialDark)
 
                                 // Animated background behind selected tab
-                                HStack(spacing: 0) {
-                                    if selectedTab == .featured {
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                        .cornerRadius(20)
-                                        .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
-                                    } else if selectedTab == .prime {
-                                        Spacer()
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                        .cornerRadius(20)
-                                        .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
-                                        Spacer()
-                                    } else {
-                                        Spacer()
-                                        Spacer()
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                        .cornerRadius(20)
-                                        .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
-                                    }
-                                }
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        DesignColors.accent,
+                                        Color(red: 0.3, green: 0.8, blue: 1.0)
+                                    ]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                                .cornerRadius(16)
                                 .padding(4)
+                                .frame(maxWidth: .infinity, alignment: selectedTab == .featured ? .leading : (selectedTab == .prime ? .center : .trailing))
+                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                             }
                         )
                         .cornerRadius(20)
