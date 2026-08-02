@@ -220,7 +220,7 @@ struct GuideDetailScreenView: View {
                         .padding(.horizontal, DesignSpacing.lg)
                     }
 
-                    // Quick Answers: The Best Picks
+                    // Quick Answers: The Best Picks - 2-column grid with product boxes
                     if !guide.products.isEmpty {
                         VStack(alignment: .leading, spacing: DesignSpacing.md) {
                             Text("Quick Answers: The Best Picks")
@@ -228,28 +228,8 @@ struct GuideDetailScreenView: View {
                                 .foregroundColor(DesignColors.primary)
                                 .padding(.horizontal, DesignSpacing.lg)
 
-                            VStack(spacing: 0) {
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: DesignSpacing.md) {
                                 ForEach(guide.products) { product in
-                                    ProductRow(product: product)
-                                        .borderBottom(DesignColors.divider)
-                                }
-                            }
-                            .background(DesignColors.tertiaryBackground)
-                            .cornerRadius(DesignRadius.md)
-                            .padding(.horizontal, DesignSpacing.lg)
-                        }
-                    }
-
-                    // Product Details
-                    if !guide.products.isEmpty && guide.products.contains(where: { $0.description != nil && !($0.description?.isEmpty ?? true) }) {
-                        VStack(alignment: .leading, spacing: DesignSpacing.md) {
-                            Text("Product Details")
-                                .font(DesignTypography.headline2)
-                                .foregroundColor(DesignColors.primary)
-                                .padding(.horizontal, DesignSpacing.lg)
-
-                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: DesignSpacing.md) {
-                                ForEach(guide.products.filter { $0.description != nil && !($0.description?.isEmpty ?? true) }) { product in
                                     VStack(alignment: .leading, spacing: DesignSpacing.sm) {
                                         // Product thumbnail
                                         if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
@@ -280,22 +260,139 @@ struct GuideDetailScreenView: View {
 
                                         // Product title
                                         Text(product.truncatedTitle)
-                                            .font(DesignTypography.caption1)
+                                            .font(DesignTypography.bodySmall)
                                             .fontWeight(.semibold)
                                             .foregroundColor(DesignColors.primary)
                                             .lineLimit(2)
                                             .multilineTextAlignment(.leading)
 
+                                        // Price and rating
+                                        HStack(spacing: 8) {
+                                            Text("$\(product.priceDouble, specifier: "%.2f")")
+                                                .font(DesignTypography.headline3)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(DesignColors.accent)
+
+                                            if product.ratingDouble > 0 {
+                                                HStack(spacing: 2) {
+                                                    Text("★")
+                                                        .font(DesignTypography.caption2)
+                                                        .foregroundColor(DesignColors.success)
+
+                                                    Text(String(format: "%.1f", product.ratingDouble))
+                                                        .font(DesignTypography.caption2)
+                                                        .fontWeight(.semibold)
+                                                        .foregroundColor(DesignColors.success)
+                                                }
+                                            }
+
+                                            Spacer()
+                                        }
+
+                                        // Original price and discount
+                                        HStack(spacing: 8) {
+                                            if product.originalPriceDouble > 0 {
+                                                Text("$\(product.originalPriceDouble, specifier: "%.2f")")
+                                                    .font(DesignTypography.caption1)
+                                                    .foregroundColor(DesignColors.secondary)
+                                                    .strikethrough()
+                                            }
+
+                                            if product.discountPercent > 0 {
+                                                Text("\(product.discountPercent)% OFF")
+                                                    .font(DesignTypography.caption2)
+                                                    .fontWeight(.bold)
+                                                    .foregroundColor(.white)
+                                                    .padding(.horizontal, 6)
+                                                    .padding(.vertical, 3)
+                                                    .background(
+                                                        LinearGradient(
+                                                            gradient: Gradient(colors: [
+                                                                DesignColors.accentSecondary,
+                                                                Color(red: 0.9, green: 0.3, blue: 0.5)
+                                                            ]),
+                                                            startPoint: .topLeading,
+                                                            endPoint: .bottomTrailing
+                                                        )
+                                                    )
+                                                    .cornerRadius(DesignRadius.sm)
+                                            }
+
+                                            Spacer()
+                                        }
+                                    }
+                                    .padding(DesignSpacing.md)
+                                    .background(DesignColors.tertiaryBackground)
+                                    .cornerRadius(DesignRadius.md)
+                                }
+                            }
+                            .padding(.horizontal, DesignSpacing.lg)
+                        }
+                        .padding(.bottom, DesignSpacing.xl)
+                    }
+
+                    // Product Details - horizontal layout with thumbnail, title, and description
+                    if !guide.products.isEmpty && guide.products.contains(where: { $0.description != nil && !($0.description?.isEmpty ?? true) }) {
+                        VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                            Text("Product Details")
+                                .font(DesignTypography.headline2)
+                                .foregroundColor(DesignColors.primary)
+                                .padding(.horizontal, DesignSpacing.lg)
+
+                            VStack(spacing: DesignSpacing.md) {
+                                ForEach(guide.products.filter { $0.description != nil && !($0.description?.isEmpty ?? true) }) { product in
+                                    VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                                        HStack(alignment: .top, spacing: DesignSpacing.md) {
+                                            // Product thumbnail
+                                            if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
+                                                AsyncImage(url: url) { phase in
+                                                    switch phase {
+                                                    case .empty:
+                                                        DesignColors.tertiaryBackground
+                                                            .frame(width: 80, height: 80)
+                                                    case .success(let image):
+                                                        image
+                                                            .resizable()
+                                                            .scaledToFill()
+                                                            .frame(width: 80, height: 80)
+                                                            .clipped()
+                                                    case .failure:
+                                                        DesignColors.tertiaryBackground
+                                                            .frame(width: 80, height: 80)
+                                                    @unknown default:
+                                                        EmptyView()
+                                                    }
+                                                }
+                                                .cornerRadius(DesignRadius.md)
+                                            } else {
+                                                DesignColors.tertiaryBackground
+                                                    .frame(width: 80, height: 80)
+                                                    .cornerRadius(DesignRadius.md)
+                                            }
+
+                                            // Title
+                                            VStack(alignment: .leading, spacing: DesignSpacing.xs) {
+                                                Text(product.truncatedTitle)
+                                                    .font(DesignTypography.bodySmall)
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(DesignColors.primary)
+                                                    .lineLimit(2)
+                                                    .multilineTextAlignment(.leading)
+
+                                                Spacer()
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                                        }
+
                                         // Product description
                                         if let description = product.description {
                                             Text(description)
-                                                .font(DesignTypography.caption2)
+                                                .font(DesignTypography.bodySmall)
                                                 .foregroundColor(DesignColors.secondary)
-                                                .lineSpacing(2)
-                                                .lineLimit(3)
+                                                .lineSpacing(4)
                                         }
                                     }
-                                    .padding(DesignSpacing.sm)
+                                    .padding(DesignSpacing.md)
                                     .background(DesignColors.tertiaryBackground)
                                     .cornerRadius(DesignRadius.md)
                                 }
