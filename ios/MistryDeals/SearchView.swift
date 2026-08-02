@@ -166,7 +166,7 @@ struct SearchView: View {
         }
         .ignoresSafeArea()
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isSearchFocused = true
             }
         }
@@ -180,6 +180,10 @@ struct SearchView: View {
             errorMessage = nil
             hasSearched = true
             products = try await client.searchProducts(query: searchText)
+            print("📊 Search returned \(products.count) products")
+            for product in products {
+                print("  - \(product.title): is_prime=\(product.is_prime ?? false)")
+            }
             applyFilter()
             isLoading = false
         } catch {
