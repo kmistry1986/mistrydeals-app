@@ -212,7 +212,7 @@ struct SearchView: View {
             }
             .padding(.horizontal, DesignSpacing.lg)
             .padding(.vertical, DesignSpacing.md)
-            .padding(.bottom, keyboardHeight > 0 ? keyboardHeight + 5 : 0)
+            .padding(.bottom, keyboardHeight > 0 ? keyboardHeight + 10 : 0)
             .background(Color.black)
             .frame(maxWidth: .infinity)
         }
