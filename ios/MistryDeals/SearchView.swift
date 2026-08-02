@@ -218,7 +218,7 @@ struct SearchView: View {
                 )
                 .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
             }
-            .padding(.horizontal, DesignSpacing.lg)
+            .padding(.horizontal, 0)
             .padding(.vertical, DesignSpacing.md)
             .padding(.bottom, keyboardHeight + 10)
             .background(Color.black)
