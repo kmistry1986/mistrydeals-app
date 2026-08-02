@@ -8,6 +8,7 @@ struct FeaturedView: View {
     @State private var errorMessage: String?
     @State private var showSearchModal = false
     @State private var searchText = ""
+    @State private var showSearchBox = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -18,7 +19,7 @@ struct FeaturedView: View {
 
                 HStack {
                     Spacer()
-                    Button(action: { showSearchModal = true }) {
+                    Button(action: { showSearchBox = true }) {
                         Image(systemName: "magnifyingglass")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(DesignColors.accent)
@@ -52,14 +53,59 @@ struct FeaturedView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 0, pinnedViews: []) {
-                        ForEach(filteredProducts) { product in
-                            ProductRow(product: product)
-                                .borderBottom(DesignColors.divider)
+                    VStack(spacing: 0) {
+                        if showSearchBox {
+                            VStack(spacing: 8) {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                        .foregroundColor(DesignColors.tertiary)
+
+                                    TextField("Search products...", text: $searchText)
+                                        .textFieldStyle(.plain)
+                                        .foregroundColor(DesignColors.primary)
+                                        .submitLabel(.search)
+                                        .onSubmit {
+                                            performSearch()
+                                        }
+                                }
+                                .padding(DesignSpacing.sm)
+                                .background(DesignColors.tertiaryBackground)
+                                .cornerRadius(DesignRadius.sm)
+
+                                HStack(spacing: 8) {
+                                    Button(action: { searchText = "" }) {
+                                        Text("Clear")
+                                            .font(DesignTypography.caption1)
+                                            .foregroundColor(DesignColors.primary)
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 8)
+                                            .background(DesignColors.tertiaryBackground)
+                                            .cornerRadius(DesignRadius.sm)
+                                    }
+
+                                    Button(action: { showSearchBox = false; searchText = "" }) {
+                                        Text("Close")
+                                            .font(DesignTypography.caption1)
+                                            .foregroundColor(DesignColors.primary)
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 8)
+                                            .background(DesignColors.accentSecondary)
+                                            .cornerRadius(DesignRadius.sm)
+                                    }
+                                }
+                            }
+                            .padding(DesignSpacing.lg)
                         }
+
+                        LazyVStack(spacing: 0, pinnedViews: []) {
+                            ForEach(filteredProducts) { product in
+                                ProductRow(product: product)
+                                    .borderBottom(DesignColors.divider)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 0)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal, 0)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.bottom, 66)
