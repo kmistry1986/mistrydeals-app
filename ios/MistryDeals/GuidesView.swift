@@ -1,4 +1,5 @@
 import SwiftUI
+import WebKit
 
 struct GuidesView: View {
     @ObservedObject var client: SupabaseClient
@@ -9,9 +10,11 @@ struct GuidesView: View {
     @State private var showSearchModal = false
     @State private var searchText = ""
     @State private var showSearchBox = false
+    @State private var navigationPath: [Guide] = []
 
     var body: some View {
-        VStack(spacing: 0) {
+        NavigationStack(path: $navigationPath) {
+            VStack(spacing: 0) {
                 ZStack {
                     Text("Buying Guides")
                         .font(DesignTypography.headline1)
@@ -98,9 +101,7 @@ struct GuidesView: View {
 
                             LazyVStack(spacing: DesignSpacing.md) {
                                 ForEach(filteredGuides) { guide in
-                                    NavigationLink(destination: GuideDetailView(guide: guide)) {
-                                        GuideCard(guide: guide)
-                                    }
+                                    GuideCardWrapper(guide: guide)
                                 }
                             }
                             .padding(DesignSpacing.lg)
@@ -110,6 +111,7 @@ struct GuidesView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.bottom, 66)
                 }
+            }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(DesignColors.background)
@@ -124,7 +126,7 @@ struct GuidesView: View {
             .task {
                 await loadGuides()
             }
-    }
+        }
 
     private func loadGuides() async {
         do {
@@ -152,26 +154,267 @@ struct GuidesView: View {
     }
 }
 
-struct GuideCard: View {
+struct GuideCardWrapper: View {
     let guide: Guide
 
     var body: some View {
-        VStack(alignment: .leading, spacing: DesignSpacing.md) {
+        NavigationLink(destination: GuideDetailScreenView(guide: guide)) {
+            GuideCard(guide: guide)
+        }
+    }
+}
+
+struct GuideDetailScreenView: View {
+    @Environment(\.dismiss) var dismiss
+    let guide: Guide
+
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Button(action: { dismiss() }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "chevron.left")
+                        Text("Guide")
+                    }
+                    .font(DesignTypography.headline2)
+                    .foregroundColor(DesignColors.primary)
+                }
+                Spacer()
+            }
+            .padding(.horizontal, DesignSpacing.lg)
+            .frame(height: 56)
+            .background(DesignColors.secondaryBackground)
+            .borderBottom(DesignColors.divider)
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: DesignSpacing.lg) {
+                    // Guide title and subtitle
+                    VStack(alignment: .leading, spacing: DesignSpacing.sm) {
+                        Text(guide.guideContent?.title ?? guide.title)
+                            .font(DesignTypography.displaySmall)
+                            .foregroundColor(DesignColors.primary)
+
+                        if let subtitle = guide.guideContent?.subtitle {
+                            Text(subtitle)
+                                .font(DesignTypography.bodyMedium)
+                                .foregroundColor(DesignColors.secondary)
+                        } else if let description = guide.description {
+                            Text(description)
+                                .font(DesignTypography.bodyMedium)
+                                .foregroundColor(DesignColors.secondary)
+                                .lineLimit(3)
+                        }
+                    }
+                    .padding(.horizontal, DesignSpacing.lg)
+
+                    // Intro paragraphs
+                    if let intro = guide.guideContent?.intro {
+                        VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                            ForEach(intro, id: \.self) { paragraph in
+                                Text(paragraph)
+                                    .font(DesignTypography.bodyMedium)
+                                    .foregroundColor(DesignColors.secondary)
+                                    .lineSpacing(4)
+                            }
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
+                    }
+
+                    // Quick Answers: The Best Picks
+                    if !guide.products.isEmpty {
+                        VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                            Text("Quick Answers: The Best Picks")
+                                .font(DesignTypography.headline2)
+                                .foregroundColor(DesignColors.primary)
+                                .padding(.horizontal, DesignSpacing.lg)
+
+                            VStack(spacing: 0) {
+                                ForEach(guide.products) { product in
+                                    ProductRow(product: product)
+                                        .borderBottom(DesignColors.divider)
+                                }
+                            }
+                            .background(DesignColors.tertiaryBackground)
+                            .cornerRadius(DesignRadius.md)
+                            .padding(.horizontal, DesignSpacing.lg)
+                        }
+                    }
+
+                    // Product Details
+                    if !guide.products.isEmpty && guide.products.contains(where: { $0.description != nil && !($0.description?.isEmpty ?? true) }) {
+                        VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                            Text("Product Details")
+                                .font(DesignTypography.headline2)
+                                .foregroundColor(DesignColors.primary)
+                                .padding(.horizontal, DesignSpacing.lg)
+
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: DesignSpacing.md) {
+                                ForEach(guide.products.filter { $0.description != nil && !($0.description?.isEmpty ?? true) }) { product in
+                                    VStack(alignment: .leading, spacing: DesignSpacing.sm) {
+                                        // Product thumbnail
+                                        if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
+                                            AsyncImage(url: url) { phase in
+                                                switch phase {
+                                                case .empty:
+                                                    DesignColors.tertiaryBackground
+                                                        .frame(height: 120)
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(height: 120)
+                                                        .clipped()
+                                                case .failure:
+                                                    DesignColors.tertiaryBackground
+                                                        .frame(height: 120)
+                                                @unknown default:
+                                                    EmptyView()
+                                                }
+                                            }
+                                            .cornerRadius(DesignRadius.md)
+                                        } else {
+                                            DesignColors.tertiaryBackground
+                                                .frame(height: 120)
+                                                .cornerRadius(DesignRadius.md)
+                                        }
+
+                                        // Product title
+                                        Text(product.truncatedTitle)
+                                            .font(DesignTypography.caption1)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(DesignColors.primary)
+                                            .lineLimit(2)
+                                            .multilineTextAlignment(.leading)
+
+                                        // Product description
+                                        if let description = product.description {
+                                            Text(description)
+                                                .font(DesignTypography.caption2)
+                                                .foregroundColor(DesignColors.secondary)
+                                                .lineSpacing(2)
+                                                .lineLimit(3)
+                                        }
+                                    }
+                                    .padding(DesignSpacing.sm)
+                                    .background(DesignColors.tertiaryBackground)
+                                    .cornerRadius(DesignRadius.md)
+                                }
+                            }
+                            .padding(.horizontal, DesignSpacing.lg)
+                        }
+                    }
+
+                    // Sections
+                    if let sections = guide.guideContent?.sections {
+                        VStack(alignment: .leading, spacing: DesignSpacing.lg) {
+                            ForEach(sections) { section in
+                                VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                                    Text(section.title)
+                                        .font(DesignTypography.headline2)
+                                        .foregroundColor(DesignColors.primary)
+
+                                    Text(section.content)
+                                        .font(DesignTypography.bodyMedium)
+                                        .foregroundColor(DesignColors.secondary)
+                                        .lineSpacing(4)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
+                    }
+
+                    // How-to list
+                    if let howto = guide.guideContent?.howto {
+                        VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                            Text("How To")
+                                .font(DesignTypography.headline2)
+                                .foregroundColor(DesignColors.primary)
+
+                            VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                                ForEach(howto, id: \.self) { item in
+                                    HStack(alignment: .top, spacing: DesignSpacing.md) {
+                                        Text("•")
+                                            .foregroundColor(DesignColors.accent)
+                                        Text(item)
+                                            .font(DesignTypography.bodyMedium)
+                                            .foregroundColor(DesignColors.secondary)
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
+                    }
+
+                    // FAQ
+                    if let faq = guide.guideContent?.faq {
+                        VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                            Text("FAQ")
+                                .font(DesignTypography.headline2)
+                                .foregroundColor(DesignColors.primary)
+
+                            VStack(alignment: .leading, spacing: DesignSpacing.md) {
+                                ForEach(faq) { item in
+                                    VStack(alignment: .leading, spacing: DesignSpacing.sm) {
+                                        Text(item.question)
+                                            .font(DesignTypography.headline3)
+                                            .foregroundColor(DesignColors.primary)
+
+                                        Text(item.answer)
+                                            .font(DesignTypography.bodySmall)
+                                            .foregroundColor(DesignColors.secondary)
+                                    }
+                                    .padding(DesignSpacing.md)
+                                    .background(DesignColors.tertiaryBackground)
+                                    .cornerRadius(DesignRadius.md)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
+                    }
+                }
+                .padding(.vertical, DesignSpacing.lg)
+            }
+            .background(DesignColors.background)
+        }
+        .background(DesignColors.background)
+    }
+}
+
+struct WebViewRepresentable: UIViewRepresentable {
+    let url: URL
+
+    func makeUIView(context: Context) -> WKWebView {
+        return WKWebView()
+    }
+
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        let request = URLRequest(url: url)
+        uiView.load(request)
+    }
+}
+
+struct GuideCard: View {
+    let guide: Guide
+    @State private var isTapped = false
+
+    var body: some View {
+        HStack(alignment: .top, spacing: DesignSpacing.md) {
+            // Left: Thumbnail image
             if let imageUrl = guide.image_url, let url = URL(string: imageUrl) {
                 AsyncImage(url: url) { phase in
                     switch phase {
                     case .empty:
                         DesignColors.tertiaryBackground
-                            .frame(height: 150)
+                            .frame(width: 80, height: 80)
                     case .success(let image):
                         image
                             .resizable()
                             .scaledToFill()
-                            .frame(height: 150)
+                            .frame(width: 80, height: 80)
                             .clipped()
                     case .failure:
                         DesignColors.tertiaryBackground
-                            .frame(height: 150)
+                            .frame(width: 80, height: 80)
                     @unknown default:
                         EmptyView()
                     }
@@ -179,20 +422,33 @@ struct GuideCard: View {
                 .cornerRadius(DesignRadius.md)
             }
 
-            Text(guide.title)
-                .font(DesignTypography.headline2)
-                .foregroundColor(DesignColors.primary)
-
-            if let description = guide.description {
-                Text(description)
-                    .font(DesignTypography.bodySmall)
-                    .foregroundColor(DesignColors.secondary)
+            // Right: Title and description
+            VStack(alignment: .leading, spacing: DesignSpacing.sm) {
+                Text(guide.title)
+                    .font(DesignTypography.headline3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(DesignColors.primary)
                     .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+
+                if let description = guide.description {
+                    Text(description)
+                        .font(DesignTypography.caption1)
+                        .foregroundColor(DesignColors.secondary)
+                        .lineLimit(3)
+                        .multilineTextAlignment(.leading)
+                }
+
+                Spacer()
             }
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+
+            Spacer()
         }
         .padding(DesignSpacing.md)
         .glassEffect()
         .cornerRadius(DesignRadius.lg)
+        .opacity(isTapped ? 0.5 : 1.0)
     }
 }
 

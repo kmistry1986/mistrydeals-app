@@ -52,7 +52,7 @@ class SupabaseClient: ObservableObject {
     }
 
     func fetchGuides() async throws -> [Guide] {
-        let urlString = "\(baseURL)/rest/v1/guide_calendar?select=*&published=eq.true&order=published_at.desc"
+        let urlString = "\(baseURL)/rest/v1/guide_calendar?select=id,title,caption,guide_url,content&published=eq.true&order=published_at.desc"
         print("🔍 Fetching guides: \(urlString)")
 
         guard let url = URL(string: urlString) else {
@@ -71,35 +71,54 @@ class SupabaseClient: ObservableObject {
             struct GuideCalendarRow: Codable {
                 let id: String
                 let title: String
-                let description: String?
+                let caption: String?
+                let guide_url: String?
                 let content: GuideContent?
-                let image_url: String?
-            }
-
-            struct GuideContent: Codable {
-                let products: [Product]?
             }
 
             let rows = try JSONDecoder().decode([GuideCalendarRow].self, from: data)
             print("📖 Fetched \(rows.count) guides")
 
             let guides = rows.map { row in
-                Guide(
+                let parsedContent = row.content
+                let imageUrl = extractFirstProductImage(from: parsedContent?.products)
+                let description = row.caption ?? (parsedContent?.intro?.first ?? nil)
+                let fullGuideUrl: String?
+                if let guideUrl = row.guide_url {
+                    if guideUrl.hasPrefix("http") {
+                        fullGuideUrl = guideUrl
+                    } else {
+                        fullGuideUrl = "http://www.mistrydeals.com\(guideUrl)"
+                    }
+                } else {
+                    fullGuideUrl = nil
+                }
+
+                var guide = Guide(
                     id: row.id,
                     title: row.title,
-                    description: row.description,
-                    image_url: row.image_url,
+                    description: description,
+                    image_url: imageUrl,
                     content: nil,
                     created_at: nil,
-                    products: row.content?.products ?? []
+                    guide_url: fullGuideUrl
                 )
+                guide.products = parsedContent?.products ?? []
+                guide.guideContent = parsedContent
+                print("📚 Guide: \(guide.title)")
+                return guide
             }
 
+            print("📖 Fetched \(guides.count) guides")
             return guides
         } catch {
             print("❌ Error fetching guides: \(error)")
             throw error
         }
+    }
+
+    private func extractFirstProductImage(from products: [Product]?) -> String? {
+        return products?.first?.image_url
     }
 
 }

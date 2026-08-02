@@ -37,6 +37,7 @@ struct ProductRow: View {
                         .foregroundColor(DesignColors.primary)
                         .lineLimit(2)
                         .truncationMode(.tail)
+                        .multilineTextAlignment(.leading)
                         .padding(0)
 
                     HStack(spacing: 8) {
@@ -110,7 +111,8 @@ struct ProductRow: View {
         amazon_asin: "B123456",
         is_featured: true,
         is_prime: true,
-        last_price_sync: nil
+        last_price_sync: nil,
+        description: nil
     ))
     .background(DesignColors.background)
 }

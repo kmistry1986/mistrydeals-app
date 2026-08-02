@@ -96,6 +96,7 @@ struct GuideDetailView: View {
         image_url: nil,
         content: "This is a guide about gaming laptops",
         created_at: nil,
+        guide_url: nil,
         products: []
     ))
 }
