@@ -136,7 +136,7 @@ struct ContentView: View {
                                 Image(systemName: "magnifyingglass")
                                     .font(.system(size: 16, weight: .semibold))
                                     .foregroundColor(.white)
-                                    .frame(width: 40, height: 40)
+                                    .frame(width: 38, height: 38)
                                     .background(
                                         Circle()
                                             .fill(
@@ -157,7 +157,7 @@ struct ContentView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 8)
-                    .padding(.bottom, 16)
+                    .padding(.bottom, 22)
                 }
             }
             .ignoresSafeArea(edges: [.top, .bottom])
