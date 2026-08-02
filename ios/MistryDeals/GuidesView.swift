@@ -259,7 +259,7 @@ struct GuideDetailScreenView: View {
                                         }
 
                                         // Product title
-                                        Text(product.truncatedTitle)
+                                        Text(product.display_title ?? product.truncatedTitle)
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(.semibold)
                                             .foregroundColor(DesignColors.primary)
@@ -372,7 +372,7 @@ struct GuideDetailScreenView: View {
 
                                             // Title
                                             VStack(alignment: .leading, spacing: DesignSpacing.xs) {
-                                                Text(product.truncatedTitle)
+                                                Text(product.display_title ?? product.truncatedTitle)
                                                     .font(DesignTypography.bodySmall)
                                                     .fontWeight(.semibold)
                                                     .foregroundColor(DesignColors.primary)
