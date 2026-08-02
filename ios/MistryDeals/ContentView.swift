@@ -51,6 +51,22 @@ struct ContentView: View {
                                     .foregroundColor(selectedTab == .featured ? .white : DesignColors.tertiary)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 10)
+                                    .background(
+                                        selectedTab == .featured ?
+                                        AnyView(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    DesignColors.accent,
+                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                ]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                            .cornerRadius(12)
+                                            .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                        ) :
+                                        AnyView(Color.clear)
+                                    )
                             }
 
                             Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .prime } }) {
@@ -60,6 +76,22 @@ struct ContentView: View {
                                     .foregroundColor(selectedTab == .prime ? .white : DesignColors.tertiary)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 10)
+                                    .background(
+                                        selectedTab == .prime ?
+                                        AnyView(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    DesignColors.accent,
+                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                ]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                            .cornerRadius(12)
+                                            .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                        ) :
+                                        AnyView(Color.clear)
+                                    )
                             }
 
                             Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .guides } }) {
@@ -69,27 +101,29 @@ struct ContentView: View {
                                     .foregroundColor(selectedTab == .guides ? .white : DesignColors.tertiary)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 10)
+                                    .background(
+                                        selectedTab == .guides ?
+                                        AnyView(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    DesignColors.accent,
+                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                ]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                            .cornerRadius(12)
+                                            .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                        ) :
+                                        AnyView(Color.clear)
+                                    )
                             }
                         }
                         .frame(height: 40)
                         .background(
-                            ZStack(alignment: .leading) {
+                            ZStack {
                                 Color.white.opacity(0.1)
                                 BlurView(style: .systemThinMaterialDark)
-
-                                // Animated background behind selected tab
-                                LinearGradient(
-                                    gradient: Gradient(colors: [
-                                        DesignColors.accent,
-                                        Color(red: 0.3, green: 0.8, blue: 1.0)
-                                    ]),
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                                .cornerRadius(16)
-                                .padding(4)
-                                .frame(maxWidth: .infinity, alignment: selectedTab == .featured ? .leading : (selectedTab == .prime ? .center : .trailing))
-                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                             }
                         )
                         .cornerRadius(20)
