@@ -44,40 +44,88 @@ struct SearchView: View {
                 .borderBottom(DesignColors.divider)
                 .padding(.top, 48)
 
-                // Filter pills - pill-shaped and spread across
-                VStack {
-                    HStack(spacing: 12) {
-                        FilterPill(
-                            label: "All",
-                            isSelected: selectedFilter == .all,
-                            action: {
-                                selectedFilter = .all
-                                applyFilter()
-                            }
-                        )
-                        .frame(maxWidth: .infinity)
+                // Filter pills - pill container like navigation bar
+                HStack(spacing: 0) {
+                    Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .all; applyFilter() } }) {
+                        Text("All")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedFilter == .all ? .semibold : .regular)
+                            .foregroundColor(selectedFilter == .all ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedFilter == .all ?
+                                AnyView(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    .cornerRadius(12)
+                                ) :
+                                AnyView(Color.clear)
+                            )
+                    }
 
-                        FilterPill(
-                            label: "Featured",
-                            isSelected: selectedFilter == .featured,
-                            action: {
-                                selectedFilter = .featured
-                                applyFilter()
-                            }
-                        )
-                        .frame(maxWidth: .infinity)
+                    Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .featured; applyFilter() } }) {
+                        Text("Featured")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedFilter == .featured ? .semibold : .regular)
+                            .foregroundColor(selectedFilter == .featured ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedFilter == .featured ?
+                                AnyView(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    .cornerRadius(12)
+                                ) :
+                                AnyView(Color.clear)
+                            )
+                    }
 
-                        FilterPill(
-                            label: "Prime",
-                            isSelected: selectedFilter == .prime,
-                            action: {
-                                selectedFilter = .prime
-                                applyFilter()
-                            }
-                        )
-                        .frame(maxWidth: .infinity)
+                    Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .prime; applyFilter() } }) {
+                        Text("Prime")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedFilter == .prime ? .semibold : .regular)
+                            .foregroundColor(selectedFilter == .prime ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedFilter == .prime ?
+                                AnyView(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    .cornerRadius(12)
+                                ) :
+                                AnyView(Color.clear)
+                            )
                     }
                 }
+                .frame(height: 40)
+                .background(
+                    ZStack {
+                        Color.white.opacity(0.1)
+                        BlurView(style: .systemThinMaterialDark)
+                    }
+                )
+                .cornerRadius(20)
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.md)
 
@@ -163,8 +211,9 @@ struct SearchView: View {
             .padding(.vertical, DesignSpacing.md)
             .background(Color.black)
             .frame(maxWidth: .infinity)
+            .ignoresSafeArea(edges: .bottom)
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(edges: .top)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isSearchFocused = true
