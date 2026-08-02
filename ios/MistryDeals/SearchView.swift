@@ -4,9 +4,17 @@ struct SearchView: View {
     @ObservedObject var client: SupabaseClient
     @State private var searchText = ""
     @State private var products: [Product] = []
+    @State private var filteredProducts: [Product] = []
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var hasSearched = false
+    @State private var selectedFilter: SearchFilter = .all
+
+    enum SearchFilter {
+        case all
+        case featured
+        case prime
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -52,6 +60,40 @@ struct SearchView: View {
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.vertical, DesignSpacing.md)
 
+                // Filter pills
+                HStack(spacing: DesignSpacing.md) {
+                    FilterPill(
+                        label: "All",
+                        isSelected: selectedFilter == .all,
+                        action: {
+                            selectedFilter = .all
+                            applyFilter()
+                        }
+                    )
+
+                    FilterPill(
+                        label: "Featured",
+                        isSelected: selectedFilter == .featured,
+                        action: {
+                            selectedFilter = .featured
+                            applyFilter()
+                        }
+                    )
+
+                    FilterPill(
+                        label: "Prime",
+                        isSelected: selectedFilter == .prime,
+                        action: {
+                            selectedFilter = .prime
+                            applyFilter()
+                        }
+                    )
+
+                    Spacer()
+                }
+                .padding(.horizontal, DesignSpacing.lg)
+                .padding(.bottom, DesignSpacing.md)
+
                 if isLoading {
                     VStack {
                         Spacer()
@@ -76,7 +118,7 @@ struct SearchView: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if products.isEmpty {
+                } else if filteredProducts.isEmpty {
                     VStack {
                         Spacer()
                         Text("No results found")
@@ -87,7 +129,7 @@ struct SearchView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 0) {
-                            ForEach(products) { product in
+                            ForEach(filteredProducts) { product in
                                 ProductRow(product: product)
                                     .borderBottom(DesignColors.divider)
                             }
@@ -111,10 +153,57 @@ struct SearchView: View {
             errorMessage = nil
             hasSearched = true
             products = try await client.searchProducts(query: searchText)
+            applyFilter()
             isLoading = false
         } catch {
             errorMessage = error.localizedDescription
             isLoading = false
+        }
+    }
+
+    private func applyFilter() {
+        switch selectedFilter {
+        case .all:
+            filteredProducts = products
+        case .featured:
+            filteredProducts = products.filter { $0.is_featured == true }
+        case .prime:
+            filteredProducts = products.filter { $0.is_prime == true }
+        }
+    }
+}
+
+struct FilterPill: View {
+    let label: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(label)
+                .font(DesignTypography.caption1)
+                .fontWeight(isSelected ? .semibold : .regular)
+                .foregroundColor(isSelected ? .white : DesignColors.tertiary)
+                .padding(.horizontal, DesignSpacing.md)
+                .padding(.vertical, 8)
+                .background(
+                    isSelected ?
+                    AnyView(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                DesignColors.accent,
+                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .cornerRadius(12)
+                    ) :
+                    AnyView(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(DesignColors.divider, lineWidth: 1)
+                    )
+                )
         }
     }
 }
