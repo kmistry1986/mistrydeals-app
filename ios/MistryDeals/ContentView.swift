@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var isSearchActive = false
     @StateObject private var supabaseClient = SupabaseClient()
     @Namespace private var searchAnimation
+    @Namespace private var pillAnimation
 
     var body: some View {
         ZStack {
@@ -43,76 +44,31 @@ struct ContentView: View {
                     HStack(spacing: 12) {
                         // Navigation pill (narrower, left-aligned, 3 tabs only)
                         HStack(spacing: 0) {
-                            Button(action: { selectedTab = .featured }) {
+                            Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .featured } }) {
                                 Text("Featured")
                                     .font(DesignTypography.bodySmall)
                                     .fontWeight(selectedTab == .featured ? .semibold : .regular)
                                     .foregroundColor(selectedTab == .featured ? .white : DesignColors.tertiary)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 10)
-                                    .background(
-                                        selectedTab == .featured ?
-                                        AnyView(
-                                            LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    DesignColors.accent,
-                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                ]),
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                            .cornerRadius(20)
-                                        ) :
-                                        AnyView(Color.clear)
-                                    )
                             }
 
-                            Button(action: { selectedTab = .prime }) {
+                            Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .prime } }) {
                                 Text("Prime")
                                     .font(DesignTypography.bodySmall)
                                     .fontWeight(selectedTab == .prime ? .semibold : .regular)
                                     .foregroundColor(selectedTab == .prime ? .white : DesignColors.tertiary)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 10)
-                                    .background(
-                                        selectedTab == .prime ?
-                                        AnyView(
-                                            LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    DesignColors.accent,
-                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                ]),
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                            .cornerRadius(20)
-                                        ) :
-                                        AnyView(Color.clear)
-                                    )
                             }
 
-                            Button(action: { selectedTab = .guides }) {
+                            Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .guides } }) {
                                 Text("Guides")
                                     .font(DesignTypography.bodySmall)
                                     .fontWeight(selectedTab == .guides ? .semibold : .regular)
                                     .foregroundColor(selectedTab == .guides ? .white : DesignColors.tertiary)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 10)
-                                    .background(
-                                        selectedTab == .guides ?
-                                        AnyView(
-                                            LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    DesignColors.accent,
-                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                ]),
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                            .cornerRadius(20)
-                                        ) :
-                                        AnyView(Color.clear)
-                                    )
                             }
                         }
                         .frame(height: 40)
@@ -120,6 +76,49 @@ struct ContentView: View {
                             ZStack {
                                 Color.white.opacity(0.1)
                                 BlurView(style: .systemThinMaterialDark)
+
+                                // Animated background behind selected tab
+                                HStack(spacing: 0) {
+                                    if selectedTab == .featured {
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                        .cornerRadius(20)
+                                        .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                    } else if selectedTab == .prime {
+                                        Spacer()
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                        .cornerRadius(20)
+                                        .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                        Spacer()
+                                    } else {
+                                        Spacer()
+                                        Spacer()
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                        .cornerRadius(20)
+                                        .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                    }
+                                }
+                                .padding(4)
                             }
                         )
                         .cornerRadius(20)
