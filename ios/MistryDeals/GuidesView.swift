@@ -35,7 +35,7 @@ struct GuidesView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.black)
                 .borderBottom(DesignColors.divider)
-                .padding(.top, 48)
+                .padding(.top, 0)
 
                 if isLoading {
                     VStack {
