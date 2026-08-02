@@ -20,164 +20,164 @@ struct SearchView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack(spacing: 0) {
-                HStack {
-                    Spacer()
-                    Text("Search Deals")
-                        .font(DesignTypography.headline1)
-                        .foregroundColor(DesignColors.primary)
-                    Spacer()
+        VStack(spacing: 0) {
+            HStack {
+                Spacer()
+                Text("Search Deals")
+                    .font(DesignTypography.headline1)
+                    .foregroundColor(DesignColors.primary)
+                Spacer()
 
-                    Button(action: { isSearchActive = false; searchText = "" }) {
-                        Text("Close")
-                            .font(DesignTypography.bodySmall)
-                            .fontWeight(.semibold)
-                            .foregroundColor(DesignColors.accent)
-                    }
-                }
-                .padding(.horizontal, DesignSpacing.lg)
-                .padding(.top, DesignSpacing.lg)
-                .padding(.bottom, DesignSpacing.lg)
-                .frame(maxWidth: .infinity)
-                .background(Color.black)
-                .borderBottom(DesignColors.divider)
-                .padding(.top, 48)
-
-                // Filter pills - pill container like navigation bar
-                HStack(spacing: 0) {
-                    Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .all; applyFilter() } }) {
-                        Text("All")
-                            .font(DesignTypography.bodySmall)
-                            .fontWeight(selectedFilter == .all ? .semibold : .regular)
-                            .foregroundColor(selectedFilter == .all ? .white : DesignColors.tertiary)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .background(
-                                selectedFilter == .all ?
-                                AnyView(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            DesignColors.accent,
-                                            Color(red: 0.3, green: 0.8, blue: 1.0)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                    .cornerRadius(12)
-                                ) :
-                                AnyView(Color.clear)
-                            )
-                    }
-
-                    Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .featured; applyFilter() } }) {
-                        Text("Featured")
-                            .font(DesignTypography.bodySmall)
-                            .fontWeight(selectedFilter == .featured ? .semibold : .regular)
-                            .foregroundColor(selectedFilter == .featured ? .white : DesignColors.tertiary)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .background(
-                                selectedFilter == .featured ?
-                                AnyView(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            DesignColors.accent,
-                                            Color(red: 0.3, green: 0.8, blue: 1.0)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                    .cornerRadius(12)
-                                ) :
-                                AnyView(Color.clear)
-                            )
-                    }
-
-                    Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .prime; applyFilter() } }) {
-                        Text("Prime")
-                            .font(DesignTypography.bodySmall)
-                            .fontWeight(selectedFilter == .prime ? .semibold : .regular)
-                            .foregroundColor(selectedFilter == .prime ? .white : DesignColors.tertiary)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .background(
-                                selectedFilter == .prime ?
-                                AnyView(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            DesignColors.accent,
-                                            Color(red: 0.3, green: 0.8, blue: 1.0)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                    .cornerRadius(12)
-                                ) :
-                                AnyView(Color.clear)
-                            )
-                    }
-                }
-                .frame(height: 40)
-                .background(
-                    ZStack {
-                        Color.white.opacity(0.1)
-                        BlurView(style: .systemThinMaterialDark)
-                    }
-                )
-                .cornerRadius(20)
-                .padding(.horizontal, DesignSpacing.lg)
-                .padding(.bottom, DesignSpacing.md)
-
-                if isLoading {
-                    VStack {
-                        Spacer()
-                        ProgressView()
-                            .tint(DesignColors.accent)
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if let error = errorMessage {
-                    VStack {
-                        Spacer()
-                        Text("Error: \(error)")
-                            .foregroundColor(DesignColors.accentSecondary)
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if !hasSearched {
-                    VStack {
-                        Spacer()
-                        Text("Enter a search term")
-                            .foregroundColor(DesignColors.tertiary)
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if filteredProducts.isEmpty {
-                    VStack {
-                        Spacer()
-                        Text("No results found")
-                            .foregroundColor(DesignColors.tertiary)
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    ScrollView {
-                        LazyVStack(spacing: 0) {
-                            ForEach(filteredProducts) { product in
-                                ProductRow(product: product)
-                                    .borderBottom(DesignColors.divider)
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.bottom, 100)
+                Button(action: { isSearchActive = false; searchText = "" }) {
+                    Text("Close")
+                        .font(DesignTypography.bodySmall)
+                        .fontWeight(.semibold)
+                        .foregroundColor(DesignColors.accent)
                 }
             }
+            .padding(.horizontal, DesignSpacing.lg)
+            .padding(.top, DesignSpacing.lg)
+            .padding(.bottom, DesignSpacing.lg)
+            .frame(maxWidth: .infinity)
             .background(Color.black)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .borderBottom(DesignColors.divider)
+            .padding(.top, 48)
 
+            // Filter pills - pill container like navigation bar
+            HStack(spacing: 0) {
+                Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .all; applyFilter() } }) {
+                    Text("All")
+                        .font(DesignTypography.bodySmall)
+                        .fontWeight(selectedFilter == .all ? .semibold : .regular)
+                        .foregroundColor(selectedFilter == .all ? .white : DesignColors.tertiary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(
+                            selectedFilter == .all ?
+                            AnyView(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        DesignColors.accent,
+                                        Color(red: 0.3, green: 0.8, blue: 1.0)
+                                    ]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                                .cornerRadius(12)
+                            ) :
+                            AnyView(Color.clear)
+                        )
+                }
+
+                Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .featured; applyFilter() } }) {
+                    Text("Featured")
+                        .font(DesignTypography.bodySmall)
+                        .fontWeight(selectedFilter == .featured ? .semibold : .regular)
+                        .foregroundColor(selectedFilter == .featured ? .white : DesignColors.tertiary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(
+                            selectedFilter == .featured ?
+                            AnyView(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        DesignColors.accent,
+                                        Color(red: 0.3, green: 0.8, blue: 1.0)
+                                    ]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                                .cornerRadius(12)
+                            ) :
+                            AnyView(Color.clear)
+                        )
+                }
+
+                Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .prime; applyFilter() } }) {
+                    Text("Prime")
+                        .font(DesignTypography.bodySmall)
+                        .fontWeight(selectedFilter == .prime ? .semibold : .regular)
+                        .foregroundColor(selectedFilter == .prime ? .white : DesignColors.tertiary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(
+                            selectedFilter == .prime ?
+                            AnyView(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        DesignColors.accent,
+                                        Color(red: 0.3, green: 0.8, blue: 1.0)
+                                    ]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                                .cornerRadius(12)
+                            ) :
+                            AnyView(Color.clear)
+                        )
+                }
+            }
+            .frame(height: 40)
+            .background(
+                ZStack {
+                    Color.white.opacity(0.1)
+                    BlurView(style: .systemThinMaterialDark)
+                }
+            )
+            .cornerRadius(20)
+            .padding(.horizontal, DesignSpacing.lg)
+            .padding(.top, DesignSpacing.lg)
+            .padding(.bottom, DesignSpacing.md)
+
+            if isLoading {
+                VStack {
+                    Spacer()
+                    ProgressView()
+                        .tint(DesignColors.accent)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if let error = errorMessage {
+                VStack {
+                    Spacer()
+                    Text("Error: \(error)")
+                        .foregroundColor(DesignColors.accentSecondary)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if !hasSearched {
+                VStack {
+                    Spacer()
+                    Text("Enter a search term")
+                        .foregroundColor(DesignColors.tertiary)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if filteredProducts.isEmpty {
+                VStack {
+                    Spacer()
+                    Text("No results found")
+                        .foregroundColor(DesignColors.tertiary)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(filteredProducts) { product in
+                            ProductRow(product: product)
+                                .borderBottom(DesignColors.divider)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .background(Color.black)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(edges: .top)
+        .safeAreaInset(edge: .bottom) {
             // Search bar that floats above keyboard
             VStack(spacing: DesignSpacing.md) {
                 HStack {
@@ -211,9 +211,7 @@ struct SearchView: View {
             .padding(.vertical, DesignSpacing.md)
             .background(Color.black)
             .frame(maxWidth: .infinity)
-            .ignoresSafeArea(edges: .bottom)
         }
-        .ignoresSafeArea(edges: .top)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isSearchFocused = true
