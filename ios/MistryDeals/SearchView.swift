@@ -3,6 +3,7 @@ import SwiftUI
 struct SearchView: View {
     @ObservedObject var client: SupabaseClient
     @Binding var isSearchActive: Bool
+    var searchAnimation: Namespace.ID
     @State private var searchText = ""
     @State private var products: [Product] = []
     @State private var filteredProducts: [Product] = []
@@ -66,6 +67,7 @@ struct SearchView: View {
                     .padding(DesignSpacing.sm)
                     .background(DesignColors.tertiaryBackground)
                     .cornerRadius(DesignRadius.sm)
+                    .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
                 }
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.vertical, DesignSpacing.md)
@@ -219,5 +221,6 @@ struct FilterPill: View {
 }
 
 #Preview {
-    SearchView(client: SupabaseClient(), isSearchActive: .constant(true))
+    @Namespace var ns
+    return SearchView(client: SupabaseClient(), isSearchActive: .constant(true), searchAnimation: ns)
 }

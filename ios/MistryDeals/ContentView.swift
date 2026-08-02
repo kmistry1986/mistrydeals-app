@@ -4,6 +4,7 @@ struct ContentView: View {
     @State private var selectedTab: TabSelection = .featured
     @State private var isSearchActive = false
     @StateObject private var supabaseClient = SupabaseClient()
+    @Namespace private var searchAnimation
 
     var body: some View {
         ZStack {
@@ -20,7 +21,8 @@ struct ContentView: View {
 
             Group {
                 if isSearchActive {
-                    SearchView(client: supabaseClient, isSearchActive: $isSearchActive)
+                    SearchView(client: supabaseClient, isSearchActive: $isSearchActive, searchAnimation: searchAnimation)
+                        .transition(.opacity)
                 } else {
                     switch selectedTab {
                     case .featured:
@@ -35,6 +37,7 @@ struct ContentView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .animation(.easeInOut(duration: 0.3), value: isSearchActive)
             .safeAreaInset(edge: .bottom) {
                 if !isSearchActive {
                     HStack(spacing: 12) {
@@ -122,22 +125,25 @@ struct ContentView: View {
                         .cornerRadius(20)
 
                         // Floating search button
-                        Button(action: { isSearchActive = true }) {
-                            Image(systemName: "magnifyingglass")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .frame(width: 40, height: 40)
-                                .background(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            DesignColors.accent,
-                                            Color(red: 0.3, green: 0.8, blue: 1.0)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
+                        if !isSearchActive {
+                            Button(action: { isSearchActive = true }) {
+                                Image(systemName: "magnifyingglass")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(.white)
+                                    .frame(width: 40, height: 40)
+                                    .background(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
                                     )
-                                )
-                                .cornerRadius(20)
+                                    .cornerRadius(20)
+                                    .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
+                            }
                         }
 
                         Spacer()
