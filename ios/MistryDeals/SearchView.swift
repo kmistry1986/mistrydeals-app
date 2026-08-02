@@ -19,7 +19,8 @@ struct SearchView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
+        ZStack(alignment: .bottom) {
+            VStack(spacing: 0) {
                 HStack {
                     Text("Search Deals")
                         .font(DesignTypography.headline1)
@@ -119,12 +120,13 @@ struct SearchView: View {
                         .frame(maxWidth: .infinity)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.bottom, 100)
                 }
-        }
-        .background(Color.black)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea()
-        .safeAreaInset(edge: .bottom) {
+            }
+            .background(Color.black)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            // Search bar that floats above keyboard
             VStack(spacing: DesignSpacing.md) {
                 HStack {
                     Image(systemName: "magnifyingglass")
@@ -155,7 +157,9 @@ struct SearchView: View {
             .padding(.horizontal, DesignSpacing.lg)
             .padding(.vertical, DesignSpacing.md)
             .background(Color.black)
+            .frame(maxWidth: .infinity)
         }
+        .ignoresSafeArea()
     }
 
     private func performSearch() async {
