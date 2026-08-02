@@ -181,42 +181,40 @@ struct SearchView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(edges: .top)
         .overlay(alignment: .bottom) {
-            if keyboardHeight > 0 {
-                // Search bar that floats above keyboard
-                VStack(spacing: DesignSpacing.md) {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(DesignColors.tertiary)
+            // Search bar that floats above keyboard - always visible
+            VStack(spacing: DesignSpacing.md) {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(DesignColors.tertiary)
 
-                        TextField("Search products...", text: $searchText)
-                            .textFieldStyle(.plain)
-                            .foregroundColor(DesignColors.primary)
-                            .submitLabel(.search)
-                            .focused($isSearchFocused)
-                            .onSubmit {
-                                Task {
-                                    await performSearch()
-                                }
-                            }
-
-                        if !searchText.isEmpty {
-                            Button(action: { searchText = "" }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(DesignColors.tertiary)
+                    TextField("Search products...", text: $searchText)
+                        .textFieldStyle(.plain)
+                        .foregroundColor(DesignColors.primary)
+                        .submitLabel(.search)
+                        .focused($isSearchFocused)
+                        .onSubmit {
+                            Task {
+                                await performSearch()
                             }
                         }
+
+                    if !searchText.isEmpty {
+                        Button(action: { searchText = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(DesignColors.tertiary)
+                        }
                     }
-                    .padding(DesignSpacing.sm)
-                    .background(DesignColors.tertiaryBackground)
-                    .cornerRadius(DesignRadius.sm)
-                    .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
                 }
-                .padding(.horizontal, DesignSpacing.lg)
-                .padding(.bottom, keyboardHeight)
-                .background(Color.black)
-                .frame(maxWidth: .infinity)
-                .transition(.move(edge: .bottom))
+                .padding(DesignSpacing.sm)
+                .background(DesignColors.tertiaryBackground)
+                .cornerRadius(DesignRadius.sm)
+                .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
             }
+            .padding(.horizontal, DesignSpacing.lg)
+            .padding(.vertical, DesignSpacing.md)
+            .padding(.bottom, max(0, keyboardHeight - (UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first?.windows.first?.safeAreaInsets.bottom ?? 0)))
+            .background(Color.black)
+            .frame(maxWidth: .infinity)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
