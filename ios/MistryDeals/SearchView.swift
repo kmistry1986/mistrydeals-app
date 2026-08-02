@@ -1,4 +1,6 @@
 import SwiftUI
+import Combine
+import UIKit
 
 struct SearchView: View {
     @ObservedObject var client: SupabaseClient
@@ -12,6 +14,7 @@ struct SearchView: View {
     @State private var hasSearched = false
     @State private var selectedFilter: SearchFilter = .all
     @FocusState private var isSearchFocused: Bool
+    @State private var keyboardHeight: CGFloat = 0
 
     enum SearchFilter {
         case all
@@ -177,45 +180,51 @@ struct SearchView: View {
         .background(Color.black)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(edges: .top)
-        .safeAreaInset(edge: .bottom) {
-            // Search bar that floats above keyboard
-            VStack(spacing: DesignSpacing.md) {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(DesignColors.tertiary)
+        .overlay(alignment: .bottom) {
+            if keyboardHeight > 0 {
+                // Search bar that floats above keyboard
+                VStack(spacing: DesignSpacing.md) {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(DesignColors.tertiary)
 
-                    TextField("Search products...", text: $searchText)
-                        .textFieldStyle(.plain)
-                        .foregroundColor(DesignColors.primary)
-                        .submitLabel(.search)
-                        .focused($isSearchFocused)
-                        .onSubmit {
-                            Task {
-                                await performSearch()
+                        TextField("Search products...", text: $searchText)
+                            .textFieldStyle(.plain)
+                            .foregroundColor(DesignColors.primary)
+                            .submitLabel(.search)
+                            .focused($isSearchFocused)
+                            .onSubmit {
+                                Task {
+                                    await performSearch()
+                                }
+                            }
+
+                        if !searchText.isEmpty {
+                            Button(action: { searchText = "" }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(DesignColors.tertiary)
                             }
                         }
-
-                    if !searchText.isEmpty {
-                        Button(action: { searchText = "" }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(DesignColors.tertiary)
-                        }
                     }
+                    .padding(DesignSpacing.sm)
+                    .background(DesignColors.tertiaryBackground)
+                    .cornerRadius(DesignRadius.sm)
+                    .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
                 }
-                .padding(DesignSpacing.sm)
-                .background(DesignColors.tertiaryBackground)
-                .cornerRadius(DesignRadius.sm)
-                .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
+                .padding(.horizontal, DesignSpacing.lg)
+                .padding(.bottom, keyboardHeight)
+                .background(Color.black)
+                .frame(maxWidth: .infinity)
+                .transition(.move(edge: .bottom))
             }
-            .padding(.horizontal, DesignSpacing.lg)
-            .padding(.vertical, DesignSpacing.md)
-            .background(Color.black)
-            .frame(maxWidth: .infinity)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isSearchFocused = true
             }
+        }
+        .onReceive(Publishers.keyboardHeight) { height in
+            keyboardHeight = height
         }
     }
 
@@ -244,6 +253,21 @@ struct SearchView: View {
         case .prime:
             filteredProducts = products.filter { $0.is_prime_bonus ?? false }
         }
+    }
+}
+
+extension Publishers {
+    static var keyboardHeight: AnyPublisher<CGFloat, Never> {
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .compactMap { $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect }
+            .map { $0.height }
+
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .map { _ in CGFloat(0) }
+
+        return Publishers.Merge(willShow, willHide)
+            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 }
 
