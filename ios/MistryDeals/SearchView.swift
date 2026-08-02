@@ -31,7 +31,11 @@ struct SearchView: View {
                     .foregroundColor(DesignColors.primary)
                 Spacer()
 
-                Button(action: { isSearchActive = false; searchText = "" }) {
+                Button(action: {
+                    isSearchFocused = false
+                    isSearchActive = false
+                    searchText = ""
+                }) {
                     Text("Close")
                         .font(DesignTypography.bodySmall)
                         .fontWeight(.semibold)
