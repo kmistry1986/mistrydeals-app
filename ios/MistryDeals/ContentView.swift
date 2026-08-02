@@ -20,7 +20,7 @@ struct ContentView: View {
 
             Group {
                 if isSearchActive {
-                    SearchView(client: supabaseClient)
+                    SearchView(client: supabaseClient, isSearchActive: $isSearchActive)
                 } else {
                     switch selectedTab {
                     case .featured:

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SearchView: View {
     @ObservedObject var client: SupabaseClient
+    @Binding var isSearchActive: Bool
     @State private var searchText = ""
     @State private var products: [Product] = []
     @State private var filteredProducts: [Product] = []
@@ -18,10 +19,19 @@ struct SearchView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-                ZStack {
+                HStack {
                     Text("Search Deals")
                         .font(DesignTypography.headline1)
                         .foregroundColor(DesignColors.primary)
+
+                    Spacer()
+
+                    Button(action: { isSearchActive = false; searchText = "" }) {
+                        Text("Close")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(.semibold)
+                            .foregroundColor(DesignColors.accent)
+                    }
                 }
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.top, DesignSpacing.lg)
@@ -209,5 +219,5 @@ struct FilterPill: View {
 }
 
 #Preview {
-    SearchView(client: SupabaseClient())
+    SearchView(client: SupabaseClient(), isSearchActive: .constant(true))
 }
