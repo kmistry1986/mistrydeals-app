@@ -180,10 +180,6 @@ struct SearchView: View {
             errorMessage = nil
             hasSearched = true
             products = try await client.searchProducts(query: searchText)
-            print("📊 Search returned \(products.count) products")
-            for product in products {
-                print("  - \(product.title): is_prime=\(product.is_prime ?? false)")
-            }
             applyFilter()
             isLoading = false
         } catch {
@@ -199,7 +195,7 @@ struct SearchView: View {
         case .featured:
             filteredProducts = products.filter { $0.is_featured ?? false }
         case .prime:
-            filteredProducts = products.filter { $0.is_prime ?? false }
+            filteredProducts = products.filter { $0.is_prime_bonus ?? false }
         }
     }
 }

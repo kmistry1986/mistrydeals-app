@@ -10,7 +10,7 @@ struct Product: Codable, Identifiable {
     let rating: Double?
     let amazon_asin: String
     let is_featured: Bool?
-    let is_prime: Bool?
+    let is_prime_bonus: Bool?
     let last_price_sync: String?
     let description: String?
 

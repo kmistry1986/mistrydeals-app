@@ -110,7 +110,7 @@ struct ProductRow: View {
         rating: 4.5,
         amazon_asin: "B123456",
         is_featured: true,
-        is_prime: true,
+        is_prime_bonus: true,
         last_price_sync: nil,
         description: nil
     ))
