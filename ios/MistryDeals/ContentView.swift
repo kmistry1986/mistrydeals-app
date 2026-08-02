@@ -126,7 +126,7 @@ struct ContentView: View {
                                 BlurView(style: .systemThinMaterialDark)
                             }
                         )
-                        .cornerRadius(20)
+                        .cornerRadius(14)
 
                         // Floating search button
                         if !isSearchActive {
@@ -145,7 +145,7 @@ struct ContentView: View {
                                             endPoint: .bottomTrailing
                                         )
                                     )
-                                    .cornerRadius(20)
+                                    .cornerRadius(12)
                                     .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
                             }
                         }

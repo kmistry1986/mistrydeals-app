@@ -127,7 +127,7 @@ struct SearchView: View {
                     BlurView(style: .systemThinMaterialDark)
                 }
             )
-            .cornerRadius(20)
+            .cornerRadius(14)
             .padding(.horizontal, DesignSpacing.lg)
             .padding(.top, DesignSpacing.lg)
             .padding(.bottom, DesignSpacing.md)
@@ -206,8 +206,10 @@ struct SearchView: View {
                     }
                 }
                 .padding(DesignSpacing.sm)
-                .background(DesignColors.tertiaryBackground)
-                .cornerRadius(DesignRadius.sm)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(DesignColors.tertiaryBackground)
+                )
                 .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
             }
             .padding(.horizontal, DesignSpacing.lg)
