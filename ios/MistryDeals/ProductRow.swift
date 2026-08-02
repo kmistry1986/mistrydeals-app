@@ -89,11 +89,11 @@ struct ProductRow: View {
                     }
                 }
             }
-            .padding(DesignSpacing.lg)
+            .padding(DesignSpacing.md)
             .background(DesignColors.tertiaryBackground.opacity(0.5))
             .cornerRadius(DesignRadius.md)
-            .padding(.horizontal, DesignSpacing.sm)
-            .padding(.vertical, DesignSpacing.sm)
+            .padding(.horizontal, DesignSpacing.xs)
+            .padding(.vertical, DesignSpacing.xs)
         }
     }
 }

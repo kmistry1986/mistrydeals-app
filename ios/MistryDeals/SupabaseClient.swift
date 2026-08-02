@@ -8,11 +8,11 @@ class SupabaseClient: ObservableObject {
         let query: String
         switch type {
         case "featured":
-            query = "select=*&is_featured=eq.true&order=last_price_sync.desc"
+            query = "select=*&is_featured=eq.true&order=last_price_sync.desc&limit=500&offset=0"
         case "prime":
-            query = "select=*&is_prime_bonus=eq.true&order=last_price_sync.desc"
+            query = "select=*&is_prime_bonus=eq.true&order=last_price_sync.desc&limit=500&offset=0"
         default:
-            query = "select=*&order=last_price_sync.desc&limit=50"
+            query = "select=*&order=last_price_sync.desc&limit=500&offset=0"
         }
 
         let urlString = "\(baseURL)/rest/v1/products?\(query)"
@@ -30,7 +30,9 @@ class SupabaseClient: ObservableObject {
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             print("✅ Response: \(response)")
-            return try JSONDecoder().decode([Product].self, from: data)
+            let products = try JSONDecoder().decode([Product].self, from: data)
+            print("📊 Fetched \(products.count) products for type: \(type)")
+            return products
         } catch {
             print("❌ Error: \(error)")
             throw error

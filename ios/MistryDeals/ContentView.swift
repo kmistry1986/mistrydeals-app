@@ -17,24 +17,128 @@ struct ContentView: View {
             )
             .ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                Group {
-                    switch selectedTab {
-                    case .featured:
-                        FeaturedView(client: supabaseClient)
-                    case .prime:
-                        PrimeView(client: supabaseClient)
-                    case .guides:
-                        GuidesView(client: supabaseClient)
-                    case .search:
-                        SearchView(client: supabaseClient)
-                    }
+            Group {
+                switch selectedTab {
+                case .featured:
+                    FeaturedView(client: supabaseClient)
+                case .prime:
+                    PrimeView(client: supabaseClient)
+                case .guides:
+                    GuidesView(client: supabaseClient)
+                case .search:
+                    SearchView(client: supabaseClient)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                TabBar(selectedTab: $selectedTab)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .safeAreaInset(edge: .bottom) {
+                HStack(spacing: 0) {
+                    Button(action: { selectedTab = .featured }) {
+                        Text("Featured")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedTab == .featured ? .semibold : .regular)
+                            .foregroundColor(selectedTab == .featured ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedTab == .featured ?
+                                AnyView(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    .cornerRadius(20)
+                                ) :
+                                AnyView(Color.clear)
+                            )
+                    }
+
+                    Button(action: { selectedTab = .prime }) {
+                        Text("Prime")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedTab == .prime ? .semibold : .regular)
+                            .foregroundColor(selectedTab == .prime ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedTab == .prime ?
+                                AnyView(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    .cornerRadius(20)
+                                ) :
+                                AnyView(Color.clear)
+                            )
+                    }
+
+                    Button(action: { selectedTab = .guides }) {
+                        Text("Guides")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedTab == .guides ? .semibold : .regular)
+                            .foregroundColor(selectedTab == .guides ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedTab == .guides ?
+                                AnyView(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    .cornerRadius(20)
+                                ) :
+                                AnyView(Color.clear)
+                            )
+                    }
+
+                    Button(action: { selectedTab = .search }) {
+                        Text("Search")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedTab == .search ? .semibold : .regular)
+                            .foregroundColor(selectedTab == .search ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedTab == .search ?
+                                AnyView(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    .cornerRadius(20)
+                                ) :
+                                AnyView(Color.clear)
+                            )
+                    }
+                }
+                .frame(height: 50)
+                .background(
+                    ZStack {
+                        Color.white.opacity(0.1)
+                        BlurView(style: .systemThinMaterialDark)
+                    }
+                )
+                .cornerRadius(25)
+                .padding(.horizontal, 8)
+                .padding(.bottom, 16)
+            }
             .ignoresSafeArea(edges: [.top, .bottom])
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

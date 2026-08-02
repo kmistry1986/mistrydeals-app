@@ -62,6 +62,7 @@ struct GuidesView: View {
                         .padding(.top, DesignSpacing.md)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.bottom, 66)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

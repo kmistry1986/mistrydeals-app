@@ -95,6 +95,7 @@ struct SearchView: View {
                         .frame(maxWidth: .infinity)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.bottom, 66)
                 }
         }
         .background(DesignColors.background)
