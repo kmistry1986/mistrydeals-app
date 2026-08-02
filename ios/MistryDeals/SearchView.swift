@@ -11,6 +11,7 @@ struct SearchView: View {
     @State private var errorMessage: String?
     @State private var hasSearched = false
     @State private var selectedFilter: SearchFilter = .all
+    @FocusState private var isSearchFocused: Bool
 
     enum SearchFilter {
         case all
@@ -22,10 +23,10 @@ struct SearchView: View {
         ZStack(alignment: .bottom) {
             VStack(spacing: 0) {
                 HStack {
+                    Spacer()
                     Text("Search Deals")
                         .font(DesignTypography.headline1)
                         .foregroundColor(DesignColors.primary)
-
                     Spacer()
 
                     Button(action: { isSearchActive = false; searchText = "" }) {
@@ -43,36 +44,39 @@ struct SearchView: View {
                 .borderBottom(DesignColors.divider)
                 .padding(.top, 48)
 
-                // Filter pills
-                HStack(spacing: DesignSpacing.md) {
-                    FilterPill(
-                        label: "All",
-                        isSelected: selectedFilter == .all,
-                        action: {
-                            selectedFilter = .all
-                            applyFilter()
-                        }
-                    )
+                // Filter pills - pill-shaped and spread across
+                VStack {
+                    HStack(spacing: 12) {
+                        FilterPill(
+                            label: "All",
+                            isSelected: selectedFilter == .all,
+                            action: {
+                                selectedFilter = .all
+                                applyFilter()
+                            }
+                        )
+                        .frame(maxWidth: .infinity)
 
-                    FilterPill(
-                        label: "Featured",
-                        isSelected: selectedFilter == .featured,
-                        action: {
-                            selectedFilter = .featured
-                            applyFilter()
-                        }
-                    )
+                        FilterPill(
+                            label: "Featured",
+                            isSelected: selectedFilter == .featured,
+                            action: {
+                                selectedFilter = .featured
+                                applyFilter()
+                            }
+                        )
+                        .frame(maxWidth: .infinity)
 
-                    FilterPill(
-                        label: "Prime",
-                        isSelected: selectedFilter == .prime,
-                        action: {
-                            selectedFilter = .prime
-                            applyFilter()
-                        }
-                    )
-
-                    Spacer()
+                        FilterPill(
+                            label: "Prime",
+                            isSelected: selectedFilter == .prime,
+                            action: {
+                                selectedFilter = .prime
+                                applyFilter()
+                            }
+                        )
+                        .frame(maxWidth: .infinity)
+                    }
                 }
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.md)
@@ -136,6 +140,7 @@ struct SearchView: View {
                         .textFieldStyle(.plain)
                         .foregroundColor(DesignColors.primary)
                         .submitLabel(.search)
+                        .focused($isSearchFocused)
                         .onSubmit {
                             Task {
                                 await performSearch()
@@ -160,6 +165,11 @@ struct SearchView: View {
             .frame(maxWidth: .infinity)
         }
         .ignoresSafeArea()
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isSearchFocused = true
+            }
+        }
     }
 
     private func performSearch() async {
@@ -183,9 +193,9 @@ struct SearchView: View {
         case .all:
             filteredProducts = products
         case .featured:
-            filteredProducts = products.filter { $0.is_featured == true }
+            filteredProducts = products.filter { $0.is_featured ?? false }
         case .prime:
-            filteredProducts = products.filter { $0.is_prime == true }
+            filteredProducts = products.filter { $0.is_prime ?? false }
         }
     }
 }
