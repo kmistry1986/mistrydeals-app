@@ -75,7 +75,10 @@ struct GuidesView: View {
                                     .cornerRadius(DesignRadius.sm)
 
                                     HStack(spacing: 8) {
-                                        Button(action: { searchText = "" }) {
+                                        Button(action: {
+                                            searchText = ""
+                                            performSearch()
+                                        }) {
                                             Text("Clear")
                                                 .font(DesignTypography.caption1)
                                                 .foregroundColor(DesignColors.primary)
@@ -85,7 +88,11 @@ struct GuidesView: View {
                                                 .cornerRadius(DesignRadius.sm)
                                         }
 
-                                        Button(action: { showSearchBox = false; searchText = "" }) {
+                                        Button(action: {
+                                            showSearchBox = false
+                                            searchText = ""
+                                            performSearch()
+                                        }) {
                                             Text("Close")
                                                 .font(DesignTypography.caption1)
                                                 .foregroundColor(DesignColors.primary)
