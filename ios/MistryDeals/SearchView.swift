@@ -212,7 +212,7 @@ struct SearchView: View {
             }
             .padding(.horizontal, DesignSpacing.lg)
             .padding(.vertical, DesignSpacing.md)
-            .padding(.bottom, max(0, keyboardHeight - (UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first?.windows.first?.safeAreaInsets.bottom ?? 0) + 8))
+            .padding(.bottom, max(0, keyboardHeight - (UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first?.windows.first?.safeAreaInsets.bottom ?? 0) + 20))
             .background(Color.black)
             .frame(maxWidth: .infinity)
         }
