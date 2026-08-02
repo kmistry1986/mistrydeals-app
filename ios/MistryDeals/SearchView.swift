@@ -19,9 +19,9 @@ struct SearchView: View {
                 .padding(.top, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(DesignColors.secondaryBackground)
+                .background(Color.black)
                 .borderBottom(DesignColors.divider)
-                .padding(.top, 35)
+                .padding(.top, 48)
 
                 VStack(spacing: DesignSpacing.md) {
                     HStack {
@@ -98,7 +98,7 @@ struct SearchView: View {
                     .padding(.bottom, 66)
                 }
         }
-        .background(DesignColors.background)
+        .background(Color.black)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
     }

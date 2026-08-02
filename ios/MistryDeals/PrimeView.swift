@@ -31,9 +31,9 @@ struct PrimeView: View {
             .padding(.top, DesignSpacing.lg)
             .padding(.bottom, DesignSpacing.lg)
             .frame(maxWidth: .infinity)
-            .background(DesignColors.secondaryBackground)
+            .background(Color.black)
             .borderBottom(DesignColors.divider)
-            .padding(.top, 35)
+            .padding(.top, 48)
 
             if isLoading {
                 VStack {
@@ -112,7 +112,7 @@ struct PrimeView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DesignColors.background)
+        .background(Color.black)
         .ignoresSafeArea()
         .sheet(isPresented: $showSearchModal) {
             PrimeSearchModalView(
