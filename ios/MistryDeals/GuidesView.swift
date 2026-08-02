@@ -196,23 +196,27 @@ struct GuideDetailScreenView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: DesignSpacing.lg) {
                     // Guide title and subtitle
-                    VStack(alignment: .leading, spacing: DesignSpacing.sm) {
+                    VStack(alignment: .center, spacing: DesignSpacing.sm) {
                         Text(guide.guideContent?.title ?? guide.title)
                             .font(DesignTypography.displaySmall)
                             .foregroundColor(DesignColors.primary)
+                            .multilineTextAlignment(.center)
 
                         if let subtitle = guide.guideContent?.subtitle {
                             Text(subtitle)
                                 .font(DesignTypography.bodyMedium)
                                 .foregroundColor(DesignColors.secondary)
+                                .multilineTextAlignment(.center)
                         } else if let description = guide.description {
                             Text(description)
                                 .font(DesignTypography.bodyMedium)
                                 .foregroundColor(DesignColors.secondary)
+                                .multilineTextAlignment(.center)
                                 .lineLimit(3)
                         }
                     }
                     .padding(.horizontal, DesignSpacing.lg)
+                    .frame(maxWidth: .infinity)
 
                     // Intro paragraphs
                     if let intro = guide.guideContent?.intro {
@@ -234,6 +238,8 @@ struct GuideDetailScreenView: View {
                                 .font(DesignTypography.headline2)
                                 .foregroundColor(DesignColors.primary)
                                 .padding(.horizontal, DesignSpacing.lg)
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.center)
 
                             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: DesignSpacing.md) {
                                 ForEach(guide.products) { product in
