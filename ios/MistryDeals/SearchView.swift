@@ -26,7 +26,7 @@ struct SearchView: View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
-                Text("Search Deals")
+                Text("Search")
                     .font(DesignTypography.headline1)
                     .foregroundColor(DesignColors.primary)
                 Spacer()
