@@ -66,7 +66,7 @@ struct SearchView: View {
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
-                                .cornerRadius(12)
+                                .cornerRadius(10)
                             ) :
                             AnyView(Color.clear)
                         )
@@ -90,7 +90,7 @@ struct SearchView: View {
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
-                                .cornerRadius(12)
+                                .cornerRadius(10)
                             ) :
                             AnyView(Color.clear)
                         )
@@ -114,7 +114,7 @@ struct SearchView: View {
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
-                                .cornerRadius(12)
+                                .cornerRadius(10)
                             ) :
                             AnyView(Color.clear)
                         )

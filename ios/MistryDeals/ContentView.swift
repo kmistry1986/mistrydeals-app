@@ -62,7 +62,7 @@ struct ContentView: View {
                                                 startPoint: .topLeading,
                                                 endPoint: .bottomTrailing
                                             )
-                                            .cornerRadius(12)
+                                            .cornerRadius(10)
                                             .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                         ) :
                                         AnyView(Color.clear)
@@ -87,7 +87,7 @@ struct ContentView: View {
                                                 startPoint: .topLeading,
                                                 endPoint: .bottomTrailing
                                             )
-                                            .cornerRadius(12)
+                                            .cornerRadius(10)
                                             .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                         ) :
                                         AnyView(Color.clear)
@@ -112,7 +112,7 @@ struct ContentView: View {
                                                 startPoint: .topLeading,
                                                 endPoint: .bottomTrailing
                                             )
-                                            .cornerRadius(12)
+                                            .cornerRadius(10)
                                             .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                         ) :
                                         AnyView(Color.clear)
@@ -136,16 +136,18 @@ struct ContentView: View {
                                     .foregroundColor(.white)
                                     .frame(width: 40, height: 40)
                                     .background(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
+                                        Circle()
+                                            .fill(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [
+                                                        DesignColors.accent,
+                                                        Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                    ]),
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                )
+                                            )
                                     )
-                                    .cornerRadius(12)
                                     .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
                             }
                         }
