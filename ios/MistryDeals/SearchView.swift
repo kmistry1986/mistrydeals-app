@@ -58,15 +58,17 @@ struct SearchView: View {
                         .background(
                             selectedFilter == .all ?
                             AnyView(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [
-                                        DesignColors.accent,
-                                        Color(red: 0.3, green: 0.8, blue: 1.0)
-                                    ]),
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                                .cornerRadius(10)
+                                Capsule()
+                                    .fill(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
                             ) :
                             AnyView(Color.clear)
                         )
@@ -82,15 +84,17 @@ struct SearchView: View {
                         .background(
                             selectedFilter == .featured ?
                             AnyView(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [
-                                        DesignColors.accent,
-                                        Color(red: 0.3, green: 0.8, blue: 1.0)
-                                    ]),
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                                .cornerRadius(10)
+                                Capsule()
+                                    .fill(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
                             ) :
                             AnyView(Color.clear)
                         )
@@ -106,28 +110,26 @@ struct SearchView: View {
                         .background(
                             selectedFilter == .prime ?
                             AnyView(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [
-                                        DesignColors.accent,
-                                        Color(red: 0.3, green: 0.8, blue: 1.0)
-                                    ]),
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                                .cornerRadius(10)
+                                Capsule()
+                                    .fill(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
                             ) :
                             AnyView(Color.clear)
                         )
                 }
             }
             .frame(height: 40)
-            .background(
-                ZStack {
-                    Color.white.opacity(0.1)
-                    BlurView(style: .systemThinMaterialDark)
-                }
-            )
-            .cornerRadius(14)
+            .background(Color.white.opacity(0.1))
+            .background(BlurView(style: .systemThinMaterialDark))
+            .clipShape(Capsule())
             .padding(.horizontal, DesignSpacing.lg)
             .padding(.top, DesignSpacing.lg)
             .padding(.bottom, DesignSpacing.md)
@@ -207,7 +209,7 @@ struct SearchView: View {
                 }
                 .padding(DesignSpacing.sm)
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
+                    Capsule()
                         .fill(DesignColors.tertiaryBackground)
                 )
                 .matchedGeometryEffect(id: "searchButton", in: searchAnimation)

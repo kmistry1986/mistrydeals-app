@@ -54,16 +54,18 @@ struct ContentView: View {
                                     .background(
                                         selectedTab == .featured ?
                                         AnyView(
-                                            LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    DesignColors.accent,
-                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                ]),
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                            .cornerRadius(10)
-                                            .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                            Capsule()
+                                                .fill(
+                                                    LinearGradient(
+                                                        gradient: Gradient(colors: [
+                                                            DesignColors.accent,
+                                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                        ]),
+                                                        startPoint: .topLeading,
+                                                        endPoint: .bottomTrailing
+                                                    )
+                                                )
+                                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                         ) :
                                         AnyView(Color.clear)
                                     )
@@ -79,16 +81,18 @@ struct ContentView: View {
                                     .background(
                                         selectedTab == .prime ?
                                         AnyView(
-                                            LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    DesignColors.accent,
-                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                ]),
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                            .cornerRadius(10)
-                                            .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                            Capsule()
+                                                .fill(
+                                                    LinearGradient(
+                                                        gradient: Gradient(colors: [
+                                                            DesignColors.accent,
+                                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                        ]),
+                                                        startPoint: .topLeading,
+                                                        endPoint: .bottomTrailing
+                                                    )
+                                                )
+                                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                         ) :
                                         AnyView(Color.clear)
                                     )
@@ -104,29 +108,27 @@ struct ContentView: View {
                                     .background(
                                         selectedTab == .guides ?
                                         AnyView(
-                                            LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    DesignColors.accent,
-                                                    Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                ]),
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                            .cornerRadius(10)
-                                            .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                            Capsule()
+                                                .fill(
+                                                    LinearGradient(
+                                                        gradient: Gradient(colors: [
+                                                            DesignColors.accent,
+                                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                        ]),
+                                                        startPoint: .topLeading,
+                                                        endPoint: .bottomTrailing
+                                                    )
+                                                )
+                                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                         ) :
                                         AnyView(Color.clear)
                                     )
                             }
                         }
                         .frame(height: 40)
-                        .background(
-                            ZStack {
-                                Color.white.opacity(0.1)
-                                BlurView(style: .systemThinMaterialDark)
-                            }
-                        )
-                        .cornerRadius(14)
+                        .background(Color.white.opacity(0.1))
+                        .background(BlurView(style: .systemThinMaterialDark))
+                        .clipShape(Capsule())
 
                         // Floating search button
                         if !isSearchActive {
