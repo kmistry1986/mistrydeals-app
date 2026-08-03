@@ -16,7 +16,7 @@ struct SettingsView: View {
                 Button(action: { dismiss() }) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(DesignColors.accent)
+                        .foregroundColor(Color("AccentColor"))
                 }
 
                 Spacer()
@@ -56,7 +56,7 @@ struct SettingsView: View {
                                 Spacer()
 
                                 Toggle("", isOn: $isDarkModeEnabled)
-                                    .tint(DesignColors.accent)
+                                    .tint(Color("AccentColor"))
                             }
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)
@@ -152,7 +152,7 @@ struct FeedbackFormView: View {
                     Button(action: { isPresented = false }) {
                         Image(systemName: "xmark")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.accent)
+                            .foregroundColor(Color("AccentColor"))
                     }
                 }
                 .padding(.horizontal, DesignSpacing.lg)
@@ -195,10 +195,10 @@ struct FeedbackFormView: View {
                         if showSuccessMessage {
                             Text("Thank you for your feedback!")
                                 .font(DesignTypography.bodySmall)
-                                .foregroundColor(DesignColors.accent)
+                                .foregroundColor(Color("AccentColor"))
                                 .frame(maxWidth: .infinity)
                                 .padding(DesignSpacing.md)
-                                .background(DesignColors.accentSecondary.opacity(0.2))
+                                .background(Color("AccentColor").opacity(0.2))
                                 .cornerRadius(DesignRadius.sm)
                         }
 
@@ -217,8 +217,8 @@ struct FeedbackFormView: View {
                         .background(
                             LinearGradient(
                                 gradient: Gradient(colors: [
-                                    DesignColors.accent,
-                                    Color(red: 0.3, green: 0.8, blue: 1.0)
+                                    Color("AccentColor"),
+                                    Color("AccentColor").opacity(0.8)
                                 ]),
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing

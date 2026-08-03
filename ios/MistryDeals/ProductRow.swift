@@ -66,8 +66,7 @@ struct ProductRow: View {
 
                                 if product.discountPercent > 0 {
                                     Text("\(product.discountPercent)% OFF")
-                                        .font(DesignTypography.caption2)
-                                        .fontWeight(.bold)
+                                        .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(.black)
                                         .padding(.horizontal, 6)
                                         .padding(.vertical, 3)

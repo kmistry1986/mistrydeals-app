@@ -11,6 +11,7 @@ struct Product: Codable, Identifiable {
     let amazon_asin: String
     let is_featured: Bool?
     let is_prime_bonus: Bool?
+    let prime_cashback_percent: Int?
     let last_price_sync: String?
     let description: String?
 

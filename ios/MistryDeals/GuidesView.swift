@@ -284,20 +284,19 @@ struct GuideDetailScreenView: View {
                                         // Price and rating
                                         HStack(spacing: 8) {
                                             Text("$\(product.priceDouble, specifier: "%.2f")")
-                                                .font(DesignTypography.headline3)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(DesignColors.accent)
+                                                .font(DesignTypography.price)
+                                                .foregroundColor(Color("PriceColor"))
 
                                             if product.ratingDouble > 0 {
                                                 HStack(spacing: 2) {
                                                     Text("★")
                                                         .font(DesignTypography.caption2)
-                                                        .foregroundColor(DesignColors.success)
+                                                        .foregroundColor(Color("StarRatingColor"))
 
                                                     Text(String(format: "%.1f", product.ratingDouble))
                                                         .font(DesignTypography.caption2)
                                                         .fontWeight(.semibold)
-                                                        .foregroundColor(DesignColors.success)
+                                                        .foregroundColor(Color("StarRatingColor"))
                                                 }
                                             }
 
@@ -309,7 +308,7 @@ struct GuideDetailScreenView: View {
                                             if product.originalPriceDouble > 0 {
                                                 Text("$\(product.originalPriceDouble, specifier: "%.2f")")
                                                     .font(DesignTypography.caption1)
-                                                    .foregroundColor(DesignColors.secondary)
+                                                    .foregroundColor(Color("OriginalPriceColor"))
                                                     .strikethrough()
                                             }
 
@@ -317,19 +316,10 @@ struct GuideDetailScreenView: View {
                                                 Text("\(product.discountPercent)% OFF")
                                                     .font(DesignTypography.caption2)
                                                     .fontWeight(.bold)
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(.black)
                                                     .padding(.horizontal, 6)
                                                     .padding(.vertical, 3)
-                                                    .background(
-                                                        LinearGradient(
-                                                            gradient: Gradient(colors: [
-                                                                DesignColors.accentSecondary,
-                                                                Color(red: 0.9, green: 0.3, blue: 0.5)
-                                                            ]),
-                                                            startPoint: .topLeading,
-                                                            endPoint: .bottomTrailing
-                                                        )
-                                                    )
+                                                    .background(Color("DiscountBadgeColor"))
                                                     .cornerRadius(DesignRadius.sm)
                                             }
 

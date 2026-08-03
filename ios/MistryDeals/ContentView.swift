@@ -102,8 +102,8 @@ struct ContentView: View {
                                     .fill(
                                         LinearGradient(
                                             gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                Color("AccentColor"),
+                                                Color("AccentColor").opacity(0.8)
                                             ]),
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
@@ -178,8 +178,8 @@ struct ContentView: View {
                                             .fill(
                                                 LinearGradient(
                                                     gradient: Gradient(colors: [
-                                                        DesignColors.accent,
-                                                        Color(red: 0.3, green: 0.8, blue: 1.0)
+                                                        Color("AccentColor"),
+                                                        Color("AccentColor").opacity(0.8)
                                                     ]),
                                                     startPoint: .topLeading,
                                                     endPoint: .bottomTrailing
@@ -259,11 +259,11 @@ struct TabBarItem: View {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(isSelected ? DesignColors.accent : DesignColors.tertiary)
+                    .foregroundColor(isSelected ? Color("AccentColor") : DesignColors.tertiary)
 
                 Text(label)
                     .font(DesignTypography.caption2)
-                    .foregroundColor(isSelected ? DesignColors.accent : DesignColors.tertiary)
+                    .foregroundColor(isSelected ? Color("AccentColor") : DesignColors.tertiary)
                     .fontWeight(isSelected ? .semibold : .regular)
             }
             .frame(maxWidth: .infinity)

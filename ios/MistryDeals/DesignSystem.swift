@@ -16,6 +16,8 @@ struct DesignColors {
     // Accent colors
     static let accent = Color(red: 0.4, green: 0.8, blue: 1.0)
     static let accentSecondary = Color(red: 0.95, green: 0.4, blue: 0.6)
+    static let accentLight = Color(red: 0.3, green: 0.8, blue: 1.0)
+    static let accentRed = Color(red: 0.9, green: 0.3, blue: 0.5)
     static let success = Color(red: 0.2, green: 0.9, blue: 0.6)
     static let warning = Color(red: 1.0, green: 0.7, blue: 0.2)
 
@@ -35,6 +37,9 @@ struct DesignTypography {
     static let headline1 = Font.system(size: 20, weight: .semibold, design: .default)
     static let headline2 = Font.system(size: 18, weight: .semibold, design: .default)
     static let headline3 = Font.system(size: 16, weight: .semibold, design: .default)
+
+    // Price
+    static let price = Font.system(size: 12, weight: .bold, design: .default)
 
     // Body
     static let body = Font.system(size: 16, weight: .regular, design: .default)

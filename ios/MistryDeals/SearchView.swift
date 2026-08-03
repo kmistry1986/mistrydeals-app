@@ -52,7 +52,7 @@ struct SearchView: View {
                         Text("Close")
                             .font(DesignTypography.bodySmall)
                             .fontWeight(.semibold)
-                            .foregroundColor(DesignColors.accent)
+                            .foregroundColor(Color("AccentColor"))
                     }
                 }
             }
@@ -70,8 +70,8 @@ struct SearchView: View {
                     .fill(
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                DesignColors.accent,
-                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                Color("AccentColor"),
+                                Color("AccentColor").opacity(0.8)
                             ]),
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
@@ -122,7 +122,7 @@ struct SearchView: View {
                 VStack {
                     Spacer()
                     ProgressView()
-                        .tint(DesignColors.accent)
+                        .tint(Color("AccentColor"))
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -130,7 +130,7 @@ struct SearchView: View {
                 VStack {
                     Spacer()
                     Text("Error: \(error)")
-                        .foregroundColor(DesignColors.accentSecondary)
+                        .foregroundColor(Color("AccentColor"))
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -183,8 +183,8 @@ struct SearchView: View {
                                 .fill(
                                     LinearGradient(
                                         gradient: Gradient(colors: [
-                                            DesignColors.accent,
-                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            Color("AccentColor"),
+                                            Color("AccentColor").opacity(0.8)
                                         ]),
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
@@ -316,8 +316,8 @@ struct FilterPill: View {
                     AnyView(
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                DesignColors.accent,
-                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                Color("AccentColor"),
+                                Color("AccentColor").opacity(0.8)
                             ]),
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
