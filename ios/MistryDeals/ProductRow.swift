@@ -6,28 +6,38 @@ struct ProductRow: View {
     var body: some View {
         Link(destination: product.amazonURL ?? URL(string: "https://amazon.com")!) {
             HStack(alignment: .top, spacing: 12) {
-                // Product image with glass effect
-                ZStack {
-                    Color.white.opacity(0.05)
+                // Product image with date below
+                VStack(alignment: .center, spacing: 0) {
+                    ZStack {
+                        Color.white.opacity(0.05)
 
-                    if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
-                        AsyncImage(url: url) { phase in
-                            switch phase {
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                            case .failure, .empty:
-                                EmptyView()
-                            @unknown default:
-                                EmptyView()
+                        if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
+                            AsyncImage(url: url) { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                case .failure, .empty:
+                                    EmptyView()
+                                @unknown default:
+                                    EmptyView()
+                                }
                             }
                         }
                     }
+                    .frame(width: 70, height: 70)
+                    .cornerRadius(12)
+                    .clipped()
+
+                    if let dateString = product.last_price_sync {
+                        Text(formatDate(dateString))
+                            .font(.system(size: 8, weight: .regular))
+                            .foregroundColor(DesignColors.tertiary)
+                            .lineLimit(1)
+                            .padding(.top, 6)
+                    }
                 }
-                .frame(width: 70, height: 70)
-                .cornerRadius(12)
-                .clipped()
                 .layoutPriority(1)
 
                 VStack(alignment: .leading, spacing: 6) {
@@ -41,38 +51,44 @@ struct ProductRow: View {
                         .padding(0)
 
                     HStack(spacing: 8) {
-                        Text("$\(product.priceDouble, specifier: "%.2f")")
-                            .font(DesignTypography.headline3)
-                            .fontWeight(.bold)
-                            .foregroundColor(DesignColors.accent)
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack(spacing: 6) {
+                                Text("$\(product.priceDouble, specifier: "%.2f")")
+                                    .font(DesignTypography.price)
+                                    .foregroundColor(Color("PriceColor"))
 
-                        if product.originalPriceDouble > 0 {
-                            Text("$\(product.originalPriceDouble, specifier: "%.2f")")
-                                .font(DesignTypography.caption1)
-                                .foregroundColor(DesignColors.secondary)
-                                .strikethrough()
+                                if product.originalPriceDouble > 0 {
+                                    Text("$\(product.originalPriceDouble, specifier: "%.2f")")
+                                        .font(DesignTypography.caption1)
+                                        .foregroundColor(Color("OriginalPriceColor"))
+                                        .strikethrough()
+                                }
+
+                                if product.discountPercent > 0 {
+                                    Text("\(product.discountPercent)% OFF")
+                                        .font(DesignTypography.caption2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.black)
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 3)
+                                        .background(Color("DiscountBadgeColor"))
+                                        .cornerRadius(DesignRadius.sm)
+                                }
+                            }
+
+                            if let cashback = product.prime_cashback_percent, cashback > 0 {
+                                Text("+\(cashback)% Cashback with Prime Credit Card")
+                                    .font(DesignTypography.caption2)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 3)
+                                    .background(Color("PrimeCashbackColor"))
+                                    .cornerRadius(DesignRadius.sm)
+                                    .padding(.top, 4)
+                            }
                         }
 
-                        if product.discountPercent > 0 {
-                            Text("\(product.discountPercent)% OFF")
-                                .font(DesignTypography.caption2)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 3)
-                                .background(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            DesignColors.accentSecondary,
-                                            Color(red: 0.9, green: 0.3, blue: 0.5)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .cornerRadius(DesignRadius.sm)
-                        }
-                        
                         Spacer()
                     }
                 }
@@ -81,12 +97,12 @@ struct ProductRow: View {
                     VStack(spacing: 2) {
                         Text("★")
                             .font(DesignTypography.caption1)
-                            .foregroundColor(DesignColors.success)
+                            .foregroundColor(Color("StarRatingColor"))
 
                         Text(String(format: "%.1f", product.ratingDouble))
                             .font(DesignTypography.caption1)
                             .fontWeight(.semibold)
-                            .foregroundColor(DesignColors.success)
+                            .foregroundColor(Color("StarRatingColor"))
                     }
                 }
             }
@@ -96,6 +112,25 @@ struct ProductRow: View {
             .padding(.horizontal, DesignSpacing.xs)
             .padding(.vertical, DesignSpacing.xs)
         }
+    }
+
+    private func formatDate(_ dateString: String) -> String {
+        // Extract just the date part (YYYY-MM-DD) from ISO8601 string
+        let datePart = String(dateString.prefix(10))
+
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.timeZone = TimeZone(identifier: "America/New_York")
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        if let date = inputFormatter.date(from: datePart) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "MM/dd/yyyy"
+            displayFormatter.timeZone = TimeZone(identifier: "America/New_York")
+            displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+            return displayFormatter.string(from: date)
+        }
+        return datePart
     }
 }
 
@@ -111,6 +146,7 @@ struct ProductRow: View {
         amazon_asin: "B123456",
         is_featured: true,
         is_prime_bonus: true,
+        prime_cashback_percent: 5,
         last_price_sync: nil,
         description: nil
     ))
