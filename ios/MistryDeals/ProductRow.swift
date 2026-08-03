@@ -93,15 +93,23 @@ struct ProductRow: View {
                 }
 
                 if product.ratingDouble > 0 {
-                    VStack(spacing: 2) {
-                        Text("★")
-                            .font(DesignTypography.caption1)
-                            .foregroundColor(Color("StarRatingColor"))
+                    VStack(spacing: 6) {
+                        VStack(spacing: 2) {
+                            Text("★")
+                                .font(DesignTypography.caption1)
+                                .foregroundColor(Color("StarRatingColor"))
 
-                        Text(String(format: "%.1f", product.ratingDouble))
-                            .font(DesignTypography.caption1)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color("StarRatingColor"))
+                            Text(String(format: "%.1f", product.ratingDouble))
+                                .font(DesignTypography.caption1)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color("StarRatingColor"))
+                        }
+
+                        ShareLink(item: product.amazonURL ?? URL(string: "https://amazon.com")!) {
+                            Image(systemName: "square.and.arrow.up")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(DesignColors.accent)
+                        }
                     }
                 }
             }
