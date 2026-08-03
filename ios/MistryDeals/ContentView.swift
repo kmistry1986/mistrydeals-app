@@ -4,6 +4,7 @@ struct ContentView: View {
     @State private var selectedTab: TabSelection = .featured
     @State private var isSearchActive = false
     @State private var previousTabIndex = 0
+    @State private var currentTransitionEdges: (incoming: Edge, outgoing: Edge) = (.trailing, .leading)
     @StateObject private var supabaseClient = SupabaseClient()
     @Namespace private var searchAnimation
     @Namespace private var pillAnimation
@@ -14,6 +15,33 @@ struct ContentView: View {
         case .prime: return 1
         case .guides: return 2
         case .search: return 0
+        }
+    }
+
+    private func getTransitionEdges(from: Int, to: Int) -> (incoming: Edge, outgoing: Edge) {
+        switch (from, to) {
+        case (0, 1): return (.trailing, .leading)
+        case (0, 2): return (.trailing, .leading)
+        case (1, 0): return (.leading, .trailing)
+        case (1, 2): return (.trailing, .leading)
+        case (2, 1): return (.leading, .trailing)
+        case (2, 0): return (.leading, .trailing)
+        default: return (.trailing, .leading)
+        }
+    }
+
+    private var tabOffset: CGFloat {
+        // HStack padding is 8 on each side = 16 total
+        // Search button is 38 width + 12 spacing = 50
+        // Spacer takes remaining, so pill gets: (screen - 16) - 50
+        let screenWidth = UIScreen.main.bounds.width
+        let pillWidth = (screenWidth - 16) - 50
+        let itemWidth = pillWidth / 3
+        switch tabIndex {
+        case 0: return 0
+        case 1: return itemWidth
+        case 2: return itemWidth * 2
+        default: return 0
         }
     }
 
@@ -30,114 +58,107 @@ struct ContentView: View {
             )
             .ignoresSafeArea()
 
-            Group {
+            ZStack {
                 if isSearchActive {
                     SearchView(client: supabaseClient, isSearchActive: $isSearchActive, searchAnimation: searchAnimation)
                         .transition(.opacity)
+                        .animation(.easeInOut(duration: 0.25), value: isSearchActive)
                 } else {
                     switch selectedTab {
                     case .featured:
                         FeaturedView(client: supabaseClient)
-                            .transition(.opacity.combined(with: .move(edge: .trailing)))
+                            .transition(.asymmetric(insertion: .move(edge: currentTransitionEdges.incoming), removal: .move(edge: currentTransitionEdges.outgoing)))
+                            .animation(.easeInOut(duration: 0.15), value: selectedTab)
+                            .id("featured")
                     case .prime:
                         PrimeView(client: supabaseClient)
-                            .transition(.opacity.combined(with: .move(edge: .trailing)))
+                            .transition(.asymmetric(insertion: .move(edge: currentTransitionEdges.incoming), removal: .move(edge: currentTransitionEdges.outgoing)))
+                            .animation(.easeInOut(duration: 0.15), value: selectedTab)
+                            .id("prime")
                     case .guides:
                         GuidesView(client: supabaseClient)
-                            .transition(.opacity.combined(with: .move(edge: .trailing)))
+                            .transition(.asymmetric(insertion: .move(edge: currentTransitionEdges.incoming), removal: .move(edge: currentTransitionEdges.outgoing)))
+                            .animation(.easeInOut(duration: 0.15), value: selectedTab)
+                            .id("guides")
                     case .search:
                         FeaturedView(client: supabaseClient)
-                            .transition(.opacity.combined(with: .move(edge: .trailing)))
+                            .transition(.asymmetric(insertion: .move(edge: currentTransitionEdges.incoming), removal: .move(edge: currentTransitionEdges.outgoing)))
+                            .animation(.easeInOut(duration: 0.15), value: selectedTab)
+                            .id("search")
                     }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .animation(.easeInOut(duration: 0.25), value: isSearchActive)
-            .animation(.easeInOut(duration: 0.25), value: selectedTab)
             .safeAreaInset(edge: .bottom) {
                 if !isSearchActive {
                     HStack(spacing: 12) {
                         // Navigation pill (narrower, left-aligned, 3 tabs only)
-                        HStack(spacing: 0) {
-                            Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .featured } }) {
-                                Text("Featured")
-                                    .font(DesignTypography.bodySmall)
-                                    .fontWeight(selectedTab == .featured ? .semibold : .regular)
-                                    .foregroundColor(selectedTab == .featured ? .white : DesignColors.tertiary)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        selectedTab == .featured ?
-                                        AnyView(
-                                            Capsule()
-                                                .fill(
-                                                    LinearGradient(
-                                                        gradient: Gradient(colors: [
-                                                            DesignColors.accent,
-                                                            Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                        ]),
-                                                        startPoint: .topLeading,
-                                                        endPoint: .bottomTrailing
-                                                    )
-                                                )
-                                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
-                                        ) :
-                                        AnyView(Color.clear)
-                                    )
-                            }
+                        GeometryReader { geometry in
+                            ZStack(alignment: .leading) {
+                                let itemWidth = geometry.size.width / 3
+                                let offset = CGFloat(tabIndex) * itemWidth
 
-                            Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .prime } }) {
-                                Text("Prime")
-                                    .font(DesignTypography.bodySmall)
-                                    .fontWeight(selectedTab == .prime ? .semibold : .regular)
-                                    .foregroundColor(selectedTab == .prime ? .white : DesignColors.tertiary)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        selectedTab == .prime ?
-                                        AnyView(
-                                            Capsule()
-                                                .fill(
-                                                    LinearGradient(
-                                                        gradient: Gradient(colors: [
-                                                            DesignColors.accent,
-                                                            Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                        ]),
-                                                        startPoint: .topLeading,
-                                                        endPoint: .bottomTrailing
-                                                    )
-                                                )
-                                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
-                                        ) :
-                                        AnyView(Color.clear)
+                                Capsule()
+                                    .fill(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                DesignColors.accent,
+                                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                                            ]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
                                     )
-                            }
+                                    .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
+                                    .frame(maxWidth: itemWidth)
+                                    .offset(x: offset)
 
-                            Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedTab = .guides } }) {
-                                Text("Guides")
-                                    .font(DesignTypography.bodySmall)
-                                    .fontWeight(selectedTab == .guides ? .semibold : .regular)
-                                    .foregroundColor(selectedTab == .guides ? .white : DesignColors.tertiary)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        selectedTab == .guides ?
-                                        AnyView(
-                                            Capsule()
-                                                .fill(
-                                                    LinearGradient(
-                                                        gradient: Gradient(colors: [
-                                                            DesignColors.accent,
-                                                            Color(red: 0.3, green: 0.8, blue: 1.0)
-                                                        ]),
-                                                        startPoint: .topLeading,
-                                                        endPoint: .bottomTrailing
-                                                    )
-                                                )
-                                                .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
-                                        ) :
-                                        AnyView(Color.clear)
-                                    )
+                                HStack(spacing: 0) {
+                                    Button(action: {
+                                        currentTransitionEdges = getTransitionEdges(from: tabIndex, to: 0)
+                                        withAnimation(.easeInOut(duration: 0.25)) {
+                                            previousTabIndex = tabIndex
+                                            selectedTab = .featured
+                                        }
+                                    }) {
+                                        Text("Featured")
+                                            .font(DesignTypography.bodySmall)
+                                            .fontWeight(selectedTab == .featured ? .semibold : .regular)
+                                            .foregroundColor(selectedTab == .featured ? .white : DesignColors.tertiary)
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 10)
+                                    }
+
+                                    Button(action: {
+                                        currentTransitionEdges = getTransitionEdges(from: tabIndex, to: 1)
+                                        withAnimation(.easeInOut(duration: 0.25)) {
+                                            previousTabIndex = tabIndex
+                                            selectedTab = .prime
+                                        }
+                                    }) {
+                                        Text("Prime")
+                                            .font(DesignTypography.bodySmall)
+                                            .fontWeight(selectedTab == .prime ? .semibold : .regular)
+                                            .foregroundColor(selectedTab == .prime ? .white : DesignColors.tertiary)
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 10)
+                                    }
+
+                                    Button(action: {
+                                        currentTransitionEdges = getTransitionEdges(from: tabIndex, to: 2)
+                                        withAnimation(.easeInOut(duration: 0.25)) {
+                                            previousTabIndex = tabIndex
+                                            selectedTab = .guides
+                                        }
+                                    }) {
+                                        Text("Guides")
+                                            .font(DesignTypography.bodySmall)
+                                            .fontWeight(selectedTab == .guides ? .semibold : .regular)
+                                            .foregroundColor(selectedTab == .guides ? .white : DesignColors.tertiary)
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 10)
+                                    }
+                                }
                             }
                         }
                         .frame(height: 40)
@@ -165,7 +186,6 @@ struct ContentView: View {
                                                 )
                                             )
                                     )
-                                    .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
                             }
                         }
 

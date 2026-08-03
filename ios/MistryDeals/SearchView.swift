@@ -15,6 +15,9 @@ struct SearchView: View {
     @State private var selectedFilter: SearchFilter = .all
     @FocusState private var isSearchFocused: Bool
     @State private var keyboardHeight: CGFloat = 0
+    @State private var searchBarProgress: CGFloat = 0
+    @State private var showSearchOverlay = false
+    @Namespace private var filterAnimation
 
     enum SearchFilter {
         case all
@@ -22,24 +25,35 @@ struct SearchView: View {
         case prime
     }
 
+    private var filterOffset: CGFloat {
+        let availableWidth = UIScreen.main.bounds.width - DesignSpacing.lg * 2
+        let itemWidth = availableWidth / 3
+        switch selectedFilter {
+        case .all: return 0
+        case .featured: return itemWidth
+        case .prime: return itemWidth * 2
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Spacer()
+            ZStack {
                 Text("Search")
                     .font(DesignTypography.headline1)
                     .foregroundColor(DesignColors.primary)
-                Spacer()
 
-                Button(action: {
-                    isSearchFocused = false
-                    isSearchActive = false
-                    searchText = ""
-                }) {
-                    Text("Close")
-                        .font(DesignTypography.bodySmall)
-                        .fontWeight(.semibold)
-                        .foregroundColor(DesignColors.accent)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isSearchFocused = false
+                        isSearchActive = false
+                        searchText = ""
+                    }) {
+                        Text("Close")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(.semibold)
+                            .foregroundColor(DesignColors.accent)
+                    }
                 }
             }
             .padding(.horizontal, DesignSpacing.lg)
@@ -51,83 +65,49 @@ struct SearchView: View {
             .padding(.top, 48)
 
             // Filter pills - pill container like navigation bar
-            HStack(spacing: 0) {
-                Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .all; applyFilter() } }) {
-                    Text("All")
-                        .font(DesignTypography.bodySmall)
-                        .fontWeight(selectedFilter == .all ? .semibold : .regular)
-                        .foregroundColor(selectedFilter == .all ? .white : DesignColors.tertiary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(
-                            selectedFilter == .all ?
-                            AnyView(
-                                Capsule()
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                            ) :
-                            AnyView(Color.clear)
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                DesignColors.accent,
+                                Color(red: 0.3, green: 0.8, blue: 1.0)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
                         )
-                }
+                    )
+                    .matchedGeometryEffect(id: "filterBackground", in: filterAnimation)
+                    .frame(maxWidth: (UIScreen.main.bounds.width - DesignSpacing.lg * 2) / 3)
+                    .offset(x: filterOffset)
 
-                Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .featured; applyFilter() } }) {
-                    Text("Featured")
-                        .font(DesignTypography.bodySmall)
-                        .fontWeight(selectedFilter == .featured ? .semibold : .regular)
-                        .foregroundColor(selectedFilter == .featured ? .white : DesignColors.tertiary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(
-                            selectedFilter == .featured ?
-                            AnyView(
-                                Capsule()
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                            ) :
-                            AnyView(Color.clear)
-                        )
-                }
+                HStack(spacing: 0) {
+                    Button(action: { withAnimation(.easeInOut(duration: 0.25)) { selectedFilter = .all; applyFilter() } }) {
+                        Text("All")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedFilter == .all ? .semibold : .regular)
+                            .foregroundColor(selectedFilter == .all ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                    }
 
-                Button(action: { withAnimation(.easeInOut(duration: 0.3)) { selectedFilter = .prime; applyFilter() } }) {
-                    Text("Prime")
-                        .font(DesignTypography.bodySmall)
-                        .fontWeight(selectedFilter == .prime ? .semibold : .regular)
-                        .foregroundColor(selectedFilter == .prime ? .white : DesignColors.tertiary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(
-                            selectedFilter == .prime ?
-                            AnyView(
-                                Capsule()
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                DesignColors.accent,
-                                                Color(red: 0.3, green: 0.8, blue: 1.0)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                            ) :
-                            AnyView(Color.clear)
-                        )
+                    Button(action: { withAnimation(.easeInOut(duration: 0.25)) { selectedFilter = .featured; applyFilter() } }) {
+                        Text("Featured")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedFilter == .featured ? .semibold : .regular)
+                            .foregroundColor(selectedFilter == .featured ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                    }
+
+                    Button(action: { withAnimation(.easeInOut(duration: 0.25)) { selectedFilter = .prime; applyFilter() } }) {
+                        Text("Prime")
+                            .font(DesignTypography.bodySmall)
+                            .fontWeight(selectedFilter == .prime ? .semibold : .regular)
+                            .foregroundColor(selectedFilter == .prime ? .white : DesignColors.tertiary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                    }
                 }
             }
             .frame(height: 40)
@@ -189,55 +169,86 @@ struct SearchView: View {
         .ignoresSafeArea(edges: .top)
         .overlay(alignment: .bottom) {
             // Search bar that floats above keyboard - always visible
-            VStack(spacing: DesignSpacing.md) {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(DesignColors.tertiary)
+            if showSearchOverlay {
+                VStack(spacing: 0) {
+                    Spacer()
 
-                    TextField("Search products...", text: $searchText)
-                        .textFieldStyle(.plain)
-                        .foregroundColor(DesignColors.primary)
-                        .submitLabel(.search)
-                        .focused($isSearchFocused)
-                        .onSubmit {
-                            Task {
-                                await performSearch()
+                    HStack(spacing: 12) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .frame(width: 38, height: 38)
+                        .background(
+                            Circle()
+                                .fill(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            DesignColors.accent,
+                                            Color(red: 0.3, green: 0.8, blue: 1.0)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                        )
+
+                    VStack(spacing: 0) {
+                        HStack {
+                            TextField("Search products...", text: $searchText)
+                                .textFieldStyle(.plain)
+                                .foregroundColor(DesignColors.primary)
+                                .submitLabel(.search)
+                                .focused($isSearchFocused)
+                                .onSubmit {
+                                    Task {
+                                        await performSearch()
+                                    }
+                                }
+
+                            if !searchText.isEmpty {
+                                Button(action: { searchText = "" }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(DesignColors.tertiary)
+                                }
                             }
                         }
-
-                    if !searchText.isEmpty {
-                        Button(action: { searchText = "" }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(DesignColors.tertiary)
-                        }
+                        .padding(DesignSpacing.sm)
+                        .background(
+                            Capsule()
+                                .fill(DesignColors.tertiaryBackground)
+                        )
                     }
+                    .opacity(searchBarProgress)
+                    .scaleEffect(x: searchBarProgress, y: 1, anchor: .leading)
                 }
-                .padding(DesignSpacing.sm)
-                .background(
-                    Capsule()
-                        .fill(DesignColors.tertiaryBackground)
-                )
+                .padding(.horizontal, 12)
+                .padding(.vertical, DesignSpacing.md)
+                .padding(.bottom, 10)
+                .background(Color.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .offset(y: -keyboardHeight)
+                }
+                .ignoresSafeArea(edges: .bottom)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, DesignSpacing.md)
-            .padding(.bottom, keyboardHeight + 10)
-            .background(Color.black)
-            .frame(maxWidth: .infinity)
-            .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                isSearchFocused = true
-            }
+            showSearchOverlay = true
+            isSearchFocused = true
         }
         .onReceive(Publishers.keyboardHeight) { height in
-            DispatchQueue.main.async {
-                keyboardHeight = height
+            // Update keyboard height without animation - let the offset follow naturally
+            keyboardHeight = height
+            // Expand search bar after keyboard appears (delayed to let icon slide up first)
+            if height > 0 && searchBarProgress == 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        searchBarProgress = 1
+                    }
+                }
             }
         }
         .onChange(of: isLoading) { newValue in
             if !newValue && hasSearched {
-                // Dismiss keyboard after search completes
                 isSearchFocused = false
                 keyboardHeight = 0
             }

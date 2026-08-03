@@ -11,41 +11,37 @@ struct SettingsView: View {
     }
 
     var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-
-            VStack(spacing: 0) {
-                HStack {
-                    Button(action: { dismiss() }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.accent)
-                    }
-
-                    Spacer()
-
-                    Text("Settings")
-                        .font(DesignTypography.headline1)
-                        .foregroundColor(DesignColors.primary)
-
-                    Spacer()
-
-                    Color.clear
-                        .frame(width: 40)
+        VStack(spacing: 0) {
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(DesignColors.accent)
                 }
-                .padding(.horizontal, DesignSpacing.lg)
-                .padding(.top, DesignSpacing.lg)
-                .padding(.bottom, DesignSpacing.lg)
-                .frame(maxWidth: .infinity)
-                .background(Color.black)
-                .borderBottom(DesignColors.divider)
-                .padding(.top, 48)
 
-                ScrollView {
+                Spacer()
+
+                Text("Settings")
+                    .font(DesignTypography.headline1)
+                    .foregroundColor(DesignColors.primary)
+
+                Spacer()
+
+                Color.clear
+                    .frame(width: 40)
+            }
+            .padding(.horizontal, DesignSpacing.lg)
+            .padding(.top, DesignSpacing.lg)
+            .padding(.bottom, DesignSpacing.lg)
+            .frame(maxWidth: .infinity)
+            .background(Color.black)
+            .borderBottom(DesignColors.divider)
+            .padding(.top, 48)
+
+            ScrollView {
+                VStack(spacing: 0) {
+                    // Dark Mode Section
                     VStack(spacing: 0) {
-                        // Dark Mode Section
-                        VStack(spacing: 0) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("Dark Mode")
@@ -62,70 +58,71 @@ struct SettingsView: View {
                                 Toggle("", isOn: $isDarkModeEnabled)
                                     .tint(DesignColors.accent)
                             }
-                            .padding(.horizontal, DesignSpacing.lg)
-                            .padding(.vertical, DesignSpacing.lg)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.black)
-                            .borderBottom(DesignColors.divider)
-                        }
+                        .padding(.horizontal, DesignSpacing.lg)
+                        .padding(.vertical, DesignSpacing.lg)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black)
+                        .borderBottom(DesignColors.divider)
+                    }
 
-                        // Share Feedback Section
-                        VStack(spacing: 0) {
-                            Button(action: { showFeedbackForm = true }) {
-                                HStack {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("Share Feedback")
-                                            .font(DesignTypography.headline3)
-                                            .foregroundColor(DesignColors.primary)
-
-                                        Text("Send us your feedback")
-                                            .font(DesignTypography.caption1)
-                                            .foregroundColor(DesignColors.tertiary)
-                                    }
-
-                                    Spacer()
-
-                                    Image(systemName: "chevron.right")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(DesignColors.tertiary)
-                                }
-                                .padding(.horizontal, DesignSpacing.lg)
-                                .padding(.vertical, DesignSpacing.lg)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            .background(Color.black)
-                            .borderBottom(DesignColors.divider)
-                        }
-
-                        // App Version Section
-                        VStack(spacing: 0) {
+                    // Share Feedback Section
+                    VStack(spacing: 0) {
+                        Button(action: { showFeedbackForm = true }) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text("Version")
+                                    Text("Share Feedback")
                                         .font(DesignTypography.headline3)
                                         .foregroundColor(DesignColors.primary)
+
+                                    Text("Send us your feedback")
+                                        .font(DesignTypography.caption1)
+                                        .foregroundColor(DesignColors.tertiary)
                                 }
 
                                 Spacer()
 
-                                Text("v\(appVersion)")
-                                    .font(DesignTypography.caption1)
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 16, weight: .semibold))
                                     .foregroundColor(DesignColors.tertiary)
                             }
                             .padding(.horizontal, DesignSpacing.lg)
                             .padding(.vertical, DesignSpacing.lg)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.black)
-                            .borderBottom(DesignColors.divider)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
-
-                        Spacer()
+                        .background(Color.black)
+                        .borderBottom(DesignColors.divider)
                     }
+
+                    // App Version Section
+                    VStack(spacing: 0) {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Version")
+                                    .font(DesignTypography.headline3)
+                                    .foregroundColor(DesignColors.primary)
+                            }
+
+                            Spacer()
+
+                            Text("v\(appVersion)")
+                                .font(DesignTypography.caption1)
+                                .foregroundColor(DesignColors.tertiary)
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
+                        .padding(.vertical, DesignSpacing.lg)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black)
+                        .borderBottom(DesignColors.divider)
+                    }
+
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black)
+        .ignoresSafeArea()
+        .ignoresSafeArea(edges: .top)
         .sheet(isPresented: $showFeedbackForm) {
             FeedbackFormView(isPresented: $showFeedbackForm)
         }

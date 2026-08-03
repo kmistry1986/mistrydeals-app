@@ -14,31 +14,30 @@ struct GuidesView: View {
     @State private var showSettings = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                Text("Buying Guides")
-                    .font(DesignTypography.headline1)
-                    .foregroundColor(DesignColors.primary)
+        NavigationStack(path: $navigationPath) {
+            VStack(spacing: 0) {
+                ZStack {
+                    Text("Buying Guides")
+                        .font(DesignTypography.headline1)
+                        .foregroundColor(DesignColors.primary)
 
-                HStack {
-                    Spacer()
-                    NavigationLink(destination: SettingsView()) {
-                        Image(systemName: "gear")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.accent)
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: SettingsView()) {
+                            Image(systemName: "gear")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(DesignColors.accent)
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
                     }
-                    .padding(.horizontal, DesignSpacing.lg)
                 }
-            }
-            .padding(.horizontal, DesignSpacing.lg)
-            .padding(.top, DesignSpacing.lg)
-            .padding(.bottom, DesignSpacing.lg)
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
-            .borderBottom(DesignColors.divider)
-            .padding(.top, 48)
-
-            NavigationStack(path: $navigationPath) {
+                .padding(.horizontal, DesignSpacing.lg)
+                .padding(.top, DesignSpacing.lg)
+                .padding(.bottom, DesignSpacing.lg)
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .borderBottom(DesignColors.divider)
+                .padding(.top, 48)
 
                 if isLoading {
                     VStack {
