@@ -230,6 +230,12 @@ struct SearchView: View {
         .onReceive(Publishers.keyboardHeight) { height in
             keyboardHeight = height
         }
+        .onChange(of: isLoading) { newValue in
+            if !newValue && hasSearched {
+                // Dismiss keyboard after search completes
+                isSearchFocused = false
+            }
+        }
     }
 
     private func performSearch() async {
