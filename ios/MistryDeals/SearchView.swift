@@ -235,6 +235,7 @@ struct SearchView: View {
             if !newValue && hasSearched {
                 // Dismiss keyboard after search completes
                 isSearchFocused = false
+                keyboardHeight = 0
             }
         }
     }
