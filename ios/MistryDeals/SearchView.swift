@@ -179,6 +179,7 @@ struct SearchView: View {
                         }
                     }
                     .frame(maxWidth: .infinity)
+                    .padding(.bottom, 80)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
