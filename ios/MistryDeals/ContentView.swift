@@ -3,9 +3,19 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab: TabSelection = .featured
     @State private var isSearchActive = false
+    @State private var previousTabIndex = 0
     @StateObject private var supabaseClient = SupabaseClient()
     @Namespace private var searchAnimation
     @Namespace private var pillAnimation
+
+    private var tabIndex: Int {
+        switch selectedTab {
+        case .featured: return 0
+        case .prime: return 1
+        case .guides: return 2
+        case .search: return 0
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -28,17 +38,22 @@ struct ContentView: View {
                     switch selectedTab {
                     case .featured:
                         FeaturedView(client: supabaseClient)
+                            .transition(.opacity.combined(with: .move(edge: .trailing)))
                     case .prime:
                         PrimeView(client: supabaseClient)
+                            .transition(.opacity.combined(with: .move(edge: .trailing)))
                     case .guides:
                         GuidesView(client: supabaseClient)
+                            .transition(.opacity.combined(with: .move(edge: .trailing)))
                     case .search:
                         FeaturedView(client: supabaseClient)
+                            .transition(.opacity.combined(with: .move(edge: .trailing)))
                     }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .animation(.easeInOut(duration: 0.3), value: isSearchActive)
+            .animation(.easeInOut(duration: 0.25), value: isSearchActive)
+            .animation(.easeInOut(duration: 0.25), value: selectedTab)
             .safeAreaInset(edge: .bottom) {
                 if !isSearchActive {
                     HStack(spacing: 12) {
@@ -132,7 +147,7 @@ struct ContentView: View {
 
                         // Floating search button
                         if !isSearchActive {
-                            Button(action: { isSearchActive = true }) {
+                            Button(action: { withAnimation(.easeInOut(duration: 0.4)) { isSearchActive = true } }) {
                                 Image(systemName: "magnifyingglass")
                                     .font(.system(size: 16, weight: .semibold))
                                     .foregroundColor(.white)

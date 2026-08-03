@@ -11,31 +11,34 @@ struct GuidesView: View {
     @State private var searchText = ""
     @State private var showSearchBox = false
     @State private var navigationPath: [Guide] = []
+    @State private var showSettings = false
 
     var body: some View {
-        NavigationStack(path: $navigationPath) {
-            VStack(spacing: 0) {
-                ZStack {
-                    Text("Buying Guides")
-                        .font(DesignTypography.headline1)
-                        .foregroundColor(DesignColors.primary)
+        VStack(spacing: 0) {
+            ZStack {
+                Text("Buying Guides")
+                    .font(DesignTypography.headline1)
+                    .foregroundColor(DesignColors.primary)
 
-                    HStack {
-                        Spacer()
-                        Button(action: { showSearchBox = true }) {
-                            Image(systemName: "magnifyingglass")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(DesignColors.accent)
-                        }
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gear")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(DesignColors.accent)
                     }
+                    .padding(.horizontal, DesignSpacing.lg)
                 }
-                .padding(.horizontal, DesignSpacing.lg)
-                .padding(.top, DesignSpacing.lg)
-                .padding(.bottom, DesignSpacing.lg)
-                .frame(maxWidth: .infinity)
-                .background(Color.black)
-                .borderBottom(DesignColors.divider)
-                .padding(.top, 0)
+            }
+            .padding(.horizontal, DesignSpacing.lg)
+            .padding(.top, DesignSpacing.lg)
+            .padding(.bottom, DesignSpacing.lg)
+            .frame(maxWidth: .infinity)
+            .background(Color.black)
+            .borderBottom(DesignColors.divider)
+            .padding(.top, 48)
+
+            NavigationStack(path: $navigationPath) {
 
                 if isLoading {
                     VStack {
@@ -119,7 +122,6 @@ struct GuidesView: View {
                     .padding(.bottom, 66)
                 }
             }
-            }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(DesignColors.background)
             .ignoresSafeArea()
@@ -133,6 +135,7 @@ struct GuidesView: View {
             .task {
                 await loadGuides()
             }
+        }
         }
 
     private func loadGuides() async {

@@ -1,0 +1,257 @@
+import SwiftUI
+
+struct SettingsView: View {
+    @Environment(\.colorScheme) var colorScheme
+    @State private var isDarkModeEnabled = false
+    @State private var showFeedbackForm = false
+    @Environment(\.dismiss) var dismiss
+
+    var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+    }
+
+    var body: some View {
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                HStack {
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(DesignColors.accent)
+                    }
+
+                    Spacer()
+
+                    Text("Settings")
+                        .font(DesignTypography.headline1)
+                        .foregroundColor(DesignColors.primary)
+
+                    Spacer()
+
+                    Color.clear
+                        .frame(width: 40)
+                }
+                .padding(.horizontal, DesignSpacing.lg)
+                .padding(.top, DesignSpacing.lg)
+                .padding(.bottom, DesignSpacing.lg)
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .borderBottom(DesignColors.divider)
+                .padding(.top, 48)
+
+                ScrollView {
+                    VStack(spacing: 0) {
+                        // Dark Mode Section
+                        VStack(spacing: 0) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Dark Mode")
+                                        .font(DesignTypography.headline3)
+                                        .foregroundColor(DesignColors.primary)
+
+                                    Text("Adjust display theme")
+                                        .font(DesignTypography.caption1)
+                                        .foregroundColor(DesignColors.tertiary)
+                                }
+
+                                Spacer()
+
+                                Toggle("", isOn: $isDarkModeEnabled)
+                                    .tint(DesignColors.accent)
+                            }
+                            .padding(.horizontal, DesignSpacing.lg)
+                            .padding(.vertical, DesignSpacing.lg)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.black)
+                            .borderBottom(DesignColors.divider)
+                        }
+
+                        // Share Feedback Section
+                        VStack(spacing: 0) {
+                            Button(action: { showFeedbackForm = true }) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Share Feedback")
+                                            .font(DesignTypography.headline3)
+                                            .foregroundColor(DesignColors.primary)
+
+                                        Text("Send us your feedback")
+                                            .font(DesignTypography.caption1)
+                                            .foregroundColor(DesignColors.tertiary)
+                                    }
+
+                                    Spacer()
+
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundColor(DesignColors.tertiary)
+                                }
+                                .padding(.horizontal, DesignSpacing.lg)
+                                .padding(.vertical, DesignSpacing.lg)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .background(Color.black)
+                            .borderBottom(DesignColors.divider)
+                        }
+
+                        // App Version Section
+                        VStack(spacing: 0) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Version")
+                                        .font(DesignTypography.headline3)
+                                        .foregroundColor(DesignColors.primary)
+                                }
+
+                                Spacer()
+
+                                Text("v\(appVersion)")
+                                    .font(DesignTypography.caption1)
+                                    .foregroundColor(DesignColors.tertiary)
+                            }
+                            .padding(.horizontal, DesignSpacing.lg)
+                            .padding(.vertical, DesignSpacing.lg)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.black)
+                            .borderBottom(DesignColors.divider)
+                        }
+
+                        Spacer()
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .sheet(isPresented: $showFeedbackForm) {
+            FeedbackFormView(isPresented: $showFeedbackForm)
+        }
+    }
+}
+
+struct FeedbackFormView: View {
+    @Binding var isPresented: Bool
+    @State private var feedbackText = ""
+    @State private var email = ""
+    @State private var isLoading = false
+    @State private var showSuccessMessage = false
+
+    var body: some View {
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Send Feedback")
+                        .font(DesignTypography.headline1)
+                        .foregroundColor(DesignColors.primary)
+
+                    Spacer()
+
+                    Button(action: { isPresented = false }) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(DesignColors.accent)
+                    }
+                }
+                .padding(.horizontal, DesignSpacing.lg)
+                .padding(.vertical, DesignSpacing.lg)
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .borderBottom(DesignColors.divider)
+
+                ScrollView {
+                    VStack(spacing: DesignSpacing.lg) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Email")
+                                .font(DesignTypography.caption1)
+                                .fontWeight(.semibold)
+                                .foregroundColor(DesignColors.primary)
+
+                            TextField("your@email.com", text: $email)
+                                .textFieldStyle(.plain)
+                                .foregroundColor(DesignColors.primary)
+                                .padding(DesignSpacing.md)
+                                .background(DesignColors.tertiaryBackground)
+                                .cornerRadius(DesignRadius.sm)
+                        }
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Feedback")
+                                .font(DesignTypography.caption1)
+                                .fontWeight(.semibold)
+                                .foregroundColor(DesignColors.primary)
+
+                            TextEditor(text: $feedbackText)
+                                .textFieldStyle(.plain)
+                                .foregroundColor(DesignColors.primary)
+                                .padding(DesignSpacing.md)
+                                .background(DesignColors.tertiaryBackground)
+                                .cornerRadius(DesignRadius.sm)
+                                .frame(height: 150)
+                        }
+
+                        if showSuccessMessage {
+                            Text("Thank you for your feedback!")
+                                .font(DesignTypography.bodySmall)
+                                .foregroundColor(DesignColors.accent)
+                                .frame(maxWidth: .infinity)
+                                .padding(DesignSpacing.md)
+                                .background(DesignColors.accentSecondary.opacity(0.2))
+                                .cornerRadius(DesignRadius.sm)
+                        }
+
+                        Button(action: submitFeedback) {
+                            if isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            } else {
+                                Text("Submit")
+                                    .font(DesignTypography.headline3)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(DesignSpacing.md)
+                        .background(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    DesignColors.accent,
+                                    Color(red: 0.3, green: 0.8, blue: 1.0)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .cornerRadius(DesignRadius.md)
+                        .disabled(email.isEmpty || feedbackText.isEmpty || isLoading)
+
+                        Spacer()
+                    }
+                    .padding(DesignSpacing.lg)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+    }
+
+    private func submitFeedback() {
+        isLoading = true
+        // Simulate submission - in production would hit Supabase
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            isLoading = false
+            showSuccessMessage = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                isPresented = false
+            }
+        }
+    }
+}
+
+#Preview {
+    SettingsView()
+}

@@ -9,127 +9,130 @@ struct PrimeView: View {
     @State private var showSearchModal = false
     @State private var searchText = ""
     @State private var showSearchBox = false
+    @State private var showSettings = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                Text("Prime Deals")
-                    .font(DesignTypography.headline1)
-                    .foregroundColor(DesignColors.primary)
+        NavigationStack {
+            VStack(spacing: 0) {
+                ZStack {
+                    Text("Prime Deals")
+                        .font(DesignTypography.headline1)
+                        .foregroundColor(DesignColors.primary)
 
-                HStack {
-                    Spacer()
-                    Button(action: { showSearchBox = true }) {
-                        Image(systemName: "magnifyingglass")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.accent)
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: SettingsView()) {
+                            Image(systemName: "gear")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(DesignColors.accent)
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
                     }
-                    .padding(.horizontal, DesignSpacing.lg)
                 }
-            }
-            .padding(.horizontal, DesignSpacing.lg)
-            .padding(.top, DesignSpacing.lg)
-            .padding(.bottom, DesignSpacing.lg)
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
-            .borderBottom(DesignColors.divider)
-            .padding(.top, 48)
+                .padding(.horizontal, DesignSpacing.lg)
+                .padding(.top, DesignSpacing.lg)
+                .padding(.bottom, DesignSpacing.lg)
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .borderBottom(DesignColors.divider)
+                .padding(.top, 48)
 
-            if isLoading {
-                VStack {
-                    Spacer()
-                    ProgressView()
-                        .tint(DesignColors.accent)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if let error = errorMessage {
-                VStack {
-                    Spacer()
-                    Text("Error: \(error)")
-                        .foregroundColor(DesignColors.accentSecondary)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        if showSearchBox {
-                            VStack(spacing: 8) {
-                                HStack {
-                                    Image(systemName: "magnifyingglass")
-                                        .foregroundColor(DesignColors.tertiary)
+                if isLoading {
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                            .tint(DesignColors.accent)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if let error = errorMessage {
+                    VStack {
+                        Spacer()
+                        Text("Error: \(error)")
+                            .foregroundColor(DesignColors.accentSecondary)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    ScrollView {
+                        VStack(spacing: 0) {
+                            if showSearchBox {
+                                VStack(spacing: 8) {
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                            .foregroundColor(DesignColors.tertiary)
 
-                                    TextField("Search products...", text: $searchText)
-                                        .textFieldStyle(.plain)
-                                        .foregroundColor(DesignColors.primary)
-                                        .submitLabel(.search)
-                                        .onSubmit {
+                                        TextField("Search products...", text: $searchText)
+                                            .textFieldStyle(.plain)
+                                            .foregroundColor(DesignColors.primary)
+                                            .submitLabel(.search)
+                                            .onSubmit {
+                                                performSearch()
+                                            }
+                                    }
+                                    .padding(DesignSpacing.sm)
+                                    .background(DesignColors.tertiaryBackground)
+                                    .cornerRadius(DesignRadius.sm)
+
+                                    HStack(spacing: 8) {
+                                        Button(action: {
+                                            searchText = ""
                                             performSearch()
+                                        }) {
+                                            Text("Clear")
+                                                .font(DesignTypography.caption1)
+                                                .foregroundColor(DesignColors.primary)
+                                                .frame(maxWidth: .infinity)
+                                                .padding(.vertical, 8)
+                                                .background(DesignColors.tertiaryBackground)
+                                                .cornerRadius(DesignRadius.sm)
                                         }
-                                }
-                                .padding(DesignSpacing.sm)
-                                .background(DesignColors.tertiaryBackground)
-                                .cornerRadius(DesignRadius.sm)
 
-                                HStack(spacing: 8) {
-                                    Button(action: {
-                                        searchText = ""
-                                        performSearch()
-                                    }) {
-                                        Text("Clear")
-                                            .font(DesignTypography.caption1)
-                                            .foregroundColor(DesignColors.primary)
-                                            .frame(maxWidth: .infinity)
-                                            .padding(.vertical, 8)
-                                            .background(DesignColors.tertiaryBackground)
-                                            .cornerRadius(DesignRadius.sm)
-                                    }
-
-                                    Button(action: {
-                                        showSearchBox = false
-                                        searchText = ""
-                                        performSearch()
-                                    }) {
-                                        Text("Close")
-                                            .font(DesignTypography.caption1)
-                                            .foregroundColor(DesignColors.primary)
-                                            .frame(maxWidth: .infinity)
-                                            .padding(.vertical, 8)
-                                            .background(DesignColors.accentSecondary)
-                                            .cornerRadius(DesignRadius.sm)
+                                        Button(action: {
+                                            showSearchBox = false
+                                            searchText = ""
+                                            performSearch()
+                                        }) {
+                                            Text("Close")
+                                                .font(DesignTypography.caption1)
+                                                .foregroundColor(DesignColors.primary)
+                                                .frame(maxWidth: .infinity)
+                                                .padding(.vertical, 8)
+                                                .background(DesignColors.accentSecondary)
+                                                .cornerRadius(DesignRadius.sm)
+                                        }
                                     }
                                 }
+                                .padding(DesignSpacing.lg)
                             }
-                            .padding(DesignSpacing.lg)
-                        }
 
-                        LazyVStack(spacing: 0, pinnedViews: []) {
-                            ForEach(filteredProducts) { product in
-                                ProductRow(product: product)
-                                    .borderBottom(DesignColors.divider)
+                            LazyVStack(spacing: 0, pinnedViews: []) {
+                                ForEach(filteredProducts) { product in
+                                    ProductRow(product: product)
+                                        .borderBottom(DesignColors.divider)
+                                }
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal, 0)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 0)
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.bottom, 66)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.bottom, 66)
             }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
-        .ignoresSafeArea()
-        .sheet(isPresented: $showSearchModal) {
-            PrimeSearchModalView(
-                isPresented: $showSearchModal,
-                searchText: $searchText,
-                onSearch: performSearch
-            )
-        }
-        .task {
-            await loadProducts()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black)
+            .ignoresSafeArea()
+            .sheet(isPresented: $showSearchModal) {
+                PrimeSearchModalView(
+                    isPresented: $showSearchModal,
+                    searchText: $searchText,
+                    onSearch: performSearch
+                )
+            }
+            .task {
+                await loadProducts()
+            }
         }
     }
 

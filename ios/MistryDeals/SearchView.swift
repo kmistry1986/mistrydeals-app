@@ -217,19 +217,23 @@ struct SearchView: View {
                     Capsule()
                         .fill(DesignColors.tertiaryBackground)
                 )
-                .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
             }
-            .padding(.horizontal, 0)
+            .padding(.horizontal, 12)
             .padding(.vertical, DesignSpacing.md)
             .padding(.bottom, keyboardHeight + 10)
             .background(Color.black)
             .frame(maxWidth: .infinity)
+            .matchedGeometryEffect(id: "searchButton", in: searchAnimation)
         }
         .onAppear {
-            isSearchFocused = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                isSearchFocused = true
+            }
         }
         .onReceive(Publishers.keyboardHeight) { height in
-            keyboardHeight = height
+            DispatchQueue.main.async {
+                keyboardHeight = height
+            }
         }
         .onChange(of: isLoading) { newValue in
             if !newValue && hasSearched {
