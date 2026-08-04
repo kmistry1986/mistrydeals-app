@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct ContentView: View {
     @State private var selectedTab: TabSelection = .featured
     @State private var isSearchActive = false
@@ -98,21 +99,24 @@ struct ContentView: View {
                         // Navigation pill (narrower, left-aligned, 3 tabs only)
                         GeometryReader { geometry in
                             ZStack(alignment: .leading) {
-                                let itemWidth = geometry.size.width / 3
-                                let offset = CGFloat(tabIndex) * itemWidth
-
                                 // Pill background with border
                                 Capsule()
                                     .fill(DesignColors.tabBarBackground)
-                                    .stroke(DesignColors.ruleStrong, lineWidth: 2)
+                                    .overlay(
+                                        Capsule()
+                                            .stroke(DesignColors.ruleStrong, lineWidth: 2)
+                                    )
 
-                                // Active tab indicator
+                                // Active tab indicator - positioned behind text with proper padding
+                                let totalPadding: CGFloat = 8  // 4px on each side
+                                let itemWidth = (geometry.size.width - totalPadding) / 3
+                                let offset = CGFloat(tabIndex) * itemWidth + 4
+                                
                                 Capsule()
                                     .fill(DesignColors.tabBarActiveFill)
                                     .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
-                                    .frame(maxWidth: itemWidth)
+                                    .frame(width: itemWidth, height: geometry.size.height - 8)  // Subtract 8 to account for top/bottom padding
                                     .offset(x: offset)
-                                    .padding(2)
 
                                 HStack(spacing: 0) {
                                     Button(action: {
@@ -160,6 +164,7 @@ struct ContentView: View {
                                             .padding(.vertical, 10)
                                     }
                                 }
+                                .padding(.horizontal, 4)
                             }
                         }
                         .frame(height: 40)
@@ -265,6 +270,7 @@ struct TabBarItem: View {
     }
 }
 
+@available(iOS 16.0, *)
 #Preview {
     ContentView()
 }

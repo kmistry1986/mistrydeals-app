@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct PrimeView: View {
     @ObservedObject var client: SupabaseClient
     @State private var products: [Product] = []
@@ -164,6 +165,7 @@ struct PrimeView: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct PrimeSearchModalView: View {
     @Binding var isPresented: Bool
     @Binding var searchText: String
@@ -240,6 +242,7 @@ struct PrimeSearchModalView: View {
     }
 }
 
+@available(iOS 16.0, *)
 #Preview {
     PrimeView(client: SupabaseClient())
 }

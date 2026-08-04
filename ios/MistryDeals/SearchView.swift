@@ -189,11 +189,13 @@ struct SearchView: View {
                         }
                     }
                 }
-                .padding(DesignSpacing.md)
+                .padding(.horizontal, DesignSpacing.lg)
+                .padding(.vertical, DesignSpacing.md)
                 .background(DesignColors.inputBackground)
-                .cornerRadius(DesignRadius.sm)
-                .overlay(RoundedRectangle(cornerRadius: DesignRadius.sm).stroke(DesignColors.inputBorder, lineWidth: 1))
-                .padding(DesignSpacing.md)
+                .cornerRadius(24)
+                .overlay(RoundedRectangle(cornerRadius: 24).stroke(DesignColors.inputBorder, lineWidth: 1))
+                .padding(.horizontal, DesignSpacing.md)
+                .padding(.bottom, DesignSpacing.xl)
                 .background(DesignColors.surfaceBackground)
             }
             .offset(y: -keyboardHeight)

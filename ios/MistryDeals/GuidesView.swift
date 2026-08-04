@@ -1,6 +1,7 @@
 import SwiftUI
 import WebKit
 
+@available(iOS 16.0, *)
 struct GuidesView: View {
     @ObservedObject var client: SupabaseClient
     @State private var guides: [Guide] = []
@@ -162,6 +163,7 @@ struct GuidesView: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct GuideCardWrapper: View {
     let guide: Guide
 
@@ -172,6 +174,7 @@ struct GuideCardWrapper: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct GuideDetailScreenView: View {
     @Environment(\.dismiss) var dismiss
     let guide: Guide
@@ -194,11 +197,8 @@ struct GuideDetailScreenView: View {
                 }
                 .frame(maxWidth: .infinity)
 
-                Button(action: { dismiss() }) {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(DesignColors.textPrimary)
-                }
+                Spacer()
+                    .frame(width: 16)
             }
             .padding(.horizontal, DesignSpacing.lg)
             .frame(height: 56)
@@ -490,6 +490,7 @@ struct GuideDetailScreenView: View {
             .background(DesignColors.surfaceBackground)
         }
         .background(DesignColors.background)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -642,6 +643,7 @@ struct GuideSearchModalView: View {
     }
 }
 
+@available(iOS 16.0, *)
 #Preview {
     GuidesView(client: SupabaseClient())
 }

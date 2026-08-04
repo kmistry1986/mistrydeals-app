@@ -1,0 +1,7 @@
+node_modules/
+.DerivedData/
+.xcworkspace
+Pods/
+Podfile.lock
+*.xcactivitylog
+.DS_Store

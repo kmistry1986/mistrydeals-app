@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		5537742B30202ABE00B0A531 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537742A30202ABE00B0A531 /* SettingsView.swift */; };
-		55B41B1A301EECA2001A3567 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B41B19301EECA2001A3567 /* DesignSystem.swift */; };
+		5537742B30202ABE00B0A531 /* MistryDeals/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537742A30202ABE00B0A531 /* MistryDeals/SettingsView.swift */; };
+		55B41B1A301EECA2001A3567 /* MistryDeals/DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B41B19301EECA2001A3567 /* MistryDeals/DesignSystem.swift */; };
 		E924DEB0B035761E4B279FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 006EEB860ADDC9DDEED3D609 /* PrivacyInfo.xcprivacy */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 		F117485B2D0740C70044C1D9 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F117485A2D0740C70044C1D9 /* Models.swift */; };
@@ -31,8 +31,8 @@
 		13B07F961A680F5B00A75B9A /* MistryDeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MistryDeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MistryDeals/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MistryDeals/Info.plist; sourceTree = "<group>"; };
-		5537742A30202ABE00B0A531 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MistryDeals/SettingsView.swift"; sourceTree = "<group>"; };
-		55B41B19301EECA2001A3567 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistryDeals/DesignSystem.swift; sourceTree = "<group>"; };
+		5537742A30202ABE00B0A531 /* MistryDeals/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistryDeals/SettingsView.swift; sourceTree = "<group>"; };
+		55B41B19301EECA2001A3567 /* MistryDeals/DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistryDeals/DesignSystem.swift; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = MistryDeals/SplashScreen.storyboard; sourceTree = "<group>"; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = MistryDeals/AppDelegate.swift; sourceTree = "<group>"; };
 		F117485A2D0740C70044C1D9 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = MistryDeals/Models.swift; sourceTree = "<group>"; };
@@ -78,8 +78,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
 				006EEB860ADDC9DDEED3D609 /* PrivacyInfo.xcprivacy */,
-				55B41B19301EECA2001A3567 /* DesignSystem.swift */,
-				5537742A30202ABE00B0A531 /* SettingsView.swift */,
+				55B41B19301EECA2001A3567 /* MistryDeals/DesignSystem.swift */,
+				5537742A30202ABE00B0A531 /* MistryDeals/SettingsView.swift */,
 			);
 			name = MistryDeals;
 			sourceTree = "<group>";
@@ -187,9 +187,9 @@
 				F117485B2D0740C70044C1D9 /* Models.swift in Sources */,
 				F117485D2D0740DA0044C1D9 /* SupabaseClient.swift in Sources */,
 				F117485F2D0740E80044C1D9 /* ContentView.swift in Sources */,
-				55B41B1A301EECA2001A3567 /* DesignSystem.swift in Sources */,
+				55B41B1A301EECA2001A3567 /* MistryDeals/DesignSystem.swift in Sources */,
 				F11748612D0740F60044C1D9 /* FeaturedView.swift in Sources */,
-				5537742B30202ABE00B0A531 /* SettingsView.swift in Sources */,
+				5537742B30202ABE00B0A531 /* MistryDeals/SettingsView.swift in Sources */,
 				F11748632D07410A0044C1D9 /* PrimeView.swift in Sources */,
 				F11748652D0741200044C1D9 /* SearchView.swift in Sources */,
 				F11748672D0741330044C1D9 /* GuidesView.swift in Sources */,
@@ -211,7 +211,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MistryDeals/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -234,7 +234,7 @@
 				CODE_SIGN_ENTITLEMENTS = MistryDeals/MistryDeals.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = MistryDeals/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
