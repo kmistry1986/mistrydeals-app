@@ -14,8 +14,6 @@ struct SearchView: View {
     @State private var hasSearched = false
     @State private var selectedFilter: SearchFilter = .all
     @FocusState private var isSearchFocused: Bool
-    @State private var keyboardHeight: CGFloat = 0
-    @State private var searchBarProgress: CGFloat = 0
     @State private var showSearchOverlay = false
     @Namespace private var filterAnimation
 
@@ -218,39 +216,28 @@ struct SearchView: View {
                                 .fill(DesignColors.tertiaryBackground)
                         )
                     }
-                    .opacity(searchBarProgress)
-                    .scaleEffect(x: searchBarProgress, y: 1, anchor: .leading)
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, DesignSpacing.md)
                 .padding(.bottom, 10)
                 .background(Color.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .offset(y: -keyboardHeight)
                 }
                 .ignoresSafeArea(edges: .bottom)
             }
         }
         .onAppear {
             showSearchOverlay = true
-            isSearchFocused = true
-        }
-        .onReceive(Publishers.keyboardHeight) { height in
-            // Update keyboard height without animation - let the offset follow naturally
-            keyboardHeight = height
-            // Expand search bar after keyboard appears (delayed to let icon slide up first)
-            if height > 0 && searchBarProgress == 0 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        searchBarProgress = 1
-                    }
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isSearchFocused = true
             }
+        }
+        .onDisappear {
+            isSearchFocused = false
         }
         .onChange(of: isLoading) { newValue in
             if !newValue && hasSearched {
                 isSearchFocused = false
-                keyboardHeight = 0
             }
         }
     }
@@ -283,20 +270,6 @@ struct SearchView: View {
     }
 }
 
-extension Publishers {
-    static var keyboardHeight: AnyPublisher<CGFloat, Never> {
-        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
-            .compactMap { $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect }
-            .map { $0.height }
-
-        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
-            .map { _ in CGFloat(0) }
-
-        return Publishers.Merge(willShow, willHide)
-            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-}
 
 struct FilterPill: View {
     let label: String

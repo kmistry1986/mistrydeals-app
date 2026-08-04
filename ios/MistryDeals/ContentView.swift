@@ -102,8 +102,8 @@ struct ContentView: View {
                                     .fill(
                                         LinearGradient(
                                             gradient: Gradient(colors: [
-                                                Color("AccentColor"),
-                                                Color("AccentColor").opacity(0.8)
+                                                Color("AccentColor").opacity(0.6),
+                                                Color("AccentColor").opacity(0.4)
                                             ]),
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing

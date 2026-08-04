@@ -116,6 +116,9 @@ struct PrimeView: View {
                             .padding(.horizontal, 0)
                         }
                     }
+                    .refreshable {
+                        await loadProducts()
+                    }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.bottom, 66)
                 }
@@ -141,6 +144,7 @@ struct PrimeView: View {
             isLoading = true
             errorMessage = nil
             products = try await client.fetchProducts(type: "prime")
+            products.sort { ($0.last_price_sync ?? "") > ($1.last_price_sync ?? "") }
             filteredProducts = products
             isLoading = false
         } catch {

@@ -2,28 +2,106 @@ import SwiftUI
 
 // MARK: - Color System
 struct DesignColors {
-    // Primary backgrounds
-    static let background = Color(red: 0.06, green: 0.06, blue: 0.14)
-    static let secondaryBackground = Color(red: 0.09, green: 0.09, blue: 0.18)
-    static let tertiaryBackground = Color(red: 0.12, green: 0.11, blue: 0.22)
+    // Helper to determine if dark mode should be used
+    private static func isDarkMode() -> Bool {
+        let isDarkOverride = UserDefaults.standard.bool(forKey: "isDarkModeOverride")
+        return isDarkOverride
+    }
 
-    // Text colors
-    static let primary = Color.white
-    static let secondary = Color.white.opacity(0.7)
-    static let tertiary = Color.white.opacity(0.5)
-    static let tertiaryText = Color.white.opacity(0.5)
+    // Adaptive backgrounds
+    static var background: Color {
+        if isDarkMode() {
+            return Color(red: 0.059, green: 0.059, blue: 0.059)  // #0F0F0F
+        } else {
+            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
+        }
+    }
 
-    // Accent colors
-    static let accent = Color(red: 0.4, green: 0.8, blue: 1.0)
+    static var secondaryBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.102, green: 0.102, blue: 0.102)  // #1A1A1A
+        } else {
+            return Color(red: 0.973, green: 0.969, blue: 0.965)  // #F8F7F6
+        }
+    }
+
+    static var tertiaryBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.165, green: 0.165, blue: 0.165)  // #2A2A2A
+        } else {
+            return Color(red: 0.898, green: 0.888, blue: 0.882)  // #E5E3E1
+        }
+    }
+
+    // Adaptive text colors
+    static var primary: Color {
+        if isDarkMode() {
+            return Color(red: 0.961, green: 0.953, blue: 0.945)  // #F5F3F1
+        } else {
+            return Color(red: 0.102, green: 0.102, blue: 0.102)  // #1A1A1A
+        }
+    }
+
+    static var secondary: Color {
+        if isDarkMode() {
+            return Color(red: 0.961, green: 0.953, blue: 0.945).opacity(0.7)  // #F5F3F1
+        } else {
+            return Color(red: 0.102, green: 0.102, blue: 0.102).opacity(0.7)  // #1A1A1A
+        }
+    }
+
+    static var tertiary: Color {
+        if isDarkMode() {
+            return Color(red: 0.961, green: 0.953, blue: 0.945).opacity(0.5)  // #F5F3F1
+        } else {
+            return Color(red: 0.102, green: 0.102, blue: 0.102).opacity(0.5)  // #1A1A1A
+        }
+    }
+
+    static var tertiaryText: Color {
+        tertiary
+    }
+
+    // Accent colors (deals/CTAs)
+    static var accent: Color {
+        if isDarkMode() {
+            return Color(red: 1.0, green: 0.478, blue: 0.420)  // #FF7A6B
+        } else {
+            return Color(red: 0.847, green: 0.298, blue: 0.235)  // #D84B3C
+        }
+    }
+
     static let accentSecondary = Color(red: 0.95, green: 0.4, blue: 0.6)
     static let accentLight = Color(red: 0.3, green: 0.8, blue: 1.0)
     static let accentRed = Color(red: 0.9, green: 0.3, blue: 0.5)
-    static let success = Color(red: 0.2, green: 0.9, blue: 0.6)
+
+    // Success/Good deal colors
+    static var success: Color {
+        if isDarkMode() {
+            return Color(red: 0.365, green: 0.851, blue: 0.718)  // #5DD9B7
+        } else {
+            return Color(red: 0.176, green: 0.416, blue: 0.310)  // #2D6A4F
+        }
+    }
+
     static let warning = Color(red: 1.0, green: 0.7, blue: 0.2)
 
     // Borders and dividers
-    static let border = Color.white.opacity(0.1)
-    static let divider = Color.white.opacity(0.08)
+    static var border: Color {
+        if isDarkMode() {
+            return Color(red: 0.165, green: 0.165, blue: 0.165).opacity(0.6)  // #2A2A2A
+        } else {
+            return Color(red: 0.898, green: 0.888, blue: 0.882).opacity(0.8)  // #E5E3E1
+        }
+    }
+
+    static var divider: Color {
+        if isDarkMode() {
+            return Color(red: 0.165, green: 0.165, blue: 0.165).opacity(0.4)  // #2A2A2A
+        } else {
+            return Color(red: 0.898, green: 0.888, blue: 0.882).opacity(0.5)  // #E5E3E1
+        }
+    }
 }
 
 // MARK: - Typography

@@ -116,6 +116,9 @@ struct FeaturedView: View {
                             .padding(.horizontal, 0)
                         }
                     }
+                    .refreshable {
+                        await loadProducts()
+                    }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.bottom, 66)
                 }
@@ -141,6 +144,7 @@ struct FeaturedView: View {
             isLoading = true
             errorMessage = nil
             products = try await client.fetchProducts(type: "featured")
+            products.sort { ($0.last_price_sync ?? "") > ($1.last_price_sync ?? "") }
             filteredProducts = products
             isLoading = false
         } catch {

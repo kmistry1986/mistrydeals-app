@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var isDarkModeEnabled = false
+    @AppStorage("isDarkModeOverride") private var isDarkModeOverride: Bool = true
     @State private var showFeedbackForm = false
     @Environment(\.dismiss) var dismiss
 
@@ -55,7 +55,7 @@ struct SettingsView: View {
 
                                 Spacer()
 
-                                Toggle("", isOn: $isDarkModeEnabled)
+                                Toggle("", isOn: $isDarkModeOverride)
                                     .tint(Color("AccentColor"))
                             }
                         .padding(.horizontal, DesignSpacing.lg)
