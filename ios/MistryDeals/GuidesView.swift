@@ -19,22 +19,22 @@ struct GuidesView: View {
                 HStack {
                     Text("Buying Guides")
                         .font(DesignTypography.headline1)
-                        .foregroundColor(DesignColors.primary)
+                        .foregroundColor(DesignColors.textPrimary)
 
                     Spacer()
 
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gear")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.tertiary)
+                            .foregroundColor(DesignColors.iconDefault)
                     }
                 }
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.top, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(DesignColors.secondaryBackground)
-                .borderBottom(DesignColors.divider)
+                .background(DesignColors.surfaceElevated)
+                .borderBottom(DesignColors.ruleHairline)
                 .padding(.top, 48)
 
                 if isLoading {
@@ -120,7 +120,7 @@ struct GuidesView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(DesignColors.background)
+            .background(DesignColors.surfaceBackground)
             .ignoresSafeArea()
             .sheet(isPresented: $showSearchModal) {
                 GuideSearchModalView(
@@ -474,7 +474,7 @@ struct GuideDetailScreenView: View {
                 }
                 .padding(.vertical, DesignSpacing.lg)
             }
-            .background(DesignColors.background)
+            .background(DesignColors.surfaceBackground)
         }
         .background(DesignColors.background)
     }
@@ -618,7 +618,7 @@ struct GuideSearchModalView: View {
                     Spacer()
                 }
                 .padding(DesignSpacing.lg)
-                .background(DesignColors.background)
+                .background(DesignColors.surfaceBackground)
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .glassEffect()

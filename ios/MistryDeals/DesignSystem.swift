@@ -8,38 +8,85 @@ struct DesignColors {
         return isDarkOverride
     }
 
-    // Adaptive backgrounds
-    static var background: Color {
+    // Surface/Background
+    static var surfaceBackground: Color {
         if isDarkMode() {
-            return Color(red: 0.059, green: 0.059, blue: 0.059)  // #0F0F0F
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
         } else {
-            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
         }
+    }
+
+    // Surface/Elevated
+    static var surfaceElevated: Color {
+        if isDarkMode() {
+            return Color(red: 0.176, green: 0.169, blue: 0.165)  // #2D2B2B
+        } else {
+            return Color(red: 0.973, green: 0.957, blue: 0.957)  // #F8F4F4
+        }
+    }
+
+    // Surface/Thumb
+    static var surfaceThumb: Color {
+        if isDarkMode() {
+            return Color(red: 0.267, green: 0.255, blue: 0.255)  // #444141
+        } else {
+            return Color(red: 0.918, green: 0.906, blue: 0.906)  // #EAE7E7
+        }
+    }
+
+    // Text/Primary
+    static var textPrimary: Color {
+        if isDarkMode() {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
+        } else {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        }
+    }
+
+    // Text/Secondary
+    static var textSecondary: Color {
+        if isDarkMode() {
+            return Color(red: 0.608, green: 0.591, blue: 0.591)  // #9B9797
+        } else {
+            return Color(red: 0.490, green: 0.475, blue: 0.475)  // #7D7979
+        }
+    }
+
+    // Rule/Hairline
+    static var ruleHairline: Color {
+        if isDarkMode() {
+            return Color(red: 0.267, green: 0.255, blue: 0.255)  // #444141
+        } else {
+            return Color(red: 0.843, green: 0.827, blue: 0.827)  // #D7D3D3
+        }
+    }
+
+    // Rule/Strong
+    static var ruleStrong: Color {
+        if isDarkMode() {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
+        } else {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        }
+    }
+
+    // Adaptive backgrounds (legacy)
+    static var background: Color {
+        surfaceBackground
     }
 
     static var secondaryBackground: Color {
-        if isDarkMode() {
-            return Color(red: 0.102, green: 0.102, blue: 0.102)  // #1A1A1A
-        } else {
-            return Color(red: 0.973, green: 0.969, blue: 0.965)  // #F8F7F6
-        }
+        surfaceElevated
     }
 
     static var tertiaryBackground: Color {
-        if isDarkMode() {
-            return Color(red: 0.165, green: 0.165, blue: 0.165)  // #2A2A2A
-        } else {
-            return Color(red: 0.898, green: 0.888, blue: 0.882)  // #E5E3E1
-        }
+        surfaceThumb
     }
 
-    // Adaptive text colors
+    // Adaptive text colors (legacy)
     static var primary: Color {
-        if isDarkMode() {
-            return Color(red: 0.961, green: 0.953, blue: 0.945)  // #F5F3F1
-        } else {
-            return Color(red: 0.102, green: 0.102, blue: 0.102)  // #1A1A1A
-        }
+        textPrimary
     }
 
     static var secondary: Color {
@@ -52,9 +99,9 @@ struct DesignColors {
 
     static var tertiary: Color {
         if isDarkMode() {
-            return Color(red: 0.961, green: 0.953, blue: 0.945).opacity(0.5)  // #F5F3F1
+            return Color(red: 0.729, green: 0.714, blue: 0.714)  // #BAB6B6
         } else {
-            return Color(red: 0.102, green: 0.102, blue: 0.102).opacity(0.5)  // #1A1A1A
+            return Color(red: 0.376, green: 0.365, blue: 0.365)  // #605D5D
         }
     }
 
@@ -89,18 +136,14 @@ struct DesignColors {
     // Borders and dividers
     static var border: Color {
         if isDarkMode() {
-            return Color(red: 0.165, green: 0.165, blue: 0.165).opacity(0.6)  // #2A2A2A
+            return Color(red: 0.267, green: 0.255, blue: 0.255).opacity(0.6)  // #444141
         } else {
-            return Color(red: 0.898, green: 0.888, blue: 0.882).opacity(0.8)  // #E5E3E1
+            return Color(red: 0.843, green: 0.827, blue: 0.827).opacity(0.8)  // #D7D3D3
         }
     }
 
     static var divider: Color {
-        if isDarkMode() {
-            return Color(red: 0.165, green: 0.165, blue: 0.165).opacity(0.4)  // #2A2A2A
-        } else {
-            return Color(red: 0.898, green: 0.888, blue: 0.882).opacity(0.5)  // #E5E3E1
-        }
+        ruleHairline
     }
 
     // Semantic colors respecting isDarkModeOverride

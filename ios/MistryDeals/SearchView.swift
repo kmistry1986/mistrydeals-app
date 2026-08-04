@@ -38,7 +38,7 @@ struct SearchView: View {
             ZStack {
                 Text("Search")
                     .font(DesignTypography.headline1)
-                    .foregroundColor(DesignColors.primary)
+                    .foregroundColor(DesignColors.textPrimary)
 
                 HStack {
                     Spacer()
@@ -194,7 +194,7 @@ struct SearchView: View {
                         HStack {
                             TextField("Search products...", text: $searchText)
                                 .textFieldStyle(.plain)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
                                 .submitLabel(.search)
                                 .focused($isSearchFocused)
                                 .onSubmit {
@@ -220,7 +220,7 @@ struct SearchView: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, DesignSpacing.md)
                 .padding(.bottom, 10)
-                .background(DesignColors.secondaryBackground)
+                .background(DesignColors.surfaceElevated)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .ignoresSafeArea(edges: .bottom)

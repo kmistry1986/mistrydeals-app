@@ -23,7 +23,7 @@ struct SettingsView: View {
 
                 Text("Settings")
                     .font(DesignTypography.headline1)
-                    .foregroundColor(DesignColors.primary)
+                    .foregroundColor(DesignColors.textPrimary)
 
                 Spacer()
 
@@ -34,8 +34,8 @@ struct SettingsView: View {
             .padding(.top, DesignSpacing.lg)
             .padding(.bottom, DesignSpacing.lg)
             .frame(maxWidth: .infinity)
-            .background(DesignColors.secondaryBackground)
-            .borderBottom(DesignColors.divider)
+            .background(DesignColors.surfaceElevated)
+            .borderBottom(DesignColors.ruleHairline)
             .padding(.top, 48)
 
             ScrollView {
@@ -46,11 +46,11 @@ struct SettingsView: View {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("Dark Mode")
                                         .font(DesignTypography.headline3)
-                                        .foregroundColor(DesignColors.primary)
+                                        .foregroundColor(DesignColors.textPrimary)
 
                                     Text("Adjust display theme")
                                         .font(DesignTypography.caption1)
-                                        .foregroundColor(DesignColors.tertiary)
+                                        .foregroundColor(DesignColors.textSecondary)
                                 }
 
                                 Spacer()

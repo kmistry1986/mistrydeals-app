@@ -17,22 +17,22 @@ struct FeaturedView: View {
                 HStack {
                     Text("Featured Deals")
                         .font(DesignTypography.headline1)
-                        .foregroundColor(DesignColors.primary)
+                        .foregroundColor(DesignColors.textPrimary)
 
                     Spacer()
 
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gear")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.tertiary)
+                            .foregroundColor(DesignColors.iconDefault)
                     }
                 }
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.top, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(DesignColors.secondaryBackground)
-                .borderBottom(DesignColors.divider)
+                .background(DesignColors.surfaceElevated)
+                .borderBottom(DesignColors.ruleHairline)
                 .padding(.top, 48)
 
                 if isLoading {
@@ -122,7 +122,7 @@ struct FeaturedView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(DesignColors.background)
+            .background(DesignColors.surfaceBackground)
             .ignoresSafeArea()
             .sheet(isPresented: $showSearchModal) {
                 FeaturedSearchModalView(
@@ -229,7 +229,7 @@ struct FeaturedSearchModalView: View {
                     Spacer()
                 }
                 .padding(DesignSpacing.lg)
-                .background(DesignColors.background)
+                .background(DesignColors.surfaceBackground)
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .glassEffect()

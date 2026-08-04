@@ -10,7 +10,7 @@ struct ProductRow: View {
                     // Product image with date below
                     VStack(alignment: .center, spacing: 0) {
                         ZStack {
-                            DesignColors.tertiaryBackground.opacity(0.5)
+                            DesignColors.surfaceThumb.opacity(0.5)
 
                             if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
                                 AsyncImage(url: url) { phase in
@@ -34,7 +34,7 @@ struct ProductRow: View {
                         if let dateString = product.last_price_sync {
                             Text(formatDate(dateString))
                                 .font(.system(size: 8, weight: .regular))
-                                .foregroundColor(DesignColors.tertiary)
+                                .foregroundColor(DesignColors.textSecondary)
                                 .lineLimit(1)
                                 .padding(.top, 6)
                         }
@@ -45,7 +45,7 @@ struct ProductRow: View {
                         Text(product.truncatedTitle.trimmingCharacters(in: .whitespaces))
                             .font(DesignTypography.bodySmall)
                             .fontWeight(.semibold)
-                            .foregroundColor(DesignColors.primary)
+                            .foregroundColor(DesignColors.textPrimary)
                             .lineLimit(2)
                             .truncationMode(.tail)
                             .multilineTextAlignment(.leading)
@@ -130,9 +130,7 @@ struct ProductRow: View {
     }
 
     private func formatDate(_ dateString: String) -> String {
-        // Extract just the date part (YYYY-MM-DD) from ISO8601 string
         let datePart = String(dateString.prefix(10))
-
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd"
         inputFormatter.timeZone = TimeZone(identifier: "America/New_York")
