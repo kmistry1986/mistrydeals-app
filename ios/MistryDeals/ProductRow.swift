@@ -10,7 +10,7 @@ struct ProductRow: View {
                     // Product image with date below
                     VStack(alignment: .center, spacing: 0) {
                         ZStack {
-                            DesignColors.surfaceThumb.opacity(0.5)
+                            DesignColors.surfaceThumb
 
                             if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
                                 AsyncImage(url: url) { phase in

@@ -101,17 +101,18 @@ struct ContentView: View {
                                 let itemWidth = geometry.size.width / 3
                                 let offset = CGFloat(tabIndex) * itemWidth
 
-                                // Pill background
+                                // Pill background with border
                                 Capsule()
-                                    .fill(DesignColors.navPillBackground)
-                                    .stroke(DesignColors.navPillBorder, lineWidth: 1)
+                                    .fill(DesignColors.tabBarBackground)
+                                    .stroke(DesignColors.ruleStrong, lineWidth: 2)
 
                                 // Active tab indicator
                                 Capsule()
-                                    .fill(DesignColors.priceValue)
+                                    .fill(DesignColors.tabBarActiveFill)
                                     .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                     .frame(maxWidth: itemWidth)
                                     .offset(x: offset)
+                                    .padding(2)
 
                                 HStack(spacing: 0) {
                                     Button(action: {
@@ -124,7 +125,7 @@ struct ContentView: View {
                                         Text("Featured")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .featured ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .featured ? DesignColors.navPillActiveText : DesignColors.navPillInactiveText)
+                                            .foregroundColor(selectedTab == .featured ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -139,7 +140,7 @@ struct ContentView: View {
                                         Text("Prime")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .prime ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .prime ? DesignColors.navPillActiveText : DesignColors.navPillInactiveText)
+                                            .foregroundColor(selectedTab == .prime ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -154,7 +155,7 @@ struct ContentView: View {
                                         Text("Guides")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .guides ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .guides ? DesignColors.navPillActiveText : DesignColors.navPillInactiveText)
+                                            .foregroundColor(selectedTab == .guides ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -162,7 +163,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 40)
-                        .background(DesignColors.navPillBackground)
+                        .background(DesignColors.tabBarBackground)
                         .clipShape(Capsule())
 
                         // Floating search button
@@ -170,11 +171,13 @@ struct ContentView: View {
                             Button(action: { withAnimation(.easeInOut(duration: 0.4)) { isSearchActive = true } }) {
                                 Image(systemName: "magnifyingglass")
                                     .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(DesignColors.searchButtonIcon)
+                                    .foregroundColor(
+                                        DesignColors.isDarkMode() ? Color(red: 0.125, green: 0.118, blue: 0.114) : Color(red: 1.0, green: 1.0, blue: 1.0)
+                                    )
                                     .frame(width: 38, height: 38)
                                     .background(
                                         Circle()
-                                            .fill(DesignColors.searchButtonBackground)
+                                            .fill(DesignColors.actionSearchFill)
                                     )
                             }
                         }

@@ -31,8 +31,8 @@ struct PrimeView: View {
                 .padding(.top, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(DesignColors.surfaceElevated)
-                .borderBottom(DesignColors.ruleHairline)
+                .background(DesignColors.surfaceBackground)
+                .borderBottom(DesignColors.ruleStrong, width: 2)
                 .padding(.top, 48)
 
                 if isLoading {
@@ -107,7 +107,7 @@ struct PrimeView: View {
                             LazyVStack(spacing: 0, pinnedViews: []) {
                                 ForEach(filteredProducts) { product in
                                     ProductRow(product: product)
-                                        .borderBottom(DesignColors.divider)
+                                        .borderBottom(DesignColors.ruleHairline)
                                 }
                             }
                             .frame(maxWidth: .infinity)

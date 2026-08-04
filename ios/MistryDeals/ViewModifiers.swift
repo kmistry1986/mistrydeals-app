@@ -37,18 +37,25 @@ struct BlurView: UIViewRepresentable {
 // MARK: - Border Bottom Modifier
 struct BorderBottomModifier: ViewModifier {
     let color: Color
-    
+    let height: CGFloat
+
+    init(color: Color, height: CGFloat = 1) {
+        self.color = color
+        self.height = height
+    }
+
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
             content
-            Divider()
-                .background(color)
+            Rectangle()
+                .fill(color)
+                .frame(height: height)
         }
     }
 }
 
 extension View {
-    func borderBottom(_ color: Color) -> some View {
-        modifier(BorderBottomModifier(color: color))
+    func borderBottom(_ color: Color, width: CGFloat = 1) -> some View {
+        modifier(BorderBottomModifier(color: color, height: width))
     }
 }

@@ -33,8 +33,8 @@ struct GuidesView: View {
                 .padding(.top, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(DesignColors.surfaceElevated)
-                .borderBottom(DesignColors.ruleHairline)
+                .background(DesignColors.surfaceBackground)
+                .borderBottom(DesignColors.ruleStrong, width: 2)
                 .padding(.top, 48)
 
                 if isLoading {
