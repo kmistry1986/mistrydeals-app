@@ -101,8 +101,14 @@ struct ContentView: View {
                                 let itemWidth = geometry.size.width / 3
                                 let offset = CGFloat(tabIndex) * itemWidth
 
+                                // Pill background
                                 Capsule()
-                                    .fill(DesignColors.tabBarActiveFill)
+                                    .fill(Color.white)
+                                    .stroke(Color.black, lineWidth: 1)
+
+                                // Active tab indicator
+                                Capsule()
+                                    .fill(DesignColors.priceValue)
                                     .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                     .frame(maxWidth: itemWidth)
                                     .offset(x: offset)
@@ -118,7 +124,7 @@ struct ContentView: View {
                                         Text("Featured")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .featured ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .featured ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
+                                            .foregroundColor(selectedTab == .featured ? .white : .black)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -133,7 +139,7 @@ struct ContentView: View {
                                         Text("Prime")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .prime ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .prime ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
+                                            .foregroundColor(selectedTab == .prime ? .white : .black)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -148,7 +154,7 @@ struct ContentView: View {
                                         Text("Guides")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .guides ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .guides ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
+                                            .foregroundColor(selectedTab == .guides ? .white : .black)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -156,7 +162,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 40)
-                        .background(DesignColors.tabBarBackground)
+                        .background(Color.white)
                         .clipShape(Capsule())
 
                         // Floating search button
@@ -164,11 +170,11 @@ struct ContentView: View {
                             Button(action: { withAnimation(.easeInOut(duration: 0.4)) { isSearchActive = true } }) {
                                 Image(systemName: "magnifyingglass")
                                     .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(DesignColors.tabBarActiveLabel)
+                                    .foregroundColor(.white)
                                     .frame(width: 38, height: 38)
                                     .background(
                                         Circle()
-                                            .fill(DesignColors.tabBarActiveFill)
+                                            .fill(Color(red: 0.125, green: 0.118, blue: 0.114))
                                     )
                             }
                         }

@@ -115,7 +115,7 @@ struct ProductRow: View {
                 ShareLink(item: product.amazonURL ?? URL(string: "https://amazon.com")!) {
                     Image(systemName: "square.and.arrow.up")
                         .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(DesignColors.accent)
+                        .foregroundColor(DesignColors.iconRating)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding(.bottom, DesignSpacing.md)
