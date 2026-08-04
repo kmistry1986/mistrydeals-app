@@ -122,7 +122,7 @@ struct ProductRow: View {
                 .padding(.trailing, DesignSpacing.md)
             }
             .frame(minHeight: 88)
-            .background(Color(red: 1.0, green: 1.0, blue: 1.0))
+            .background(DesignColors.surfaceBackground)
             .cornerRadius(DesignRadius.md)
             .padding(.horizontal, DesignSpacing.xs)
             .padding(.vertical, 3)
