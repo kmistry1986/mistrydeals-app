@@ -397,8 +397,9 @@ struct GuideDetailScreenView: View {
                                         }
                                     }
                                     .padding(DesignSpacing.md)
-                                    .background(DesignColors.surfaceThumb)
+                                    .background(DesignColors.surfaceElevated)
                                     .cornerRadius(DesignRadius.md)
+                                    .overlay(RoundedRectangle(cornerRadius: DesignRadius.md).stroke(DesignColors.ruleHairline, lineWidth: 1))
                                 }
                             }
                             .padding(.horizontal, DesignSpacing.lg)
@@ -434,7 +435,8 @@ struct GuideDetailScreenView: View {
                             VStack(alignment: .leading, spacing: DesignSpacing.md) {
                                 ForEach(howto, id: \.self) { item in
                                     HStack(alignment: .top, spacing: DesignSpacing.md) {
-                                        Text("•")
+                                        Text("▪")
+                                            .font(DesignTypography.bodyMedium)
                                             .foregroundColor(DesignColors.tabBarActiveFill)
                                         Text(item)
                                             .font(DesignTypography.bodyMedium)
@@ -465,8 +467,9 @@ struct GuideDetailScreenView: View {
                                             .foregroundColor(DesignColors.secondary)
                                     }
                                     .padding(DesignSpacing.md)
-                                    .background(DesignColors.surfaceThumb)
+                                    .background(DesignColors.surfaceElevated)
                                     .cornerRadius(DesignRadius.md)
+                                    .overlay(RoundedRectangle(cornerRadius: DesignRadius.md).stroke(DesignColors.ruleHairline, lineWidth: 1))
                                 }
                             }
                         }
@@ -547,8 +550,9 @@ struct GuideCard: View {
             Spacer()
         }
         .padding(DesignSpacing.md)
-        .glassEffect()
+        .background(DesignColors.surfaceBackground)
         .cornerRadius(DesignRadius.lg)
+        .overlay(RoundedRectangle(cornerRadius: DesignRadius.lg).stroke(DesignColors.ruleHairline, lineWidth: 1))
         .opacity(isTapped ? 0.5 : 1.0)
     }
 }
