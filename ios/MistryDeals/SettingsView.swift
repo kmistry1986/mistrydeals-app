@@ -18,7 +18,9 @@ struct ColoredToggleStyle: ToggleStyle {
                 )
                 .overlay(
                     Circle()
-                        .fill(configuration.isOn ? Color(red: 0.929, green: 0.188, blue: 0.075) : Color.white)
+                        .fill(configuration.isOn ?
+                            (isDarkModeOverride ? Color.white : Color(red: 0.929, green: 0.188, blue: 0.075)) :
+                            Color.white)
                         .frame(width: 26, height: 26)
                         .offset(x: configuration.isOn ? 10 : -10)
                 )
