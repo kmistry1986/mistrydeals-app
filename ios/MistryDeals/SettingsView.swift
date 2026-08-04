@@ -5,6 +5,7 @@ struct SettingsView: View {
     @AppStorage("isDarkModeOverride") private var isDarkModeOverride: Bool = true
     @State private var showFeedbackForm = false
     @Environment(\.dismiss) var dismiss
+    @AppStorage("isDarkModeOverride") private var isDarkModeOverrideWatch = false
 
     var appVersion: String {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
@@ -13,29 +14,24 @@ struct SettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Button(action: { dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(Color("AccentColor"))
-                }
-
-                Spacer()
-
                 Text("Settings")
                     .font(DesignTypography.headline1)
                     .foregroundColor(DesignColors.textPrimary)
 
                 Spacer()
 
-                Color.clear
-                    .frame(width: 40)
+                Button(action: { dismiss() }) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(DesignColors.iconDefault)
+                }
             }
             .padding(.horizontal, DesignSpacing.lg)
             .padding(.top, DesignSpacing.lg)
             .padding(.bottom, DesignSpacing.lg)
             .frame(maxWidth: .infinity)
-            .background(DesignColors.surfaceElevated)
-            .borderBottom(DesignColors.ruleHairline)
+            .background(DesignColors.surfaceBackground)
+            .borderBottom(DesignColors.ruleStrong, width: 2)
             .padding(.top, 48)
 
             ScrollView {
@@ -61,8 +57,8 @@ struct SettingsView: View {
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)
                         .frame(maxWidth: .infinity)
-                        .background(DesignColors.secondaryBackground)
-                        .borderBottom(DesignColors.divider)
+                        .background(DesignColors.surfaceBackground)
+                        .borderBottom(DesignColors.ruleHairline)
                     }
 
                     // Share Feedback Section
@@ -72,25 +68,25 @@ struct SettingsView: View {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("Share Feedback")
                                         .font(DesignTypography.headline3)
-                                        .foregroundColor(DesignColors.primary)
+                                        .foregroundColor(DesignColors.textPrimary)
 
                                     Text("Send us your feedback")
                                         .font(DesignTypography.caption1)
-                                        .foregroundColor(DesignColors.tertiary)
+                                        .foregroundColor(DesignColors.iconDefault)
                                 }
 
                                 Spacer()
 
                                 Image(systemName: "chevron.right")
                                     .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(DesignColors.tertiary)
+                                    .foregroundColor(DesignColors.iconDefault)
                             }
                             .padding(.horizontal, DesignSpacing.lg)
                             .padding(.vertical, DesignSpacing.lg)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .background(DesignColors.secondaryBackground)
-                        .borderBottom(DesignColors.divider)
+                        .background(DesignColors.surfaceBackground)
+                        .borderBottom(DesignColors.ruleHairline)
                     }
 
                     // App Version Section
@@ -99,20 +95,20 @@ struct SettingsView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Version")
                                     .font(DesignTypography.headline3)
-                                    .foregroundColor(DesignColors.primary)
+                                    .foregroundColor(DesignColors.textPrimary)
                             }
 
                             Spacer()
 
                             Text("v\(appVersion)")
                                 .font(DesignTypography.caption1)
-                                .foregroundColor(DesignColors.tertiary)
+                                .foregroundColor(DesignColors.iconDefault)
                         }
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)
                         .frame(maxWidth: .infinity)
-                        .background(DesignColors.secondaryBackground)
-                        .borderBottom(DesignColors.divider)
+                        .background(DesignColors.surfaceBackground)
+                        .borderBottom(DesignColors.ruleHairline)
                     }
 
                     Spacer()
@@ -120,7 +116,7 @@ struct SettingsView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
+        .background(DesignColors.surfaceBackground)
         .ignoresSafeArea()
         .ignoresSafeArea(edges: .top)
         .sheet(isPresented: $showFeedbackForm) {
@@ -145,7 +141,7 @@ struct FeedbackFormView: View {
                 HStack {
                     Text("Send Feedback")
                         .font(DesignTypography.headline1)
-                        .foregroundColor(DesignColors.primary)
+                        .foregroundColor(DesignColors.textPrimary)
 
                     Spacer()
 
@@ -158,8 +154,8 @@ struct FeedbackFormView: View {
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.vertical, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(DesignColors.secondaryBackground)
-                .borderBottom(DesignColors.divider)
+                .background(DesignColors.surfaceBackground)
+                .borderBottom(DesignColors.ruleHairline)
 
                 ScrollView {
                     VStack(spacing: DesignSpacing.lg) {
@@ -167,13 +163,13 @@ struct FeedbackFormView: View {
                             Text("Email")
                                 .font(DesignTypography.caption1)
                                 .fontWeight(.semibold)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
 
                             TextField("your@email.com", text: $email)
                                 .textFieldStyle(.plain)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
                                 .padding(DesignSpacing.md)
-                                .background(DesignColors.tertiaryBackground)
+                                .background(DesignColors.surfaceThumb)
                                 .cornerRadius(DesignRadius.sm)
                         }
 
@@ -181,13 +177,13 @@ struct FeedbackFormView: View {
                             Text("Feedback")
                                 .font(DesignTypography.caption1)
                                 .fontWeight(.semibold)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
 
                             TextEditor(text: $feedbackText)
                                 .textFieldStyle(.plain)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
                                 .padding(DesignSpacing.md)
-                                .background(DesignColors.tertiaryBackground)
+                                .background(DesignColors.surfaceThumb)
                                 .cornerRadius(DesignRadius.sm)
                                 .frame(height: 150)
                         }
