@@ -10,6 +10,7 @@ struct FeaturedView: View {
     @State private var searchText = ""
     @State private var showSearchBox = false
     @State private var showSettings = false
+    @AppStorage("isDarkModeOverride") private var isDarkModeOverride = false
 
     var body: some View {
         NavigationStack {

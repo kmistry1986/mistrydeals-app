@@ -12,6 +12,7 @@ struct GuidesView: View {
     @State private var showSearchBox = false
     @State private var navigationPath: [Guide] = []
     @State private var showSettings = false
+    @AppStorage("isDarkModeOverride") private var isDarkModeOverride = false
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
