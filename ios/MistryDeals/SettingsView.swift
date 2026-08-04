@@ -1,5 +1,28 @@
 import SwiftUI
 
+// Custom toggle style with colored knob
+struct ColoredToggleStyle: ToggleStyle {
+    @AppStorage("isDarkModeOverride") private var isDarkModeOverride = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            Button(action: { configuration.isOn.toggle() }) {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(configuration.isOn ?
+                        (isDarkModeOverride ? Color(red: 1.0, green: 0.337, blue: 0.235) : Color(red: 0.929, green: 0.188, blue: 0.075)) :
+                        Color.gray.opacity(0.3))
+                    .frame(width: 50, height: 30)
+                    .overlay(
+                        Circle()
+                            .fill(configuration.isOn ? Color(red: 0.929, green: 0.188, blue: 0.075) : Color.white)
+                            .frame(width: 26, height: 26)
+                            .offset(x: configuration.isOn ? 10 : -10)
+                    )
+            }
+        }
+    }
+}
+
 struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("isDarkModeOverride") private var isDarkModeOverride: Bool = true
@@ -54,7 +77,7 @@ struct SettingsView: View {
                                 Spacer()
 
                                 Toggle("", isOn: $isDarkModeOverride)
-                                    .tint(isDarkModeOverride ? DesignColors.tabBarActiveFill : Color(red: 0.929, green: 0.188, blue: 0.075))
+                                    .toggleStyle(ColoredToggleStyle())
                             }
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)
