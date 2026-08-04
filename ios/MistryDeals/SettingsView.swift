@@ -54,11 +54,7 @@ struct SettingsView: View {
                                 Spacer()
 
                                 Toggle("", isOn: $isDarkModeOverride)
-                                    .tint(DesignColors.tabBarActiveFill)
-                                    .padding(DesignSpacing.sm)
-                                    .background(DesignColors.surfaceThumb)
-                                    .cornerRadius(DesignRadius.sm)
-                                    .overlay(RoundedRectangle(cornerRadius: DesignRadius.sm).stroke(DesignColors.ruleHairline, lineWidth: 1))
+                                    .tint(isDarkModeOverride ? DesignColors.tabBarActiveFill : Color(red: 0.929, green: 0.188, blue: 0.075))
                             }
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)
@@ -125,6 +121,7 @@ struct SettingsView: View {
         .background(DesignColors.surfaceBackground)
         .ignoresSafeArea()
         .ignoresSafeArea(edges: .top)
+        .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showFeedbackForm) {
             FeedbackFormView(isPresented: $showFeedbackForm)
         }
