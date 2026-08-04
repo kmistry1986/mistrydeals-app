@@ -17,6 +17,7 @@ struct SearchView: View {
     @Namespace private var filterAnimation
     @AppStorage("isDarkModeOverride") private var isDarkModeOverride = false
     @State private var keyboardHeight: CGFloat = 0
+    @State private var keyboardObservers: [NSObjectProtocol] = []
 
     enum SearchFilter {
         case all
@@ -203,7 +204,7 @@ struct SearchView: View {
                 UIApplication.shared.sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
             }
 
-            NotificationCenter.default.addObserver(
+            let showObserver = NotificationCenter.default.addObserver(
                 forName: UIResponder.keyboardWillShowNotification,
                 object: nil,
                 queue: .main
@@ -215,7 +216,7 @@ struct SearchView: View {
                 }
             }
 
-            NotificationCenter.default.addObserver(
+            let hideObserver = NotificationCenter.default.addObserver(
                 forName: UIResponder.keyboardWillHideNotification,
                 object: nil,
                 queue: .main
@@ -224,10 +225,13 @@ struct SearchView: View {
                     keyboardHeight = 0
                 }
             }
+
+            keyboardObservers = [showObserver, hideObserver]
         }
         .onDisappear {
             isSearchFocused = false
-            NotificationCenter.default.removeObserver(self)
+            keyboardObservers.forEach { NotificationCenter.default.removeObserver($0) }
+            keyboardObservers.removeAll()
         }
     }
 
