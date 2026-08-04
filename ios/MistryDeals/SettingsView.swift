@@ -34,7 +34,7 @@ struct SettingsView: View {
             .padding(.top, DesignSpacing.lg)
             .padding(.bottom, DesignSpacing.lg)
             .frame(maxWidth: .infinity)
-            .background(Color.black)
+            .background(DesignColors.secondaryBackground)
             .borderBottom(DesignColors.divider)
             .padding(.top, 48)
 
@@ -61,7 +61,7 @@ struct SettingsView: View {
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)
                         .frame(maxWidth: .infinity)
-                        .background(Color.black)
+                        .background(DesignColors.secondaryBackground)
                         .borderBottom(DesignColors.divider)
                     }
 
@@ -89,7 +89,7 @@ struct SettingsView: View {
                             .padding(.vertical, DesignSpacing.lg)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .background(Color.black)
+                        .background(DesignColors.secondaryBackground)
                         .borderBottom(DesignColors.divider)
                     }
 
@@ -111,7 +111,7 @@ struct SettingsView: View {
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)
                         .frame(maxWidth: .infinity)
-                        .background(Color.black)
+                        .background(DesignColors.secondaryBackground)
                         .borderBottom(DesignColors.divider)
                     }
 
@@ -138,7 +138,7 @@ struct FeedbackFormView: View {
 
     var body: some View {
         ZStack {
-            Color.black
+            DesignColors.background
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
@@ -158,7 +158,7 @@ struct FeedbackFormView: View {
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.vertical, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(Color.black)
+                .background(DesignColors.secondaryBackground)
                 .borderBottom(DesignColors.divider)
 
                 ScrollView {

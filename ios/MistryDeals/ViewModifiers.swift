@@ -8,7 +8,7 @@ struct GlassView: ViewModifier {
             BlurView(style: .systemThickMaterialDark)
             
             // Overlay with subtle color
-            Color.white.opacity(0.05)
+            DesignColors.tertiaryBackground.opacity(0.5)
             
             content
         }

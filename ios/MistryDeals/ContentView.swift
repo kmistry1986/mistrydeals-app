@@ -59,6 +59,9 @@ struct ContentView: View {
             .ignoresSafeArea()
 
             ZStack {
+                DesignColors.background
+                    .ignoresSafeArea()
+
                 if isSearchActive {
                     SearchView(client: supabaseClient, isSearchActive: $isSearchActive, searchAnimation: searchAnimation)
                         .transition(.opacity)
@@ -99,16 +102,7 @@ struct ContentView: View {
                                 let offset = CGFloat(tabIndex) * itemWidth
 
                                 Capsule()
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                Color("AccentColor").opacity(0.6),
-                                                Color("AccentColor").opacity(0.4)
-                                            ]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
+                                    .fill(Color.white)
                                     .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                     .frame(maxWidth: itemWidth)
                                     .offset(x: offset)
@@ -124,7 +118,7 @@ struct ContentView: View {
                                         Text("Featured")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .featured ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .featured ? .white : DesignColors.tertiary)
+                                            .foregroundColor(selectedTab == .featured ? .black : .white)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -139,7 +133,7 @@ struct ContentView: View {
                                         Text("Prime")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .prime ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .prime ? .white : DesignColors.tertiary)
+                                            .foregroundColor(selectedTab == .prime ? .black : .white)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -154,7 +148,7 @@ struct ContentView: View {
                                         Text("Guides")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .guides ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .guides ? .white : DesignColors.tertiary)
+                                            .foregroundColor(selectedTab == .guides ? .black : .white)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -162,7 +156,16 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 40)
-                        .background(Color.white.opacity(0.1))
+                        .background(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color("AccentColor"),
+                                    Color("AccentColor").opacity(0.8)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
                         .background(BlurView(style: .systemThinMaterialDark))
                         .clipShape(Capsule())
 

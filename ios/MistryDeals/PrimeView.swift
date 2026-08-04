@@ -14,26 +14,24 @@ struct PrimeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                ZStack {
+                HStack {
                     Text("Prime Deals")
                         .font(DesignTypography.headline1)
                         .foregroundColor(DesignColors.primary)
 
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: SettingsView()) {
-                            Image(systemName: "gear")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(DesignColors.accent)
-                        }
-                        .padding(.horizontal, DesignSpacing.lg)
+                    Spacer()
+
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gear")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(DesignColors.tertiary)
                     }
                 }
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.top, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(Color.black)
+                .background(DesignColors.secondaryBackground)
                 .borderBottom(DesignColors.divider)
                 .padding(.top, 48)
 
@@ -124,7 +122,7 @@ struct PrimeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black)
+            .background(DesignColors.background)
             .ignoresSafeArea()
             .sheet(isPresented: $showSearchModal) {
                 PrimeSearchModalView(
@@ -172,7 +170,7 @@ struct PrimeSearchModalView: View {
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.6)
+            DesignColors.background.opacity(0.6)
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {

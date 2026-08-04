@@ -58,7 +58,7 @@ struct SearchView: View {
             .padding(.top, DesignSpacing.lg)
             .padding(.bottom, DesignSpacing.lg)
             .frame(maxWidth: .infinity)
-            .background(Color.black)
+            .background(DesignColors.secondaryBackground)
             .borderBottom(DesignColors.divider)
             .padding(.top, 48)
 
@@ -109,7 +109,7 @@ struct SearchView: View {
                 }
             }
             .frame(height: 40)
-            .background(Color.white.opacity(0.1))
+            .background(DesignColors.background.opacity(0.1))
             .background(BlurView(style: .systemThinMaterialDark))
             .clipShape(Capsule())
             .padding(.horizontal, DesignSpacing.lg)
@@ -162,7 +162,7 @@ struct SearchView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .background(Color.black)
+        .background(DesignColors.secondaryBackground)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(edges: .top)
         .overlay(alignment: .bottom) {
@@ -220,7 +220,7 @@ struct SearchView: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, DesignSpacing.md)
                 .padding(.bottom, 10)
-                .background(Color.black)
+                .background(DesignColors.secondaryBackground)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .ignoresSafeArea(edges: .bottom)

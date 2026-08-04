@@ -16,26 +16,24 @@ struct GuidesView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             VStack(spacing: 0) {
-                ZStack {
+                HStack {
                     Text("Buying Guides")
                         .font(DesignTypography.headline1)
                         .foregroundColor(DesignColors.primary)
 
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: SettingsView()) {
-                            Image(systemName: "gear")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(DesignColors.accent)
-                        }
-                        .padding(.horizontal, DesignSpacing.lg)
+                    Spacer()
+
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gear")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(DesignColors.tertiary)
                     }
                 }
                 .padding(.horizontal, DesignSpacing.lg)
                 .padding(.top, DesignSpacing.lg)
                 .padding(.bottom, DesignSpacing.lg)
                 .frame(maxWidth: .infinity)
-                .background(Color.black)
+                .background(DesignColors.secondaryBackground)
                 .borderBottom(DesignColors.divider)
                 .padding(.top, 48)
 
@@ -561,7 +559,7 @@ struct GuideSearchModalView: View {
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.6)
+            DesignColors.secondaryBackground.opacity(0.6)
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {

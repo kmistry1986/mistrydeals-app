@@ -10,7 +10,7 @@ struct ProductRow: View {
                     // Product image with date below
                     VStack(alignment: .center, spacing: 0) {
                         ZStack {
-                            Color.white.opacity(0.05)
+                            DesignColors.tertiaryBackground.opacity(0.5)
 
                             if let imageUrl = product.image_url, let url = URL(string: imageUrl) {
                                 AsyncImage(url: url) { phase in
@@ -67,7 +67,7 @@ struct ProductRow: View {
                                 if product.discountPercent > 0 {
                                     Text("\(product.discountPercent)% OFF")
                                         .font(.system(size: 9, weight: .bold))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.white)
                                         .padding(.horizontal, 5)
                                         .padding(.vertical, 2)
                                         .background(Color("DiscountBadgeColor"))
@@ -122,7 +122,7 @@ struct ProductRow: View {
                 .padding(.trailing, DesignSpacing.md)
             }
             .frame(minHeight: 88)
-            .background(DesignColors.tertiaryBackground.opacity(0.5))
+            .background(Color(red: 1.0, green: 1.0, blue: 1.0))
             .cornerRadius(DesignRadius.md)
             .padding(.horizontal, DesignSpacing.xs)
             .padding(.vertical, 3)
