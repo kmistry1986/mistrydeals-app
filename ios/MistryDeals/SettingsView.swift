@@ -5,21 +5,20 @@ struct ColoredToggleStyle: ToggleStyle {
     @AppStorage("isDarkModeOverride") private var isDarkModeOverride = false
 
     func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            Button(action: { configuration.isOn.toggle() }) {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(configuration.isOn ?
-                        (isDarkModeOverride ? Color(red: 1.0, green: 0.337, blue: 0.235) : Color(red: 0.929, green: 0.188, blue: 0.075)) :
-                        Color.gray.opacity(0.3))
-                    .frame(width: 50, height: 30)
-                    .overlay(
-                        Circle()
-                            .fill(configuration.isOn ? Color(red: 0.929, green: 0.188, blue: 0.075) : Color.white)
-                            .frame(width: 26, height: 26)
-                            .offset(x: configuration.isOn ? 10 : -10)
-                    )
-            }
+        Button(action: { configuration.isOn.toggle() }) {
+            RoundedRectangle(cornerRadius: 16)
+                .fill(configuration.isOn ?
+                    (isDarkModeOverride ? Color(red: 1.0, green: 0.337, blue: 0.235) : Color(red: 0.929, green: 0.188, blue: 0.075)) :
+                    Color.gray.opacity(0.3))
+                .frame(width: 50, height: 30)
+                .overlay(
+                    Circle()
+                        .fill(configuration.isOn ? Color(red: 0.929, green: 0.188, blue: 0.075) : Color.white)
+                        .frame(width: 26, height: 26)
+                        .offset(x: configuration.isOn ? 10 : -10)
+                )
         }
+        .buttonStyle(.plain)
     }
 }
 
