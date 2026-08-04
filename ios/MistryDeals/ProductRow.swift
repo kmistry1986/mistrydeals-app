@@ -67,10 +67,10 @@ struct ProductRow: View {
                                 if product.discountPercent > 0 {
                                     Text("\(product.discountPercent)% OFF")
                                         .font(.system(size: 9, weight: .bold))
-                                        .foregroundColor(Color.badgeLabel)
+                                        .foregroundColor(.white)
                                         .padding(.horizontal, 5)
                                         .padding(.vertical, 2)
-                                        .background(Color.badgeBackground)
+                                        .background(Color.black)
                                         .cornerRadius(DesignRadius.sm)
                                 }
                             }
