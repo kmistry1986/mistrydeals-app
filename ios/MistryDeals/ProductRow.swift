@@ -70,7 +70,7 @@ struct ProductRow: View {
                                         .foregroundColor(.white)
                                         .padding(.horizontal, 5)
                                         .padding(.vertical, 2)
-                                        .background(Color.black)
+                                        .background(Color(red: 0.125, green: 0.118, blue: 0.114))
                                         .cornerRadius(DesignRadius.sm)
                                 }
                             }
