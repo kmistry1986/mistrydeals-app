@@ -180,44 +180,53 @@ struct GuideDetailScreenView: View {
         VStack(spacing: 0) {
             HStack {
                 Button(action: { dismiss() }) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "chevron.left")
-                        Text("Guide")
-                    }
-                    .font(DesignTypography.headline2)
-                    .foregroundColor(DesignColors.textPrimary)
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(DesignColors.textPrimary)
                 }
-                Spacer()
+
+                VStack(alignment: .center, spacing: 2) {
+                    Text(guide.guideContent?.title ?? guide.title)
+                        .font(DesignTypography.headline2)
+                        .foregroundColor(DesignColors.textPrimary)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity)
+
+                Button(action: { dismiss() }) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(DesignColors.textPrimary)
+                }
             }
             .padding(.horizontal, DesignSpacing.lg)
             .frame(height: 56)
-            .background(DesignColors.secondaryBackground)
-            .borderBottom(DesignColors.divider)
+            .background(DesignColors.surfaceBackground)
+            .borderBottom(DesignColors.ruleStrong, width: 2)
 
             ScrollView {
                 VStack(alignment: .leading, spacing: DesignSpacing.lg) {
-                    // Guide title and subtitle
-                    VStack(alignment: .center, spacing: DesignSpacing.sm) {
-                        Text(guide.guideContent?.title ?? guide.title)
-                            .font(DesignTypography.displaySmall)
-                            .foregroundColor(DesignColors.textPrimary)
-                            .multilineTextAlignment(.center)
-
-                        if let subtitle = guide.guideContent?.subtitle {
+                    // Subtitle
+                    if let subtitle = guide.guideContent?.subtitle {
+                        VStack(alignment: .center, spacing: DesignSpacing.sm) {
                             Text(subtitle)
                                 .font(DesignTypography.bodyMedium)
                                 .foregroundColor(DesignColors.secondary)
                                 .multilineTextAlignment(.center)
-                        } else if let description = guide.description {
+                        }
+                        .padding(.horizontal, DesignSpacing.lg)
+                        .frame(maxWidth: .infinity)
+                    } else if let description = guide.description {
+                        VStack(alignment: .center, spacing: DesignSpacing.sm) {
                             Text(description)
                                 .font(DesignTypography.bodyMedium)
                                 .foregroundColor(DesignColors.secondary)
                                 .multilineTextAlignment(.center)
-                                .lineLimit(3)
                         }
+                        .padding(.horizontal, DesignSpacing.lg)
+                        .frame(maxWidth: .infinity)
                     }
-                    .padding(.horizontal, DesignSpacing.lg)
-                    .frame(maxWidth: .infinity)
 
                     // Intro paragraphs
                     if let intro = guide.guideContent?.intro {
