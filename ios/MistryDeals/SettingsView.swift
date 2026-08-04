@@ -12,6 +12,11 @@ struct ColoredToggleStyle: ToggleStyle {
                     Color.gray.opacity(0.3))
                 .frame(width: 50, height: 30)
                 .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(isDarkModeOverride ? Color.white.opacity(0.3) : Color.black.opacity(0.2), lineWidth: 1)
+                        .frame(width: 50, height: 30)
+                )
+                .overlay(
                     Circle()
                         .fill(configuration.isOn ? Color(red: 0.929, green: 0.188, blue: 0.075) : Color.white)
                         .frame(width: 26, height: 26)
