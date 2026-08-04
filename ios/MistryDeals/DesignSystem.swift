@@ -104,6 +104,48 @@ struct DesignColors {
     }
 }
 
+// MARK: - Color Extension for Asset Catalog Colors
+extension Color {
+    // Surface Colors
+    static let surfaceBackground = Color("SurfaceBackground")
+    static let surfaceElevated = Color("SurfaceElevated")
+    static let surfaceThumb = Color("SurfaceThumb")
+
+    // Text Colors
+    static let textPrimary = Color("TextPrimary")
+    static let textSecondary = Color("TextSecondary")
+
+    // Rule Colors
+    static let ruleHairline = Color("RuleHairline")
+    static let ruleStrong = Color("RuleStrong")
+
+    // Price Colors
+    static let priceValue = Color("PriceValue")
+    static let priceStruck = Color("PriceStruck")
+
+    // Badge Colors
+    static let badgeBackground = Color("BadgeBackground")
+    static let badgeLabel = Color("BadgeLabel")
+
+    // Cashback Colors
+    static let cashbackBackground = Color("CashbackBackground")
+    static let cashbackLabel = Color("CashbackLabel")
+    static let cashbackBorder = Color("CashbackBorder")
+
+    // Icon Colors
+    static let iconRating = Color("IconRating")
+    static let iconDefault = Color("IconDefault")
+
+    // TabBar Colors
+    static let tabBarBackground = Color("TabBarBackground")
+    static let tabBarLabel = Color("TabBarLabel")
+    static let tabBarActiveFill = Color("TabBarActiveFill")
+    static let tabBarActiveLabel = Color("TabBarActiveLabel")
+
+    // Action Colors
+    static let actionSearchFill = Color("ActionSearchFill")
+}
+
 // MARK: - Typography
 struct DesignTypography {
     // Display

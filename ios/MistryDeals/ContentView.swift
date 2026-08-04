@@ -102,7 +102,7 @@ struct ContentView: View {
                                 let offset = CGFloat(tabIndex) * itemWidth
 
                                 Capsule()
-                                    .fill(Color.white)
+                                    .fill(Color.tabBarActiveFill)
                                     .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                     .frame(maxWidth: itemWidth)
                                     .offset(x: offset)
@@ -118,7 +118,7 @@ struct ContentView: View {
                                         Text("Featured")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .featured ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .featured ? .black : .white)
+                                            .foregroundColor(selectedTab == .featured ? Color.tabBarActiveLabel : Color.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -133,7 +133,7 @@ struct ContentView: View {
                                         Text("Prime")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .prime ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .prime ? .black : .white)
+                                            .foregroundColor(selectedTab == .prime ? Color.tabBarActiveLabel : Color.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -148,7 +148,7 @@ struct ContentView: View {
                                         Text("Guides")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .guides ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .guides ? .black : .white)
+                                            .foregroundColor(selectedTab == .guides ? Color.tabBarActiveLabel : Color.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -156,17 +156,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 40)
-                        .background(
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color("AccentColor"),
-                                    Color("AccentColor").opacity(0.8)
-                                ]),
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .background(BlurView(style: .systemThinMaterialDark))
+                        .background(Color.tabBarBackground)
                         .clipShape(Capsule())
 
                         // Floating search button
@@ -174,20 +164,11 @@ struct ContentView: View {
                             Button(action: { withAnimation(.easeInOut(duration: 0.4)) { isSearchActive = true } }) {
                                 Image(systemName: "magnifyingglass")
                                     .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.tabBarActiveLabel)
                                     .frame(width: 38, height: 38)
                                     .background(
                                         Circle()
-                                            .fill(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                        Color("AccentColor"),
-                                                        Color("AccentColor").opacity(0.8)
-                                                    ]),
-                                                    startPoint: .topLeading,
-                                                    endPoint: .bottomTrailing
-                                                )
-                                            )
+                                            .fill(Color.tabBarActiveFill)
                                     )
                             }
                         }

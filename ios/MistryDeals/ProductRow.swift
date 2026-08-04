@@ -55,22 +55,22 @@ struct ProductRow: View {
                             HStack(spacing: 6) {
                                 Text("$\(product.priceDouble, specifier: "%.2f")")
                                     .font(DesignTypography.price)
-                                    .foregroundColor(Color("PriceColor"))
+                                    .foregroundColor(Color.priceValue)
 
                                 if product.originalPriceDouble > 0 {
                                     Text("$\(product.originalPriceDouble, specifier: "%.2f")")
                                         .font(DesignTypography.caption1)
-                                        .foregroundColor(Color("OriginalPriceColor"))
+                                        .foregroundColor(Color.priceStruck)
                                         .strikethrough()
                                 }
 
                                 if product.discountPercent > 0 {
                                     Text("\(product.discountPercent)% OFF")
                                         .font(.system(size: 9, weight: .bold))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.badgeLabel)
                                         .padding(.horizontal, 5)
                                         .padding(.vertical, 2)
-                                        .background(Color("DiscountBadgeColor"))
+                                        .background(Color.badgeBackground)
                                         .cornerRadius(DesignRadius.sm)
                                 }
                             }
@@ -78,10 +78,10 @@ struct ProductRow: View {
                             if let cashback = product.prime_cashback_percent, cashback > 0 {
                                 Text("+\(cashback)% Cashback with Prime Credit Card")
                                     .font(.system(size: 10, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.cashbackLabel)
                                     .padding(.horizontal, 6)
                                     .padding(.vertical, 3)
-                                    .background(Color("PrimeCashbackColor"))
+                                    .background(Color.cashbackBackground)
                                     .cornerRadius(DesignRadius.sm)
                                     .padding(.top, 4)
                             }
@@ -99,12 +99,12 @@ struct ProductRow: View {
                     VStack(spacing: 2) {
                         Text("★")
                             .font(DesignTypography.caption1)
-                            .foregroundColor(Color("StarRatingColor"))
+                            .foregroundColor(Color.iconRating)
 
                         Text(String(format: "%.1f", product.ratingDouble))
                             .font(DesignTypography.caption1)
                             .fontWeight(.semibold)
-                            .foregroundColor(Color("StarRatingColor"))
+                            .foregroundColor(Color.iconRating)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     .padding(.top, DesignSpacing.md)
@@ -122,7 +122,7 @@ struct ProductRow: View {
                 .padding(.trailing, DesignSpacing.md)
             }
             .frame(minHeight: 88)
-            .background(Color(red: 1.0, green: 1.0, blue: 1.0))
+            .background(Color.surfaceBackground)
             .cornerRadius(DesignRadius.md)
             .padding(.horizontal, DesignSpacing.xs)
             .padding(.vertical, 3)
