@@ -191,6 +191,51 @@ struct DesignColors {
             return Color(red: 1.0, green: 0.769, blue: 0.722)  // #FFC4B8
         }
     }
+
+    // UI component colors
+    static var navPillBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        } else {
+            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
+        }
+    }
+
+    static var navPillBorder: Color {
+        if isDarkMode() {
+            return Color(red: 0.953, green: 0.945, blue: 0.945)  // #F3F2F2
+        } else {
+            return Color(red: 0.0, green: 0.0, blue: 0.0)  // #000000
+        }
+    }
+
+    static var navPillInactiveText: Color {
+        tabBarLabel
+    }
+
+    static var navPillActiveText: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        } else {
+            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
+        }
+    }
+
+    static var searchButtonBackground: Color {
+        if isDarkMode() {
+            return Color(red: 1.0, green: 0.337, blue: 0.235)  // #FF563C
+        } else {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        }
+    }
+
+    static var searchButtonIcon: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        } else {
+            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
+        }
+    }
 }
 
 // MARK: - Color Extension for Asset Catalog Colors

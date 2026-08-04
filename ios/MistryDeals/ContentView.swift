@@ -103,8 +103,8 @@ struct ContentView: View {
 
                                 // Pill background
                                 Capsule()
-                                    .fill(Color.white)
-                                    .stroke(Color.black, lineWidth: 1)
+                                    .fill(DesignColors.navPillBackground)
+                                    .stroke(DesignColors.navPillBorder, lineWidth: 1)
 
                                 // Active tab indicator
                                 Capsule()
@@ -124,7 +124,7 @@ struct ContentView: View {
                                         Text("Featured")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .featured ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .featured ? .white : .black)
+                                            .foregroundColor(selectedTab == .featured ? DesignColors.navPillActiveText : DesignColors.navPillInactiveText)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -139,7 +139,7 @@ struct ContentView: View {
                                         Text("Prime")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .prime ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .prime ? .white : .black)
+                                            .foregroundColor(selectedTab == .prime ? DesignColors.navPillActiveText : DesignColors.navPillInactiveText)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -154,7 +154,7 @@ struct ContentView: View {
                                         Text("Guides")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .guides ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .guides ? .white : .black)
+                                            .foregroundColor(selectedTab == .guides ? DesignColors.navPillActiveText : DesignColors.navPillInactiveText)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -162,7 +162,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 40)
-                        .background(Color.white)
+                        .background(DesignColors.navPillBackground)
                         .clipShape(Capsule())
 
                         // Floating search button
@@ -170,11 +170,11 @@ struct ContentView: View {
                             Button(action: { withAnimation(.easeInOut(duration: 0.4)) { isSearchActive = true } }) {
                                 Image(systemName: "magnifyingglass")
                                     .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(DesignColors.searchButtonIcon)
                                     .frame(width: 38, height: 38)
                                     .background(
                                         Circle()
-                                            .fill(Color(red: 0.125, green: 0.118, blue: 0.114))
+                                            .fill(DesignColors.searchButtonBackground)
                                     )
                             }
                         }
