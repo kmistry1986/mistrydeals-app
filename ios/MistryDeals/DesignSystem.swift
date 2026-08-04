@@ -102,6 +102,95 @@ struct DesignColors {
             return Color(red: 0.898, green: 0.888, blue: 0.882).opacity(0.5)  // #E5E3E1
         }
     }
+
+    // Semantic colors respecting isDarkModeOverride
+    static var priceValue: Color {
+        if isDarkMode() {
+            return Color(red: 1.0, green: 0.337, blue: 0.235)  // #FF563C
+        } else {
+            return Color(red: 0.682, green: 0.094, blue: 0.0)  // #AE1800
+        }
+    }
+
+    static var priceStruck: Color {
+        if isDarkMode() {
+            return Color(red: 0.608, green: 0.591, blue: 0.591)  // #9B9797
+        } else {
+            return Color(red: 0.490, green: 0.475, blue: 0.475)  // #7D7979
+        }
+    }
+
+    static var iconRating: Color {
+        if isDarkMode() {
+            return Color(red: 0.953, green: 0.945, blue: 0.945)  // #F3F2F2
+        } else {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        }
+    }
+
+    static var iconDefault: Color {
+        if isDarkMode() {
+            return Color(red: 0.729, green: 0.714, blue: 0.714)  // #BAB6B6
+        } else {
+            return Color(red: 0.376, green: 0.365, blue: 0.365)  // #605D5D
+        }
+    }
+
+    static var tabBarBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        } else {
+            return Color(red: 0.953, green: 0.945, blue: 0.945)  // #F3F2F2
+        }
+    }
+
+    static var tabBarLabel: Color {
+        if isDarkMode() {
+            return Color(red: 0.729, green: 0.714, blue: 0.714)  // #BAB6B6
+        } else {
+            return Color(red: 0.376, green: 0.365, blue: 0.365)  // #605D5D
+        }
+    }
+
+    static var tabBarActiveFill: Color {
+        if isDarkMode() {
+            return Color(red: 1.0, green: 0.337, blue: 0.235)  // #FF563C
+        } else {
+            return Color(red: 0.929, green: 0.188, blue: 0.075)  // #EC3013
+        }
+    }
+
+    static var tabBarActiveLabel: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        } else {
+            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
+        }
+    }
+
+    static var cashbackBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.486, green: 0.078, blue: 0.020)  // #7C1405
+        } else {
+            return Color(red: 1.0, green: 0.949, blue: 0.937)  // #FFF2EF
+        }
+    }
+
+    static var cashbackLabel: Color {
+        if isDarkMode() {
+            return Color(red: 1.0, green: 0.769, blue: 0.722)  // #FFC4B8
+        } else {
+            return Color(red: 0.682, green: 0.094, blue: 0.0)  // #AE1800
+        }
+    }
+
+    static var cashbackBorder: Color {
+        if isDarkMode() {
+            return Color(red: 0.682, green: 0.094, blue: 0.0)  // #AE1800
+        } else {
+            return Color(red: 1.0, green: 0.769, blue: 0.722)  // #FFC4B8
+        }
+    }
 }
 
 // MARK: - Color Extension for Asset Catalog Colors

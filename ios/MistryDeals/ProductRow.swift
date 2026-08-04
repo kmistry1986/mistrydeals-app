@@ -55,12 +55,12 @@ struct ProductRow: View {
                             HStack(spacing: 6) {
                                 Text("$\(product.priceDouble, specifier: "%.2f")")
                                     .font(DesignTypography.price)
-                                    .foregroundColor(Color.priceValue)
+                                    .foregroundColor(DesignColors.priceValue)
 
                                 if product.originalPriceDouble > 0 {
                                     Text("$\(product.originalPriceDouble, specifier: "%.2f")")
                                         .font(DesignTypography.caption1)
-                                        .foregroundColor(Color.priceStruck)
+                                        .foregroundColor(DesignColors.priceStruck)
                                         .strikethrough()
                                 }
 
@@ -78,10 +78,10 @@ struct ProductRow: View {
                             if let cashback = product.prime_cashback_percent, cashback > 0 {
                                 Text("+\(cashback)% Cashback with Prime Credit Card")
                                     .font(.system(size: 10, weight: .semibold))
-                                    .foregroundColor(Color.cashbackLabel)
+                                    .foregroundColor(DesignColors.cashbackLabel)
                                     .padding(.horizontal, 6)
                                     .padding(.vertical, 3)
-                                    .background(Color.cashbackBackground)
+                                    .background(DesignColors.cashbackBackground)
                                     .cornerRadius(DesignRadius.sm)
                                     .padding(.top, 4)
                             }
@@ -99,12 +99,12 @@ struct ProductRow: View {
                     VStack(spacing: 2) {
                         Text("★")
                             .font(DesignTypography.caption1)
-                            .foregroundColor(Color.iconRating)
+                            .foregroundColor(DesignColors.iconRating)
 
                         Text(String(format: "%.1f", product.ratingDouble))
                             .font(DesignTypography.caption1)
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.iconRating)
+                            .foregroundColor(DesignColors.iconRating)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     .padding(.top, DesignSpacing.md)

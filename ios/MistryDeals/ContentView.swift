@@ -102,7 +102,7 @@ struct ContentView: View {
                                 let offset = CGFloat(tabIndex) * itemWidth
 
                                 Capsule()
-                                    .fill(Color.tabBarActiveFill)
+                                    .fill(DesignColors.tabBarActiveFill)
                                     .matchedGeometryEffect(id: "selectedTabBackground", in: pillAnimation)
                                     .frame(maxWidth: itemWidth)
                                     .offset(x: offset)
@@ -118,7 +118,7 @@ struct ContentView: View {
                                         Text("Featured")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .featured ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .featured ? Color.tabBarActiveLabel : Color.tabBarLabel)
+                                            .foregroundColor(selectedTab == .featured ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -133,7 +133,7 @@ struct ContentView: View {
                                         Text("Prime")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .prime ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .prime ? Color.tabBarActiveLabel : Color.tabBarLabel)
+                                            .foregroundColor(selectedTab == .prime ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -148,7 +148,7 @@ struct ContentView: View {
                                         Text("Guides")
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .guides ? .semibold : .regular)
-                                            .foregroundColor(selectedTab == .guides ? Color.tabBarActiveLabel : Color.tabBarLabel)
+                                            .foregroundColor(selectedTab == .guides ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
                                     }
@@ -156,7 +156,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 40)
-                        .background(Color.tabBarBackground)
+                        .background(DesignColors.tabBarBackground)
                         .clipShape(Capsule())
 
                         // Floating search button
@@ -164,11 +164,11 @@ struct ContentView: View {
                             Button(action: { withAnimation(.easeInOut(duration: 0.4)) { isSearchActive = true } }) {
                                 Image(systemName: "magnifyingglass")
                                     .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(Color.tabBarActiveLabel)
+                                    .foregroundColor(DesignColors.tabBarActiveLabel)
                                     .frame(width: 38, height: 38)
                                     .background(
                                         Circle()
-                                            .fill(Color.tabBarActiveFill)
+                                            .fill(DesignColors.tabBarActiveFill)
                                     )
                             }
                         }
