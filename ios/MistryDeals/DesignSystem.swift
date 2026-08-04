@@ -8,7 +8,7 @@ struct DesignColors {
         return isDarkOverride
     }
 
-    // Surface/Background
+    // Surface/Background - Light: #F3F2F2, Dark: #201E1D
     static var surfaceBackground: Color {
         if isDarkMode() {
             return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
@@ -17,7 +17,7 @@ struct DesignColors {
         }
     }
 
-    // Surface/Elevated
+    // Surface/Elevated - Light: #F8F4F4, Dark: #2D2B2B
     static var surfaceElevated: Color {
         if isDarkMode() {
             return Color(red: 0.176, green: 0.169, blue: 0.165)  // #2D2B2B
@@ -26,7 +26,7 @@ struct DesignColors {
         }
     }
 
-    // Surface/Thumb
+    // Surface/Thumb - Light: #EAE7E7, Dark: #444141
     static var surfaceThumb: Color {
         if isDarkMode() {
             return Color(red: 0.267, green: 0.255, blue: 0.255)  // #444141
@@ -35,7 +35,7 @@ struct DesignColors {
         }
     }
 
-    // Text/Primary
+    // Text/Primary - Light: #201E1D, Dark: #F3F2F2
     static var textPrimary: Color {
         if isDarkMode() {
             return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
@@ -44,7 +44,7 @@ struct DesignColors {
         }
     }
 
-    // Text/Secondary
+    // Text/Secondary - Light: #7D7979, Dark: #9B9797
     static var textSecondary: Color {
         if isDarkMode() {
             return Color(red: 0.608, green: 0.591, blue: 0.591)  // #9B9797
@@ -53,7 +53,7 @@ struct DesignColors {
         }
     }
 
-    // Rule/Hairline
+    // Rule/Hairline - Light: #D7D3D3, Dark: #444141
     static var ruleHairline: Color {
         if isDarkMode() {
             return Color(red: 0.267, green: 0.255, blue: 0.255)  // #444141
@@ -62,7 +62,7 @@ struct DesignColors {
         }
     }
 
-    // Rule/Strong
+    // Rule/Strong - Light: #201E1D, Dark: #F3F2F2
     static var ruleStrong: Color {
         if isDarkMode() {
             return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
@@ -146,7 +146,7 @@ struct DesignColors {
         ruleHairline
     }
 
-    // Semantic colors respecting isDarkModeOverride
+    // Price/Value - Light: #AE1800, Dark: #FF563C
     static var priceValue: Color {
         if isDarkMode() {
             return Color(red: 1.0, green: 0.337, blue: 0.235)  // #FF563C
@@ -155,6 +155,7 @@ struct DesignColors {
         }
     }
 
+    // Price/Struck - Light: #7D7979, Dark: #9B9797
     static var priceStruck: Color {
         if isDarkMode() {
             return Color(red: 0.608, green: 0.591, blue: 0.591)  // #9B9797
@@ -163,54 +164,25 @@ struct DesignColors {
         }
     }
 
-    static var iconRating: Color {
+    // Badge/Background - Light: #201E1D, Dark: #F3F2F2 (INVERTS)
+    static var badgeBackground: Color {
         if isDarkMode() {
-            return Color(red: 0.953, green: 0.945, blue: 0.945)  // #F3F2F2
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
         } else {
             return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
         }
     }
 
-    static var iconDefault: Color {
-        if isDarkMode() {
-            return Color(red: 0.729, green: 0.714, blue: 0.714)  // #BAB6B6
-        } else {
-            return Color(red: 0.376, green: 0.365, blue: 0.365)  // #605D5D
-        }
-    }
-
-    static var tabBarBackground: Color {
+    // Badge/Label - Light: #F3F2F2, Dark: #201E1D (INVERTS)
+    static var badgeLabel: Color {
         if isDarkMode() {
             return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
         } else {
-            return Color(red: 0.953, green: 0.945, blue: 0.945)  // #F3F2F2
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
         }
     }
 
-    static var tabBarLabel: Color {
-        if isDarkMode() {
-            return Color(red: 0.729, green: 0.714, blue: 0.714)  // #BAB6B6
-        } else {
-            return Color(red: 0.376, green: 0.365, blue: 0.365)  // #605D5D
-        }
-    }
-
-    static var tabBarActiveFill: Color {
-        if isDarkMode() {
-            return Color(red: 1.0, green: 0.337, blue: 0.235)  // #FF563C
-        } else {
-            return Color(red: 0.929, green: 0.188, blue: 0.075)  // #EC3013
-        }
-    }
-
-    static var tabBarActiveLabel: Color {
-        if isDarkMode() {
-            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
-        } else {
-            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
-        }
-    }
-
+    // Cashback/Background - Light: #FFF2EF, Dark: #7C1405
     static var cashbackBackground: Color {
         if isDarkMode() {
             return Color(red: 0.486, green: 0.078, blue: 0.020)  // #7C1405
@@ -219,6 +191,7 @@ struct DesignColors {
         }
     }
 
+    // Cashback/Label - Light: #AE1800, Dark: #FFC4B8
     static var cashbackLabel: Color {
         if isDarkMode() {
             return Color(red: 1.0, green: 0.769, blue: 0.722)  // #FFC4B8
@@ -227,6 +200,7 @@ struct DesignColors {
         }
     }
 
+    // Cashback/Border - Light: #FFC4B8, Dark: #AE1800
     static var cashbackBorder: Color {
         if isDarkMode() {
             return Color(red: 0.682, green: 0.094, blue: 0.0)  // #AE1800
@@ -235,8 +209,53 @@ struct DesignColors {
         }
     }
 
-    // UI component colors
-    static var navPillBackground: Color {
+    // Icon/Rating - Light: #201E1D, Dark: #F3F2F2
+    static var iconRating: Color {
+        if isDarkMode() {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
+        } else {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        }
+    }
+
+    // Icon/Default - Light: #605D5D, Dark: #BAB6B6
+    static var iconDefault: Color {
+        if isDarkMode() {
+            return Color(red: 0.729, green: 0.714, blue: 0.714)  // #BAB6B6
+        } else {
+            return Color(red: 0.376, green: 0.365, blue: 0.365)  // #605D5D
+        }
+    }
+
+    // TabBar/Background - Light: #F3F2F2, Dark: #201E1D
+    static var tabBarBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        } else {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
+        }
+    }
+
+    // TabBar/Label - Light: #605D5D, Dark: #BAB6B6
+    static var tabBarLabel: Color {
+        if isDarkMode() {
+            return Color(red: 0.729, green: 0.714, blue: 0.714)  // #BAB6B6
+        } else {
+            return Color(red: 0.376, green: 0.365, blue: 0.365)  // #605D5D
+        }
+    }
+
+    // TabBar/ActiveFill - Light: #EC3013, Dark: #FF563C
+    static var tabBarActiveFill: Color {
+        if isDarkMode() {
+            return Color(red: 1.0, green: 0.337, blue: 0.235)  // #FF563C
+        } else {
+            return Color(red: 0.929, green: 0.188, blue: 0.075)  // #EC3013
+        }
+    }
+
+    // TabBar/ActiveLabel - Light: #FFFFFF, Dark: #201E1D
+    static var tabBarActiveLabel: Color {
         if isDarkMode() {
             return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
         } else {
@@ -244,34 +263,46 @@ struct DesignColors {
         }
     }
 
+    // Action/SearchFill - Light: #201E1D, Dark: #F3F2F2
+    static var actionSearchFill: Color {
+        if isDarkMode() {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
+        } else {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
+        }
+    }
+
+    // UI component colors
+    // Nav pill background - uses TabBar/Background
+    static var navPillBackground: Color {
+        tabBarBackground
+    }
+
+    // Nav pill border - opposite of background
     static var navPillBorder: Color {
         if isDarkMode() {
-            return Color(red: 0.953, green: 0.945, blue: 0.945)  // #F3F2F2
+            return Color(red: 0.953, green: 0.949, blue: 0.949)  // #F3F2F2
         } else {
             return Color(red: 0.0, green: 0.0, blue: 0.0)  // #000000
         }
     }
 
+    // Nav pill inactive text - uses TabBar/Label
     static var navPillInactiveText: Color {
         tabBarLabel
     }
 
+    // Nav pill active text - uses TabBar/ActiveLabel
     static var navPillActiveText: Color {
-        if isDarkMode() {
-            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
-        } else {
-            return Color(red: 1.0, green: 1.0, blue: 1.0)  // #FFFFFF
-        }
+        tabBarActiveLabel
     }
 
+    // Search button background - uses Action/SearchFill
     static var searchButtonBackground: Color {
-        if isDarkMode() {
-            return Color(red: 1.0, green: 0.337, blue: 0.235)  // #FF563C
-        } else {
-            return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
-        }
+        actionSearchFill
     }
 
+    // Search button icon - inverse of background
     static var searchButtonIcon: Color {
         if isDarkMode() {
             return Color(red: 0.125, green: 0.118, blue: 0.114)  // #201E1D
