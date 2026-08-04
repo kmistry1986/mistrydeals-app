@@ -16,6 +16,7 @@ struct SearchView: View {
     @FocusState private var isSearchFocused: Bool
     @Namespace private var filterAnimation
     @AppStorage("isDarkModeOverride") private var isDarkModeOverride = false
+    @State private var keyboardHeight: CGFloat = 0
 
     enum SearchFilter {
         case all
@@ -159,50 +160,74 @@ struct SearchView: View {
 
                 Spacer()
             }
-            .safeAreaInset(edge: .bottom) {
-                // Search input bar - stays above keyboard
-                VStack(spacing: 0) {
-                    HStack(spacing: DesignSpacing.md) {
-                        Image(systemName: "magnifyingglass")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.iconDefault)
-
-                        TextField("Search products...", text: $searchText)
-                            .textFieldStyle(.plain)
-                            .foregroundColor(DesignColors.textPrimary)
-                            .submitLabel(.search)
-                            .focused($isSearchFocused)
-                            .onSubmit {
-                                Task {
-                                    await performSearch()
-                                }
-                            }
-
-                        if !searchText.isEmpty {
-                            Button(action: { searchText = "" }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(DesignColors.iconDefault)
-                            }
-                        }
-                    }
-                    .padding(DesignSpacing.md)
-                    .background(DesignColors.inputBackground)
-                    .cornerRadius(DesignRadius.sm)
-                    .overlay(RoundedRectangle(cornerRadius: DesignRadius.sm).stroke(DesignColors.inputBorder, lineWidth: 1))
-                    .padding(DesignSpacing.md)
-                    .background(DesignColors.surfaceBackground)
-                }
-            }
         }
         .ignoresSafeArea(edges: .top)
+        .overlay(alignment: .bottom) {
+            // Search input bar - floats above keyboard
+            VStack(spacing: 0) {
+                HStack(spacing: DesignSpacing.md) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(DesignColors.iconDefault)
+
+                    TextField("Search products...", text: $searchText)
+                        .textFieldStyle(.plain)
+                        .foregroundColor(DesignColors.textPrimary)
+                        .submitLabel(.search)
+                        .focused($isSearchFocused)
+                        .onSubmit {
+                            Task {
+                                await performSearch()
+                            }
+                        }
+
+                    if !searchText.isEmpty {
+                        Button(action: { searchText = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(DesignColors.iconDefault)
+                        }
+                    }
+                }
+                .padding(DesignSpacing.md)
+                .background(DesignColors.inputBackground)
+                .cornerRadius(DesignRadius.sm)
+                .overlay(RoundedRectangle(cornerRadius: DesignRadius.sm).stroke(DesignColors.inputBorder, lineWidth: 1))
+                .padding(DesignSpacing.md)
+                .background(DesignColors.surfaceBackground)
+            }
+            .offset(y: -keyboardHeight)
+        }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 isSearchFocused = true
                 UIApplication.shared.sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
             }
+
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillShowNotification,
+                object: nil,
+                queue: .main
+            ) { notification in
+                if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                    withAnimation {
+                        keyboardHeight = keyboardFrame.height
+                    }
+                }
+            }
+
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillHideNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                withAnimation {
+                    keyboardHeight = 0
+                }
+            }
         }
         .onDisappear {
             isSearchFocused = false
+            NotificationCenter.default.removeObserver(self)
         }
     }
 
