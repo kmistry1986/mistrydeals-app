@@ -206,6 +206,74 @@ struct DesignColors {
         }
     }
 
+    // MARK: - Input/Form Colors
+    // Input background - Light: #F8F4F4, Dark: #2D2B2B
+    static var inputBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.176, green: 0.169, blue: 0.165)
+        } else {
+            return Color(red: 0.973, green: 0.957, blue: 0.957)
+        }
+    }
+
+    // Input border - Light: #201E1D, Dark: #F3F2F2
+    static var inputBorder: Color {
+        ruleStrong
+    }
+
+    // MARK: - Group Headers & Dividers
+    // Group header text - Light: #7D7979, Dark: #9B9797
+    static var groupHeader: Color {
+        if isDarkMode() {
+            return Color(red: 0.608, green: 0.591, blue: 0.591)
+        } else {
+            return Color(red: 0.490, green: 0.475, blue: 0.475)
+        }
+    }
+
+    // Group divider - Light: #201E1D (2px), Dark: #F3F2F2 (2px)
+    static var groupDivider: Color {
+        ruleStrong
+    }
+
+    // MARK: - Search/Filter Colors
+    // Search input placeholder - Light: #7D7979, Dark: #9B9797
+    static var placeholder: Color {
+        textSecondary
+    }
+
+    // Search filter pill inactive - Light: #F3F2F2, Dark: #201E1D
+    static var filterInactiveBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)
+        } else {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)
+        }
+    }
+
+    // Search filter pill active - Light: #201E1D, Dark: #F3F2F2
+    static var filterActiveBackground: Color {
+        if isDarkMode() {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)
+        } else {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)
+        }
+    }
+
+    // Search filter text active - Light: #F3F2F2, Dark: #201E1D
+    static var filterActiveLabel: Color {
+        if isDarkMode() {
+            return Color(red: 0.125, green: 0.118, blue: 0.114)
+        } else {
+            return Color(red: 0.953, green: 0.949, blue: 0.949)
+        }
+    }
+
+    // Search close action - Light: #AE1800, Dark: #FF563C
+    static var actionClose: Color {
+        priceValue
+    }
+
     // MARK: - Legacy Aliases (for compatibility)
     static var background: Color { surfaceBackground }
     static var secondaryBackground: Color { surfaceElevated }
