@@ -14,6 +14,8 @@ struct SettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
+                Spacer()
+
                 Text("Settings")
                     .font(DesignTypography.headline1)
                     .foregroundColor(DesignColors.textPrimary)
@@ -21,7 +23,7 @@ struct SettingsView: View {
                 Spacer()
 
                 Button(action: { dismiss() }) {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: "xmark")
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(DesignColors.iconDefault)
                 }
@@ -52,7 +54,11 @@ struct SettingsView: View {
                                 Spacer()
 
                                 Toggle("", isOn: $isDarkModeOverride)
-                                    .tint(Color("AccentColor"))
+                                    .tint(DesignColors.tabBarActiveFill)
+                                    .padding(DesignSpacing.sm)
+                                    .background(DesignColors.surfaceThumb)
+                                    .cornerRadius(DesignRadius.sm)
+                                    .overlay(RoundedRectangle(cornerRadius: DesignRadius.sm).stroke(DesignColors.ruleHairline, lineWidth: 1))
                             }
                         .padding(.horizontal, DesignSpacing.lg)
                         .padding(.vertical, DesignSpacing.lg)

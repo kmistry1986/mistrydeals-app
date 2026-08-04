@@ -50,7 +50,7 @@ struct GuidesView: View {
                     VStack {
                         Spacer()
                         Text("Error: \(error)")
-                            .foregroundColor(DesignColors.accentSecondary)
+                            .foregroundColor(DesignColors.tabBarActiveFill)
                         Spacer()
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -61,18 +61,18 @@ struct GuidesView: View {
                                 VStack(spacing: 8) {
                                     HStack {
                                         Image(systemName: "magnifyingglass")
-                                            .foregroundColor(DesignColors.tertiary)
+                                            .foregroundColor(DesignColors.iconDefault)
 
                                         TextField("Search guides...", text: $searchText)
                                             .textFieldStyle(.plain)
-                                            .foregroundColor(DesignColors.primary)
+                                            .foregroundColor(DesignColors.textPrimary)
                                             .submitLabel(.search)
                                             .onSubmit {
                                                 performSearch()
                                             }
                                     }
                                     .padding(DesignSpacing.sm)
-                                    .background(DesignColors.tertiaryBackground)
+                                    .background(DesignColors.surfaceThumb)
                                     .cornerRadius(DesignRadius.sm)
 
                                     HStack(spacing: 8) {
@@ -82,10 +82,10 @@ struct GuidesView: View {
                                         }) {
                                             Text("Clear")
                                                 .font(DesignTypography.caption1)
-                                                .foregroundColor(DesignColors.primary)
+                                                .foregroundColor(DesignColors.textPrimary)
                                                 .frame(maxWidth: .infinity)
                                                 .padding(.vertical, 8)
-                                                .background(DesignColors.tertiaryBackground)
+                                                .background(DesignColors.surfaceThumb)
                                                 .cornerRadius(DesignRadius.sm)
                                         }
 
@@ -96,10 +96,10 @@ struct GuidesView: View {
                                         }) {
                                             Text("Close")
                                                 .font(DesignTypography.caption1)
-                                                .foregroundColor(DesignColors.primary)
+                                                .foregroundColor(DesignColors.textPrimary)
                                                 .frame(maxWidth: .infinity)
                                                 .padding(.vertical, 8)
-                                                .background(DesignColors.accentSecondary)
+                                                .background(DesignColors.tabBarActiveFill)
                                                 .cornerRadius(DesignRadius.sm)
                                         }
                                     }
@@ -185,7 +185,7 @@ struct GuideDetailScreenView: View {
                         Text("Guide")
                     }
                     .font(DesignTypography.headline2)
-                    .foregroundColor(DesignColors.primary)
+                    .foregroundColor(DesignColors.textPrimary)
                 }
                 Spacer()
             }
@@ -200,7 +200,7 @@ struct GuideDetailScreenView: View {
                     VStack(alignment: .center, spacing: DesignSpacing.sm) {
                         Text(guide.guideContent?.title ?? guide.title)
                             .font(DesignTypography.displaySmall)
-                            .foregroundColor(DesignColors.primary)
+                            .foregroundColor(DesignColors.textPrimary)
                             .multilineTextAlignment(.center)
 
                         if let subtitle = guide.guideContent?.subtitle {
@@ -237,7 +237,7 @@ struct GuideDetailScreenView: View {
                         VStack(alignment: .leading, spacing: DesignSpacing.md) {
                             Text("Quick Answers: The Best Picks")
                                 .font(DesignTypography.headline2)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
                                 .padding(.horizontal, DesignSpacing.lg)
                                 .frame(maxWidth: .infinity)
                                 .multilineTextAlignment(.center)
@@ -250,7 +250,7 @@ struct GuideDetailScreenView: View {
                                             AsyncImage(url: url) { phase in
                                                 switch phase {
                                                 case .empty:
-                                                    DesignColors.tertiaryBackground
+                                                    DesignColors.surfaceThumb
                                                         .frame(height: 120)
                                                 case .success(let image):
                                                     image
@@ -259,7 +259,7 @@ struct GuideDetailScreenView: View {
                                                         .frame(height: 120)
                                                         .clipped()
                                                 case .failure:
-                                                    DesignColors.tertiaryBackground
+                                                    DesignColors.surfaceThumb
                                                         .frame(height: 120)
                                                 @unknown default:
                                                     EmptyView()
@@ -267,7 +267,7 @@ struct GuideDetailScreenView: View {
                                             }
                                             .cornerRadius(DesignRadius.md)
                                         } else {
-                                            DesignColors.tertiaryBackground
+                                            DesignColors.surfaceThumb
                                                 .frame(height: 120)
                                                 .cornerRadius(DesignRadius.md)
                                         }
@@ -276,7 +276,7 @@ struct GuideDetailScreenView: View {
                                         Text(product.display_title ?? product.truncatedTitle)
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(.semibold)
-                                            .foregroundColor(DesignColors.primary)
+                                            .foregroundColor(DesignColors.textPrimary)
                                             .lineLimit(2)
                                             .multilineTextAlignment(.leading)
 
@@ -326,7 +326,7 @@ struct GuideDetailScreenView: View {
                                         }
                                     }
                                     .padding(DesignSpacing.md)
-                                    .background(DesignColors.tertiaryBackground)
+                                    .background(DesignColors.surfaceThumb)
                                     .cornerRadius(DesignRadius.md)
                                 }
                             }
@@ -340,7 +340,7 @@ struct GuideDetailScreenView: View {
                         VStack(alignment: .leading, spacing: DesignSpacing.md) {
                             Text("Product Details")
                                 .font(DesignTypography.headline2)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
                                 .padding(.horizontal, DesignSpacing.lg)
 
                             VStack(spacing: DesignSpacing.md) {
@@ -352,7 +352,7 @@ struct GuideDetailScreenView: View {
                                                 AsyncImage(url: url) { phase in
                                                     switch phase {
                                                     case .empty:
-                                                        DesignColors.tertiaryBackground
+                                                        DesignColors.surfaceThumb
                                                             .frame(width: 80, height: 80)
                                                     case .success(let image):
                                                         image
@@ -361,7 +361,7 @@ struct GuideDetailScreenView: View {
                                                             .frame(width: 80, height: 80)
                                                             .clipped()
                                                     case .failure:
-                                                        DesignColors.tertiaryBackground
+                                                        DesignColors.surfaceThumb
                                                             .frame(width: 80, height: 80)
                                                     @unknown default:
                                                         EmptyView()
@@ -369,7 +369,7 @@ struct GuideDetailScreenView: View {
                                                 }
                                                 .cornerRadius(DesignRadius.md)
                                             } else {
-                                                DesignColors.tertiaryBackground
+                                                DesignColors.surfaceThumb
                                                     .frame(width: 80, height: 80)
                                                     .cornerRadius(DesignRadius.md)
                                             }
@@ -379,7 +379,7 @@ struct GuideDetailScreenView: View {
                                                 Text(product.display_title ?? product.truncatedTitle)
                                                     .font(DesignTypography.bodySmall)
                                                     .fontWeight(.semibold)
-                                                    .foregroundColor(DesignColors.primary)
+                                                    .foregroundColor(DesignColors.textPrimary)
                                                     .lineLimit(2)
                                                     .multilineTextAlignment(.leading)
 
@@ -397,7 +397,7 @@ struct GuideDetailScreenView: View {
                                         }
                                     }
                                     .padding(DesignSpacing.md)
-                                    .background(DesignColors.tertiaryBackground)
+                                    .background(DesignColors.surfaceThumb)
                                     .cornerRadius(DesignRadius.md)
                                 }
                             }
@@ -412,7 +412,7 @@ struct GuideDetailScreenView: View {
                                 VStack(alignment: .leading, spacing: DesignSpacing.md) {
                                     Text(section.title)
                                         .font(DesignTypography.headline2)
-                                        .foregroundColor(DesignColors.primary)
+                                        .foregroundColor(DesignColors.textPrimary)
 
                                     Text(section.content)
                                         .font(DesignTypography.bodyMedium)
@@ -429,7 +429,7 @@ struct GuideDetailScreenView: View {
                         VStack(alignment: .leading, spacing: DesignSpacing.md) {
                             Text("How To")
                                 .font(DesignTypography.headline2)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
 
                             VStack(alignment: .leading, spacing: DesignSpacing.md) {
                                 ForEach(howto, id: \.self) { item in
@@ -451,21 +451,21 @@ struct GuideDetailScreenView: View {
                         VStack(alignment: .leading, spacing: DesignSpacing.md) {
                             Text("FAQ")
                                 .font(DesignTypography.headline2)
-                                .foregroundColor(DesignColors.primary)
+                                .foregroundColor(DesignColors.textPrimary)
 
                             VStack(alignment: .leading, spacing: DesignSpacing.md) {
                                 ForEach(faq) { item in
                                     VStack(alignment: .leading, spacing: DesignSpacing.sm) {
                                         Text(item.question)
                                             .font(DesignTypography.headline3)
-                                            .foregroundColor(DesignColors.primary)
+                                            .foregroundColor(DesignColors.textPrimary)
 
                                         Text(item.answer)
                                             .font(DesignTypography.bodySmall)
                                             .foregroundColor(DesignColors.secondary)
                                     }
                                     .padding(DesignSpacing.md)
-                                    .background(DesignColors.tertiaryBackground)
+                                    .background(DesignColors.surfaceThumb)
                                     .cornerRadius(DesignRadius.md)
                                 }
                             }
@@ -505,7 +505,7 @@ struct GuideCard: View {
                 AsyncImage(url: url) { phase in
                     switch phase {
                     case .empty:
-                        DesignColors.tertiaryBackground
+                        DesignColors.surfaceThumb
                             .frame(width: 80, height: 80)
                     case .success(let image):
                         image
@@ -514,7 +514,7 @@ struct GuideCard: View {
                             .frame(width: 80, height: 80)
                             .clipped()
                     case .failure:
-                        DesignColors.tertiaryBackground
+                        DesignColors.surfaceThumb
                             .frame(width: 80, height: 80)
                     @unknown default:
                         EmptyView()
@@ -528,7 +528,7 @@ struct GuideCard: View {
                 Text(guide.title)
                     .font(DesignTypography.headline3)
                     .fontWeight(.semibold)
-                    .foregroundColor(DesignColors.primary)
+                    .foregroundColor(DesignColors.textPrimary)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
 
@@ -567,12 +567,12 @@ struct GuideSearchModalView: View {
                 HStack {
                     Text("Search Guides")
                         .font(DesignTypography.headline2)
-                        .foregroundColor(DesignColors.primary)
+                        .foregroundColor(DesignColors.textPrimary)
                     Spacer()
                     Button(action: { isPresented = false }) {
                         Image(systemName: "xmark")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(DesignColors.primary)
+                            .foregroundColor(DesignColors.textPrimary)
                     }
                 }
                 .padding(DesignSpacing.lg)
@@ -581,11 +581,11 @@ struct GuideSearchModalView: View {
                 VStack(spacing: DesignSpacing.lg) {
                     HStack {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(DesignColors.tertiary)
+                            .foregroundColor(DesignColors.iconDefault)
 
                         TextField("Search guides...", text: $searchText)
                             .textFieldStyle(.plain)
-                            .foregroundColor(DesignColors.primary)
+                            .foregroundColor(DesignColors.textPrimary)
                             .submitLabel(.search)
                             .onSubmit {
                                 onSearch()
@@ -595,12 +595,12 @@ struct GuideSearchModalView: View {
                         if !searchText.isEmpty {
                             Button(action: { searchText = "" }) {
                                 Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(DesignColors.tertiary)
+                                    .foregroundColor(DesignColors.iconDefault)
                             }
                         }
                     }
                     .padding(DesignSpacing.md)
-                    .background(DesignColors.tertiaryBackground)
+                    .background(DesignColors.surfaceThumb)
                     .cornerRadius(DesignRadius.md)
 
                     Button(action: {

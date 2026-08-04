@@ -126,7 +126,7 @@ struct ContentView: View {
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .featured ? .semibold : .regular)
                                             .foregroundColor(selectedTab == .featured ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
-                                            .frame(maxWidth: .infinity)
+                                            .frame(maxWidth: .infinity, alignment: .center)
                                             .padding(.vertical, 10)
                                     }
 
@@ -141,7 +141,7 @@ struct ContentView: View {
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .prime ? .semibold : .regular)
                                             .foregroundColor(selectedTab == .prime ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
-                                            .frame(maxWidth: .infinity)
+                                            .frame(maxWidth: .infinity, alignment: .center)
                                             .padding(.vertical, 10)
                                     }
 
@@ -156,7 +156,7 @@ struct ContentView: View {
                                             .font(DesignTypography.bodySmall)
                                             .fontWeight(selectedTab == .guides ? .semibold : .regular)
                                             .foregroundColor(selectedTab == .guides ? DesignColors.tabBarActiveLabel : DesignColors.tabBarLabel)
-                                            .frame(maxWidth: .infinity)
+                                            .frame(maxWidth: .infinity, alignment: .center)
                                             .padding(.vertical, 10)
                                     }
                                 }
