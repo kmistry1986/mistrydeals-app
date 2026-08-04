@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ProductRow: View {
     let product: Product
+    @AppStorage("isDarkModeOverride") private var isDarkModeOverride = false
 
     var body: some View {
         Link(destination: product.amazonURL ?? URL(string: "https://amazon.com")!) {
